@@ -17,7 +17,7 @@ argument-hint: [主题或需求编号]
 2. 若信息不足以定位，向用户简要询问补充（最多一轮），不再追问。
 3. 生成报告 `process-docs/<编号>/feedback-<日期>.md`（无编号时放 `process-docs/feedback/`），内容：
    - 标题 / 日期 / 会话主题 / 环境信息（`agile version`、`agile doctor --offline --json` 输出摘要）
-   - 问题清单（编号 / 现象 / 期望 / 严重级 P0-P2 / 建议归属：agile-cli / agile-plugin / 业务代码 / 规范问题）
+   - 问题清单（编号 / 现象 / 期望 / 严重级 P0-P2 / 建议归属：agile-cli / agile-plugins / 业务代码 / 规范问题）
    - 原始错误摘录（代码块）
    - 复现建议
 4. 汇报报告路径与问题统计，建议严重问题走 `/agile:fix-bug`。

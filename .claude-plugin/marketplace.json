@@ -1,6 +1,6 @@
 {
   "name": "fcc-agile",
-  "description": "agile 系列插件市场：SDD/TDD 研发流程插件（配合 @fcc/agile CLI 使用）",
+  "description": "agile 系列插件市场：SDD/TDD 研发流程插件（配合 @fcc/agilecli CLI 使用）",
   "owner": {
     "name": "fcc-agile"
   },

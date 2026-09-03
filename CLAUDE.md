@@ -1,4 +1,4 @@
-# CLAUDE.md — agile-plugin 仓库导航
+# CLAUDE.md — agile-plugins 仓库导航
 
 本仓库是 **Claude Code 插件市场（marketplace）**：`.claude-plugin/marketplace.json` 声明全部插件，主插件在 `plugins/agile/`。**新增插件无需改动 agile-cli**（CLI 从 workspace.yaml 的 `plugin.marketplace` 指向本仓库）。
 
