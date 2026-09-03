@@ -1,4 +1,4 @@
-# agile-plugins（Claude Code 插件市场）
+# Agile-Plugins（Claude Code 插件市场）
 
 [![Validate](https://github.com/pig0224/agile-plugins/actions/workflows/validate.yml/badge.svg)](https://github.com/pig0224/agile-plugins/actions/workflows/validate.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
