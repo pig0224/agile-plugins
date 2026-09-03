@@ -1,6 +1,6 @@
 {
   "name": "fcc-agile",
-  "description": "Local marketplace for the agile SDD/TDD Claude Code plugin (shipped with @fcc/agile)",
+  "description": "agile 系列插件市场：SDD/TDD 研发流程插件（配合 @fcc/agile CLI 使用）",
   "owner": {
     "name": "fcc-agile"
   },
@@ -8,7 +8,7 @@
     {
       "name": "agile",
       "description": "SDD/TDD 研发流程插件：一个根、五个抽屉",
-      "source": "./",
+      "source": "./plugins/agile",
       "category": "workflow",
       "keywords": ["sdd", "tdd", "workflow", "chinese"]
     }
