@@ -1,9 +1,9 @@
 # agile-plugin（Claude Code 插件市场）
 
-[![Validate](https://github.com/fcc-agile/agile-plugin/actions/workflows/validate.yml/badge.svg)](https://github.com/fcc-agile/agile-plugin/actions/workflows/validate.yml)
+[![Validate](https://github.com/pig0224/agile-plugin/actions/workflows/validate.yml/badge.svg)](https://github.com/pig0224/agile-plugin/actions/workflows/validate.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
 
-本仓库是 **Claude Code 插件市场（marketplace）**：`.claude-plugin/marketplace.json` 声明本仓库提供的全部插件。**新增插件无需改动 [agile-cli](https://github.com/fcc-agile/agile-cli)** —— 在本仓库加目录 + 登记 marketplace.json 即可。以 git 仓库分发，推送即发版，无需 npm。
+本仓库是 **Claude Code 插件市场（marketplace）**：`.claude-plugin/marketplace.json` 声明本仓库提供的全部插件。**新增插件无需改动 [agile-cli](https://github.com/pig0224/agile-cli)** —— 在本仓库加目录 + 登记 marketplace.json 即可。以 git 仓库分发，推送即发版，无需 npm。
 
 ## 安装（用户视角）
 

@@ -1,6 +1,6 @@
 # agile-plugin 设计
 
-> Claude Code 插件市场：12 个斜杠命令 + 7 个角色 subagent + 1 个方法论 skill。本仓库独立分发（git），**新增插件无需升级 [agile-cli](https://github.com/fcc-agile/agile-cli)**。
+> Claude Code 插件市场：12 个斜杠命令 + 7 个角色 subagent + 1 个方法论 skill。本仓库独立分发（git），**新增插件无需升级 [agile-cli](https://github.com/pig0224/agile-cli)**。
 
 ## 1. 市场仓库结构
 
