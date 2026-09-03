@@ -59,4 +59,4 @@ claude plugin marketplace add .      # 本地市场（命令文件改动后新�
 
 ## License
 
-[MIT](./LICENSE) © fcc contributors
+[MIT](./LICENSE) © FCC contributors
