@@ -1,0 +1,13 @@
+{
+  "name": "agile-plugins",
+  "version": "0.1.0",
+  "private": true,
+  "description": "agile 系列插件市场（Claude Code marketplace）——本文件仅为发版脚本服务，仓库以 git 分发",
+  "scripts": {
+    "release": "node scripts/release.mjs",
+    "validate": "claude plugin validate ."
+  },
+  "devDependencies": {
+    "execa": "^9.5.0"
+  }
+}
