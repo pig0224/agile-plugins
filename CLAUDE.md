@@ -7,7 +7,7 @@
 ```bash
 claude plugin validate .                       # 校验市场清单与插件清单
 claude plugin marketplace add .                # 本地安装（开发热加载）
-claude plugin install agile@fcc-agile
+claude plugin install agile
 ```
 
 ## 结构
@@ -26,7 +26,7 @@ docs/design.md                     # 设计文档
 ## 关键约定
 
 - 新增插件：新建 `plugins/<name>/`（含 `.claude-plugin/plugin.json`）+ 在 marketplace.json `plugins[]` 追加条目
-- 插件名（plugin.json `name`）= marketplace 条目名 = `plugins/` 目录名，三者一致；市场名固定 `fcc-agile`
+- 插件名（plugin.json `name`）= marketplace 条目名 = `plugins/` 目录名，三者一致；市场名固定 `fcc`
 - 插件文案全部中文；agent 的 `description` 用第三人称描述"何时使用"（Task 委派触发依据）
 - 命令只做「前置校验 → Task 委派 agent → 复核汇报」，不写实现细节
 - 两条 SDD/TDD 红线不得削弱：无 design.md 不开发；无失败测试不写实现

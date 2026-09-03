@@ -6,7 +6,7 @@
 
 ```
 agile-plugins/                       # 插件市场仓库
-├── .claude-plugin/marketplace.json  # 市场清单（name: fcc-agile）
+├── .claude-plugin/marketplace.json  # 市场清单（name: fcc）
 │                                    #   plugins[]: { name, source: "./plugins/<name>" }
 └── plugins/
     └── agile/                       # SDD/TDD 主插件
@@ -25,13 +25,13 @@ agile-plugins/                       # 插件市场仓库
 agile plugin install [name] [--marketplace <url>]
   → 读 workspace.yaml plugin.marketplace（默认官方 git 地址，可指向团队私有市场）
   → claude plugin marketplace add <git 地址>
-  → claude plugin install <name>@fcc-agile
+  → claude plugin install <name>@fcc
   → 记录 .agile/plugin.yaml（source = 市场地址）
 ```
 
 新增插件：市场仓库加 `plugins/<name>/`（含 `.claude-plugin/plugin.json`）+ 登记 marketplace.json 的 `plugins[]`。用户侧 `agile plugin install <name>` 即完成，CLI 不发版。
 
-约定：插件名（plugin.json `name`）= marketplace 条目名 = `plugins/` 下目录名，三者一致；市场名固定 `fcc-agile`。
+约定：插件名（plugin.json `name`）= marketplace 条目名 = `plugins/` 下目录名，三者一致；市场名固定 `fcc`。
 
 ## 3. 流程主线（SDD）
 

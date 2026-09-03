@@ -13,7 +13,7 @@ agile plugin install agile
 
 # 方式二：手动
 claude plugin marketplace add <本仓库 git 地址>
-claude plugin install agile@fcc-agile
+claude plugin install agile
 ```
 
 ## 目录结构
@@ -44,7 +44,7 @@ claude plugin install agile@fcc-agile
 
 - 插件名（plugin.json `name`）= marketplace 条目名 = `plugins/` 下目录名，三者一致
 - 插件文案全部中文；agent 的 `description` 用第三人称描述"何时使用"
-- 市场名固定 `fcc-agile`（`claude plugin install <name>@fcc-agile`）
+- 市场名固定 `fcc`（`claude plugin install <name>@fcc`）
 
 ## 开发
 
@@ -57,4 +57,4 @@ claude plugin marketplace add .      # 本地市场（命令文件改动后新�
 
 ## License
 
-[MIT](./LICENSE) © fcc-agile contributors
+[MIT](./LICENSE) © fcc contributors
