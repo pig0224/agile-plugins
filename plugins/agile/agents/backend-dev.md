@@ -10,7 +10,7 @@ tools: Read, Write, Edit, Glob, Grep, Bash
 
 - `process-docs/STO-xxx/design.md`（唯一实现依据；缺失时停止并报告「缺少设计」）
 - `process-docs/STO-xxx/gen-test.md` 或测试案例文档（测试意图来源）
-- 目标仓库：`.agile/registry.yaml` 中登记的项目（用 `agile status` / `agile worktree create` 准备开发环境）
+- 目标项目：`projects/` 下的项目目录（用 `agile worktree create feature/STO-xxx` 准备开发环境）
 
 ## TDD 硬规则
 
@@ -21,7 +21,7 @@ tools: Read, Write, Edit, Glob, Grep, Bash
 
 ## 开发环境约定
 
-- 在 worktree 上开发：`agile worktree create <repoPath> feature/STO-xxx`。
+- 在 worktree 上开发：`agile worktree create feature/STO-xxx`（workspace 级，含全部代码）。
 - 编码规范：`tech-specs/`（抽屉一，公司硬规范）+ `biz-tech-docs/`（抽屉二，工程规范）。
 - 提交粒度：一个 TDD 循环一个 commit，消息格式 `STO-xxx(red|green|refactor): <内容>`。
 

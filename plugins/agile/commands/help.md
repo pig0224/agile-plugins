@@ -33,6 +33,6 @@ disable-model-invocation: true
      → /agile:backend | /agile:frontend → /agile:run-test → review/release 归档
 ```
 
-3. 检查当前工作区状态（若在 agile 工作区内）：运行 `agile status` 概述仓库情况；否则提示「当前目录不在 agile workspace，需先 agile init workspace」。
+3. 检查当前工作区状态（若在 agile 工作区内）：运行 `agile status` 概述外部仓库情况 + `agile foreach 'ls'` 概述项目；否则提示「当前目录不在 agile workspace，需先 agile init workspace」。
 
 4. 提示两个硬规则：没有 design.md 不开发（SDD 红线）；没有失败测试不写实现（TDD 红线）。

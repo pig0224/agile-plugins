@@ -14,7 +14,7 @@ argument-hint: <问题描述或需求编号+问题描述，如 STO-001 下单接
 
 ## 执行步骤
 
-1. **环境检查**：`agile doctor --offline` + `agile status`；目标仓库 dirty 时停下询问用户（修复应基于干净基线）。
+1. **环境检查**：`agile doctor --offline` + `git status`；工作区 dirty 时停下询问用户（修复应基于干净基线）。
 2. 调用 **bug-hunter** subagent（Task 工具委派），传入：
    - bug 描述、涉及仓库（从描述推断或让用户指定）、任务编号
    - 要求完整走「复现 → 定位 → 根因 → 最小修复 → 回归验证 → 登记」闭环

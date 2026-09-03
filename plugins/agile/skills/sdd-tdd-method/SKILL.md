@@ -14,7 +14,7 @@ description: agile 工作区的 SDD/TDD 研发方法论与文档规范。凡执�
 | 一 | `tech-specs/` | 公司级技术规范（技术栈、SQL、安全硬规范） | 全员遵守 |
 | 二 | `biz-tech-docs/` | 团队技术设计知识库（架构、状态机、技术方案、工程规范） | 架构师 |
 | 三 | `biz-product-docs/` | 产品设计知识库（PRD、产品规范、UI 规范、交互规范） | 产品经理 |
-| 四 | `projects/` | 项目代码（多个 git submodule） | 开发 |
+| 四 | `projects/` | 项目代码（workspace 单仓内普通目录） | 开发 |
 | 五 | `process-docs/` | 过程产物（按需求编号归档，workspace 根仓库内） | 全员 |
 
 CLI 与 MCP：工作区操作（sync/status/doctor 等）通过 Bash 执行 `agile <command>`，或调用捆绑 MCP 工具 `mcp__plugins_agile_agile__*`（task 目录创建只有 MCP 工具 `agile_task_create`，无 CLI 命令）。**不要手工造 git submodule 命令，交给 agile CLI。**

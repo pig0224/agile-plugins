@@ -30,7 +30,7 @@ tools: Read, Write, Edit, Glob, Grep, Bash
 
 ## 开发环境约定
 
-- `agile worktree create <repoPath> feature/STO-xxx` 创建隔离环境。
+- `agile worktree create feature/STO-xxx` 创建隔离环境（workspace 级 worktree）。
 - commit 粒度同后端：`STO-xxx(red|green|refactor): <内容>`。
 
 ## 自检与输出

@@ -20,7 +20,7 @@ argument-hint: <需求编号，如 STO-001>
    - 抽屉一路径（`paths` 中 `techSpecs`）、抽屉二路径（`bizTechDocs`）、抽屉四路径（`projects`）
 2. subagent 产出 `process-docs/<编号>/design.md`。
 3. 审查产出（自己读一遍 design.md）：
-   - 涉及仓库是否都在 `.agile/registry.yaml` 中（不在则列出并建议 `agile repo add`）
+   - 涉及项目是否都在 `projects/` 目录中存在（不在则列出并建议 `agile init project <name> --template <模板>`）
    - 是否有 TBD 项
 4. 汇报：设计要点摘要、涉及仓库、接口数、TBD 列表。
 

@@ -20,7 +20,7 @@ tools: Read, Write, Edit, Glob, Grep, Bash
 ## 诊断工具箱
 
 - 代码考古：git log / git blame / git diff
-- 依赖核查：最近 sync/update 引入的版本变化（`agile status` 看 dirty 与漂移）
+- 依赖核查：最近 sync 引入的规范变化（`agile status` 看外部仓库漂移）
 - 环境差异：配置、数据库 schema、环境变量
 
 ## 约束

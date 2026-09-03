@@ -9,14 +9,14 @@ argument-hint: <需求编号> [仓库路径，如 STO-001 projects/frontend-web]
 
 ## 前置校验
 
-1. 解析 `$ARGUMENTS`：第一段为需求编号，第二段（可选）为前端仓库路径（缺省时从 `.agile/registry.yaml` 找 `projects/` 下含 vue/react 特征的仓库）。
+1. 解析 `$ARGUMENTS`：第一段为需求编号，第二段（可选）为前端项目名（缺省时扫描 `projects/` 下含 vue/react 特征的项目，用 `agile foreach 'ls package.json'` 或直接 Glob 识别）。
 2. 校验 `process-docs/<编号>/design.md` 已填充（SDD 红线）。未填充则停止。
 3. 读 `process-docs/<编号>/menu-tree.md`（或 feature-tree）确认页面范围。
-4. `agile status` 确认仓库干净；dirty 则询问。
+4. `git status` 确认工作区干净；dirty 则询问。
 
 ## 开发环境准备
 
-`agile worktree create <repoPath> feature/<编号>`，后续在 worktree 中工作。
+`agile worktree create feature/<编号>` 创建完整开发环境（自动同步外部仓库），后续在 worktree 中工作。
 
 ## 执行步骤
 

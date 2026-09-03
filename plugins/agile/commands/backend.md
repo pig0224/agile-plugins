@@ -9,15 +9,15 @@ argument-hint: <需求编号> [仓库路径或模块名，如 STO-001 projects/o
 
 ## 前置校验
 
-1. 解析 `$ARGUMENTS`：第一段为需求编号，第二段（可选）为仓库路径/模块名。
+1. 解析 `$ARGUMENTS`：第一段为需求编号，第二段（可选）为项目名/模块名（`projects/` 下的目录）。
 2. 校验 `process-docs/<编号>/design.md` 已填充（SDD 红线：**无设计不开发**）。未填充则停止，提示先 `/agile:architect <编号>`。
 3. 校验测试案例文档存在（`gen-test.md` 或 AC 内嵌案例）。缺失时警告但允许继续（TDD 红线仍在：先写失败测试）。
-4. 运行 `agile status` 确认涉及仓库已检出且干净；dirty 则停下询问用户。
+4. 检查涉及项目目录存在且工作区干净（`git status`）；dirty 则停下询问用户。
 
 ## 开发环境准备
 
-- 若指定仓库：为它创建 worktree（`agile worktree create <repoPath> feature/<编号>`），后续工作在 worktree 路径进行。
-- 未指定仓库时：从 design.md「涉及模块」表中选出后端相关仓库，逐个处理。
+- 用 `agile worktree create feature/<编号>` 创建完整开发环境（workspace 级 worktree，创建时自动同步外部仓库），后续工作在 worktree 路径进行。
+- 未指定项目时：从 design.md「涉及模块」表中选出后端相关项目，逐个处理。
 
 ## 执行步骤
 
