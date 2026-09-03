@@ -1,8 +1,9 @@
-# agile-plugin 仓库（插件市场）
+# agile-plugin（Claude Code 插件市场）
 
-本仓库是 **Claude Code 插件市场（marketplace）**：`.claude-plugin/marketplace.json` 声明本市场提供的全部插件。**新增插件无需改动 agile CLI** —— 在本仓库加目录 + 登记 marketplace.json 即可。
+[![Validate](https://github.com/fcc-agile/agile-plugin/actions/workflows/validate.yml/badge.svg)](https://github.com/fcc-agile/agile-plugin/actions/workflows/validate.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
 
-> 本仓库整体可独立拆分为单独的 git 仓库（与 CLI 仓库解耦），marketplace.json 中 `source` 使用相对路径引用本仓库内的插件目录。
+本仓库是 **Claude Code 插件市场（marketplace）**：`.claude-plugin/marketplace.json` 声明本仓库提供的全部插件。**新增插件无需改动 [agile-cli](https://github.com/fcc-agile/agile-cli)** —— 在本仓库加目录 + 登记 marketplace.json 即可。以 git 仓库分发，推送即发版，无需 npm。
 
 ## 安装（用户视角）
 
@@ -44,3 +45,16 @@ claude plugin install agile@fcc-agile
 - 插件名（plugin.json `name`）= marketplace 条目名 = `plugins/` 下目录名，三者一致
 - 插件文案全部中文；agent 的 `description` 用第三人称描述"何时使用"
 - 市场名固定 `fcc-agile`（`claude plugin install <name>@fcc-agile`）
+
+## 开发
+
+```bash
+claude plugin validate .             # 校验清单（CI 同款）
+claude plugin marketplace add .      # 本地市场（命令文件改动后新会话即生效）
+```
+
+设计文档：[docs/design.md](./docs/design.md)；开发约定见 [CLAUDE.md](./CLAUDE.md)。
+
+## License
+
+[MIT](./LICENSE) © fcc-agile contributors
