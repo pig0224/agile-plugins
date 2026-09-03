@@ -1,0 +1,32 @@
+{
+  "name": "@fcc/agile-plugin",
+  "version": "0.1.0",
+  "description": "Claude Code plugin for SDD/TDD development workflow: 12 slash commands, 7 role subagents, one workspace with five drawers (一个根、五个抽屉)",
+  "type": "module",
+  "files": [
+    ".claude-plugin",
+    "commands",
+    "agents",
+    "skills",
+    ".mcp.json"
+  ],
+  "keywords": [
+    "claude-code",
+    "claude-plugin",
+    "sdd",
+    "tdd",
+    "workflow",
+    "slash-commands",
+    "subagents",
+    "chinese"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fcc-agile/fcc-agile.git",
+    "directory": "packages/agile-plugin"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
