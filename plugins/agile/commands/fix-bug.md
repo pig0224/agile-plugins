@@ -9,7 +9,7 @@ argument-hint: <问题描述或需求编号+问题描述，如 STO-001 下单接
 
 ## 输入解析
 
-- `$ARGUMENTS` 中若含需求编号（STO-xxx/BUG-xxx）则登记到该任务目录；不含则视为新缺陷，创建 `BUG-xxx`（`agile task create BUG-xxx`，顺延编号）。
+- `$ARGUMENTS` 中若含需求编号（STO-xxx/BUG-xxx）则登记到该任务目录；不含则视为新缺陷，调用 MCP 工具 `agile_task_create` 创建 `BUG-xxx`（列出 `process-docs/` 现有编号顺延）。
 - 其余文字为 bug 描述；为空则询问用户。
 
 ## 执行步骤

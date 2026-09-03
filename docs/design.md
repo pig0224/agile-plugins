@@ -65,8 +65,8 @@ agile plugin install [name] [--marketplace <url>]
 ## 5. 与 CLI/MCP 的协作
 
 命令体指示模型通过以下方式调用 CLI 能力（不手工造 git 命令）：
-- Bash 执行 `agile task create / status / worktree create / doctor / template list`
-- 捆绑 MCP 工具（`agile mcp`）：`agile_status`、`agile_sync`（默认 dryRun）、`agile_template_list`、`agile_task_create`、`agile_doctor` 等
+- Bash 执行 `agile status / worktree create / doctor / template list`
+- 捆绑 MCP 工具（`agile mcp`）：`agile_status`、`agile_sync`（默认 dryRun）、`agile_template_list`、`agile_task_create`（task 能力仅 MCP 暴露，/agile:sync-req 等命令经它创建任务目录）、`agile_doctor` 等
 
 抽屉路径不硬编码：所有命令/agent 先读 `.agile/workspace.yaml` 的 `paths` 段。
 

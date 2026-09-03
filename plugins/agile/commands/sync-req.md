@@ -9,14 +9,12 @@ argument-hint: <需求编号，如 STO-001>
 
 ## 输入
 
-- 需求编号：`$ARGUMENTS`（必填；为空时用 `agile task list` 列出现有编号请用户选择）。
+- 需求编号：`$ARGUMENTS`（必填；为空时列出 `process-docs/` 下现有编号目录请用户选择）。
 
 ## 执行步骤
 
 1. 读 `.agile/workspace.yaml` 获取 `paths.bizProductDocs` 与 `paths.processDocs`。
-2. 创建过程目录（幂等，优先用 CLI / MCP 工具）：
-   - Bash: `agile task create <编号>`
-   - 或 MCP 工具: `agile_task_create`
+2. 创建过程目录（幂等，调用 MCP 工具 `agile_task_create`，参数 `{ "taskId": "<编号>" }`；task 能力不暴露为 CLI 命令）。
 3. 同步需求产物到过程目录：
    - `<bizProductDocs>/requirements/<编号>/PRD.md` → 若 `process-docs/<编号>/requirement.md` 仍为模板（含「待填充」/占位），将 PRD 核心内容 + AC 完整并入 `requirement.md`（保留模板中的 AC 章节结构，填充 AC 条目）。
    - 其余产物（AC.md、feature-tree.md、menu-tree.md）**复制**到 `process-docs/<编号>/`（保持文件名）。

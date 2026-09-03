@@ -10,7 +10,7 @@ argument-hint: <需求编号，如 STO-001>
 ## 前置校验
 
 1. 读 `.agile/workspace.yaml` 获取 `paths.processDocs`。
-2. 需求编号：`$ARGUMENTS`（为空时用 `agile task list` 让用户选择）。
+2. 需求编号：`$ARGUMENTS`（为空时列出 `process-docs/` 下现有编号目录让用户选择）。
 3. 检查 `process-docs/<编号>/requirement.md` 已填充（含 AC）。**未填充则停止**，提示先执行 `/agile:prd` + `/agile:sync-req`。
 
 ## 执行步骤
