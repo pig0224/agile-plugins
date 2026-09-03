@@ -23,7 +23,7 @@ tools: Read, Write, Edit, Glob, Grep, Bash
 
 - 在 worktree 上开发：`agile worktree create feature/STO-xxx`（workspace 级，含全部代码）。
 - 编码规范：`tech-specs/`（抽屉一，公司硬规范）+ `biz-tech-docs/`（抽屉二，工程规范）。
-- 提交粒度：一个 TDD 循环一个 commit，消息格式 `STO-xxx(red|green|refactor): <内容>`。
+- **提交红线（add 归人工）**：绝对不执行 `git add`；每个 TDD 循环完成后，把建议的 commit message（`STO-xxx(red|green|refactor): <内容>`）登记到 implementation.md。人工 add 完成后可汇总 commit——commit 前先 `git status` 检查，仍有未暂存的本次变更文件时提醒人工补 add（不得自行 add），确认无遗漏后才提交。
 
 ## 自检（完成前）
 
@@ -34,4 +34,4 @@ tools: Read, Write, Edit, Glob, Grep, Bash
 
 ## 输出
 
-摘要：完成任务数、测试通过情况（命令+结果）、变更文件清单、commit 列表、遗留问题。
+摘要：完成任务数、测试通过情况（命令+结果）、变更文件清单、建议的提交清单（message 已登记 implementation.md，待人工 add 后汇总提交）、遗留问题。

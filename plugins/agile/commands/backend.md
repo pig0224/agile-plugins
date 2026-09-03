@@ -30,8 +30,8 @@ argument-hint: <需求编号> [仓库路径或模块名，如 STO-001 projects/o
 
 ## 闭环条件
 
-- 任务清单全部勾选、测试全绿、implementation.md 的 TDD 循环记录完整、commit 序列符合 `STO-xxx(red|green|refactor):` 规范。
+- 任务清单全部勾选、测试全绿、implementation.md 的 TDD 循环记录完整、建议的提交序列符合 `STO-xxx(red|green|refactor):` 规范（git add 归人工；人工 add 后 AI 可汇总 commit，commit 前检查无遗漏未暂存文件）。
 
 ## 输出
 
-汇报：完成任务、测试结果、commit 列表、遗留问题；建议下一步 `/agile:frontend`（如涉及）或 `/agile:run-test <编号>`。
+汇报：完成任务、测试结果、建议的提交清单（待人工 add 后汇总提交）、遗留问题；建议下一步 `/agile:frontend`（如涉及）或 `/agile:run-test <编号>`。

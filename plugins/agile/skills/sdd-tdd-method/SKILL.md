@@ -48,6 +48,7 @@ CLI 与 MCP：工作区操作（sync/status/doctor 等）通过 Bash 执行 `agi
 1. 没有 `design.md` 不得进入开发阶段（SDD 红线）。
 2. 没有失败测试不得写实现代码（TDD 红线；脚手架/接口签名除外）。
 3. 所有产物先落盘到 process-docs，再写代码；代码变更与文档同步更新。
+4. **提交红线（add 归人工）**：绝对不执行 `git add`——哪些变更进入提交由人工审阅决定；每个 TDD 循环完成后，把建议的 commit message（`STO-xxx(red|green|refactor): <内容>`）登记到 implementation.md。人工 add 完成后，可汇总执行 `git commit`，但 commit 前必须 `git status` 检查：若仍有本次变更相关的未暂存文件，提醒人工补充 add（不得自行 add），确认无遗漏后才提交。`git push` 一律人工；**决不允许发版**（创建/推送 tag、触发 Release workflow 等一切发版动作只能由人工处理）。只读 git 命令（status/log/diff/blame）不受限制。
 
 ## 4. TDD 循环（Red → Green → Refactor）
 

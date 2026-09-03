@@ -31,7 +31,7 @@ tools: Read, Write, Edit, Glob, Grep, Bash
 ## 开发环境约定
 
 - `agile worktree create feature/STO-xxx` 创建隔离环境（workspace 级 worktree）。
-- commit 粒度同后端：`STO-xxx(red|green|refactor): <内容>`。
+- 提交约定同后端（add 归人工）：**绝对不执行 `git add`**，建议的 commit message（`STO-xxx(red|green|refactor): <内容>`）登记到 implementation.md；人工 add 完成后可汇总 commit（先检查无遗漏未暂存文件，有则提醒人工补 add）。
 
 ## 自检与输出
 
