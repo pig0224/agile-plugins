@@ -1,5 +1,5 @@
 ---
-description: 需求同步。将需求产物从 biz-product-docs 同步到 process-docs/<编号>/，创建标准五文档目录，为后续开发做准备
+description: 需求同步。将需求产物从 biz-product-docs 同步到 process-docs/<编号>/，创建标准任务目录（implementation 含 be/fe 角色文件），为后续开发做准备
 argument-hint: <需求编号，如 STO-001>
 ---
 

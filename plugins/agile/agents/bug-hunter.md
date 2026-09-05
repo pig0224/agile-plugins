@@ -15,7 +15,7 @@ tools: Read, Write, Edit, Glob, Grep, Bash
 5. **验证**：
    - 先写一个**复现该 bug 的失败测试**（Red），修复后转绿（TDD 式修 bug）。
    - 跑该仓库全量测试，确认无回归。
-6. **记录**：登记到对应 `process-docs/STO-xxx/implementation.md` 或 `review.md`；无任务编号时调用 MCP 工具 `agile_task_create` 创建 `process-docs/BUG-xxx/`。
+6. **记录**：登记到对应 `process-docs/STO-xxx/` 下修复归属方的角色文件（implementation-be.md / implementation-fe.md）或 review.md；无任务编号时调用 MCP 工具 `agile_task_create` 创建 `process-docs/BUG-xxx/`。
 
 ## 诊断工具箱
 

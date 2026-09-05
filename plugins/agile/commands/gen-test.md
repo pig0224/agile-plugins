@@ -17,7 +17,7 @@ argument-hint: <需求编号，如 STO-001>
 
 1. 调用 **test-engineer** subagent（Task 工具委派），传入：
    - 需求编号、requirement.md 与 design.md 路径、涉及的仓库列表（来自 design.md 涉及模块表）
-2. subagent 产出 `process-docs/<编号>/gen-test.md`（案例清单 TC 表格、数据准备、自动化映射）。
+2. subagent 产出 `process-docs/<编号>/gen-test.md`（案例清单 TC 表格、数据准备、自动化映射）。**案例清单分「后端用例」「前端用例」两节**——开发期各自只在自己节内补充/勾选，避免前后端并行时的合并冲突。
 3. 校验产出：每条 AC 至少 1 正常 + 1 边界/异常案例；不满足则让 subagent 补齐。
 
 ## 输出

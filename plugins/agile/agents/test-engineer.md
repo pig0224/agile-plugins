@@ -13,7 +13,7 @@ tools: Read, Write, Edit, Glob, Grep, Bash
 
 gen-test.md 必含：
 1. **测试范围**（覆盖哪些 AC、排除哪些及原因）
-2. **案例清单**（表格：TC-id、对应 AC、前置条件、步骤、期望结果、优先级 P0/P1/P2、类型 正常/边界/异常）
+2. **案例清单**（分「后端用例」「前端用例」两节；表格：TC-id、对应 AC、前置条件、步骤、期望结果、优先级 P0/P1/P2、类型 正常/边界/异常。开发期各自只在自己节内补充）
 3. **数据准备**（测试数据构造说明）
 4. **自动化映射**（哪些 TC 可自动化、对应仓库的哪个测试文件；不可自动化的标注手工步骤）
 
@@ -21,7 +21,7 @@ gen-test.md 必含：
 
 ## Stage 2：测试执行与验收
 
-输入：gen-test.md + 各仓库的实现（implementation.md 已完成的任务）。
+输入：gen-test.md + 各仓库的实现（implementation-be.md / implementation-fe.md 已完成的任务）。
 输出：`process-docs/STO-xxx/run-test.md`（验收报告）。
 
 执行方式：

@@ -21,13 +21,17 @@ CLI 与 MCP：工作区操作（sync/status/doctor 等）通过 Bash 执行 `agi
 
 ## 2. 需求编号（STO-xxx）任务目录
 
-`process-docs/STO-xxx/` 标准五文档，由 MCP 工具 `agile_task_create` 生成（task 能力不暴露为 CLI 命令，插件命令统一经 MCP 调用）：
+`process-docs/STO-xxx/` 标准任务目录，由 MCP 工具 `agile_task_create` 生成（task 能力不暴露为 CLI 命令，插件命令统一经 MCP 调用）。五文档 + 两份角色卫星文件，共 7 个 .md：
 
 - `requirement.md` — 需求说明与验收标准（AC）。产品/需求侧填充。
 - `design.md` — 技术设计。**SDD 核心：开发前必须先完成**。参考抽屉一/二规范。
-- `implementation.md` — 实施记录：任务清单、TDD 循环记录、变更清单。
+- `implementation.md` — 实施记录主文件：**任务分配表**（design 冻结时填写，之后只读）+ 联调约定。
+- `implementation-be.md` — **后端专属**实施记录：任务清单、TDD 循环记录、变更清单。前端禁写。
+- `implementation-fe.md` — **前端专属**实施记录：任务清单、测试记录、变更清单。后端禁写。
 - `review.md` — 评审记录。
 - `release.md` — 发布记录与回滚方案。
+
+> 文件级隔离：前后端并行开发（同一需求分支）时各写各的角色文件，git 合并零冲突。测试案例文档 gen-test.md 同理分「后端用例」「前端用例」两节。
 
 当前需求编号贯穿始终：所有命令产出都写入对应 `process-docs/<编号>/`。
 
@@ -48,17 +52,17 @@ CLI 与 MCP：工作区操作（sync/status/doctor 等）通过 Bash 执行 `agi
 1. 没有 `design.md` 不得进入开发阶段（SDD 红线）。
 2. 没有失败测试不得写实现代码（TDD 红线；脚手架/接口签名除外）。
 3. 所有产物先落盘到 process-docs，再写代码；代码变更与文档同步更新。
-4. **提交红线（add 归人工）**：绝对不执行 `git add`——哪些变更进入提交由人工审阅决定；每个 TDD 循环完成后，把建议的 commit message（`STO-xxx(red|green|refactor): <内容>`）登记到 implementation.md。人工 add 完成后，可汇总执行 `git commit`，但 commit 前必须 `git status` 检查：若仍有本次变更相关的未暂存文件，提醒人工补充 add（不得自行 add），确认无遗漏后才提交。`git push` 一律人工；**决不允许发版**（创建/推送 tag、触发 Release workflow 等一切发版动作只能由人工处理）。只读 git 命令（status/log/diff/blame）不受限制。
+4. **提交红线（add 归人工）**：绝对不执行 `git add`——哪些变更进入提交由人工审阅决定；每个 TDD 循环完成后，把建议的 commit message（`STO-xxx(red|green|refactor): <内容>`）登记到本角色文件（implementation-be.md / implementation-fe.md）。人工 add 完成后，可汇总执行 `git commit`，但 commit 前必须 `git status` 检查：若仍有本次变更相关的未暂存文件，提醒人工补充 add（不得自行 add），确认无遗漏后才提交。`git push` 一律人工；**决不允许发版**（创建/推送 tag、触发 Release workflow 等一切发版动作只能由人工处理）。只读 git 命令（status/log/diff/blame）不受限制。
 
 ## 4. TDD 循环（Red → Green → Refactor）
 
-每个开发任务在 `implementation.md` 登记，然后：
+每个开发任务在本角色文件（后端 implementation-be.md / 前端 implementation-fe.md）登记，然后：
 
 1. **Red**：根据 design.md 与测试案例写一个失败的测试（运行证明它失败）。
 2. **Green**：写最小实现让测试通过（不许过度设计）。
 3. **Refactor**：消除重复、改善命名与结构，测试保持绿色。
 
-循环记录写入 `implementation.md` 的「TDD 循环记录」表格。多任务按依赖顺序逐个循环。
+循环记录写入角色文件的「TDD 循环记录」表格。多任务按依赖顺序逐个循环。
 
 ## 5. 规范引用优先级
 
