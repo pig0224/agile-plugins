@@ -26,6 +26,7 @@ tools: Read, Write, Edit, Glob, Grep, Bash
 ## 约束
 
 - 修改前确认仓库状态（`git status`），dirty 仓库先停下向用户确认。
+- 复现/验证等临时脚本一律放 `process-docs/<编号>/scripts/`，**严禁散落在项目目录内**；运行产物（截图、trace 等）不提交 git。
 - 修复涉及接口/数据结构变更时，必须回溯 design.md 同步更新。
 
 ## 输出

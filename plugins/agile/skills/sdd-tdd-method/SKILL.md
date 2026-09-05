@@ -65,7 +65,18 @@ CLI 与 MCP：工作区操作（sync/status/doctor 等）通过 Bash 执行 `agi
 
 循环记录写入角色文件的「TDD 循环记录」表格。多任务按依赖顺序逐个循环。
 
-## 5. 规范引用优先级
+## 5. 测试脚本与产物归属
+
+| 层 | 内容 | 位置 | 是否入 git |
+|---|---|---|---|
+| 固化 e2e 脚本 | 关键路径回归脚本（长期资产，随页面同 PR 演进，供 /agile:run-test 与 stage 冒烟复用；**默认不进 PR CI 门禁**——e2e flaky 且慢，各项目可选跑关键路径冒烟子集） | 项目内 `e2e/`（Playwright，如 `e2e/*.spec.ts`） | ✅ 提交 |
+| 临时验证/复现脚本 | 修 bug 复现脚本、一次性验证脚本 | `process-docs/<编号>/scripts/`（**严禁散落在 projects/ 下的项目内**） | ✅ 随需求分支提交 |
+| 运行产物 | 截图、trace、HTML 报告、test-results | 框架默认输出目录 | ❌ 一律 .gitignore，不提交 |
+| 报告证据 | run-test / 浏览器验证引用的关键截图（少量） | `process-docs/<编号>/assets/` | ✅ 提交 |
+
+**测试工具约定**：e2e 主要测试工具 **Playwright**，辅助调试 **Chrome DevTools**；项目尚无可用测试工具时，给出「引入 Playwright（主）+ Chrome DevTools（辅助调试）」的建议，经负责人确认后引入。
+
+## 6. 规范引用优先级
 
 写任何代码/文档前：
 1. `tech-specs/`（公司硬规范，冲突时优先级最高）
@@ -73,7 +84,7 @@ CLI 与 MCP：工作区操作（sync/status/doctor 等）通过 Bash 执行 `agi
 3. `biz-product-docs/`（产品/UI 规范，前端实现必须对齐）
 4. 当前任务 `design.md`（本次的具体决策）
 
-## 6. 命令速查
+## 7. 命令速查
 
 | 命令 | 用途 |
 |---|---|
