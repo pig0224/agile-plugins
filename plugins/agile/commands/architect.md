@@ -11,13 +11,14 @@ argument-hint: <需求编号，如 STO-001>
 
 1. 读 `.agile/workspace.yaml` 获取 `paths.processDocs`。
 2. 需求编号：`$ARGUMENTS`（为空时列出 `process-docs/` 下现有编号目录让用户选择）。
-3. 检查 `process-docs/<编号>/requirement.md` 已填充（含 AC）。**未填充则停止**，提示先执行 `/agile:prd` + `/agile:sync-req`。
+3. 检查 `process-docs/<编号>/requirement.md` 已填充（完整形态含 AC，或轻量形态含一句话需求）。**未填充则停止**，提示先执行 `/agile:sync-req`（完整流程需先 `/agile:prd`；轻量通道直接提供一句话需求）。
 
 ## 执行步骤
 
 1. 调用 **tech-architect** subagent（Task 工具委派），传入：
    - 需求编号、`process-docs/<编号>/requirement.md` 路径
    - 抽屉一路径（`paths` 中 `techSpecs`）、抽屉二路径（`bizTechDocs`）、抽屉四路径（`projects`）
+   - **通道深度**：requirement.md 头部含 `本变更走轻量通道` 标记时为轻量——design.md 按 SOP 轻量填法输出**三五行方案简述**（STO 轻量 / OPS），不做完整设计
 2. subagent 产出 `process-docs/<编号>/design.md`。
 3. 审查产出（自己读一遍 design.md）：
    - 涉及项目是否都在 `projects/` 目录中存在（不在则列出并建议 `agile init project <name> --template <模板>`）

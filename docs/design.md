@@ -1,6 +1,6 @@
 # agile-plugins 设计
 
-> Claude Code 插件市场：13 个斜杠命令 + 7 个角色 subagent + 1 个方法论 skill。本仓库独立分发（git），**新增插件无需升级 [agile-cli](https://github.com/pig0224/agile-cli)**。
+> Claude Code 插件市场：15 个斜杠命令 + 7 个角色 subagent + 1 个方法论 skill。本仓库独立分发（git），**新增插件无需升级 [agile-cli](https://github.com/pig0224/agile-cli)**。
 
 ## 1. 市场仓库结构
 
@@ -11,7 +11,7 @@ agile-plugins/                       # 插件市场仓库
 └── plugins/
     └── agile/                       # SDD/TDD 主插件
         ├── .claude-plugin/plugin.json
-        ├── commands/                # 13 个命令（安装后 /agile:xxx）
+        ├── commands/                # 15 个命令（安装后 /agile:xxx）
         ├── agents/                  # 7 个角色 subagent
         ├── skills/sdd-tdd-method/   # 共享方法论
         └── .mcp.json                # 捆绑 agile mcp MCP Server
@@ -57,6 +57,8 @@ agile plugin install [name] [--marketplace <url>]
 | /agile:frontend | frontend-dev | 接口层→组件层→页面层 分层实现 + 浏览器验证 |
 | /agile:ui | ui-designer | 组件库 / `<抽屉三>/prototypes/<编号>/` / CHANGELOG |
 | /agile:run-test | test-engineer | `process-docs/<编号>/run-test.md`（验收报告） |
+| /agile:review | -（主会话直接执行，**分工例外**） | `process-docs/<编号>/review.md`（验收矩阵 + 门禁判定，不代验收） |
+| /agile:release | -（主会话直接执行，**分工例外**） | `process-docs/<编号>/release.md`（前置检查 + 回滚方案 + 发布记录） |
 | /agile:fix-bug | bug-hunter | 最小修复 + 复现测试 + 文档登记（无编号则 BUG-xxx） |
 | /agile:add-task | -（只追加） | implementation.md 任务清单追加 |
 | /agile:feedback | -（收集会话） | `process-docs/<编号>/feedback-<日期>.md` |

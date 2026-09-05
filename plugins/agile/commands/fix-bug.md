@@ -5,13 +5,13 @@ argument-hint: <问题描述或需求编号+问题描述，如 STO-001 下单接
 
 # /agile:fix-bug — 快速修复
 
-团队 SOP **轻量通道的 BUG 形态**标准入口：缺陷修复（回归正确行为，无需产品拍板）走此通道——worktree + PR 纪律不变，design.md 填根因分析，gen-test/review 填一行「本变更走轻量通道，此文档不适用」（见 SOP「轻量通道」节）。
+团队 SOP **轻量通道的 BUG 形态**标准入口：缺陷修复（回归正确行为，无需产品拍板）走此通道——worktree + PR 纪律不变，目录与文档按轻量填法（见 SOP「轻量通道」节；review.md 由 `/agile:review` 轻量形态生成一行验收确认，不填豁免声明）。
 
 先阅读 skill `sdd-tdd-method`，然后按以下步骤执行。
 
 ## 输入解析
 
-- `$ARGUMENTS` 中若含需求编号（STO-xxx/BUG-xxx）则登记到该任务目录；不含则视为新缺陷，调用 MCP 工具 `agile_task_create` 创建 `BUG-xxx`（列出 `process-docs/` 现有编号顺延）。
+- `$ARGUMENTS` 中若含需求编号（STO-xxx/BUG-xxx）则登记到该任务目录；不含则视为新缺陷，调用 MCP 工具 `agile_task_create` 创建 `BUG-xxx`（列出 `process-docs/` 现有编号顺延），并就地轻量初始化：`requirement.md` 头部标记 `> 本变更走轻量通道（BUG）` + 正文落缺陷描述与复现步骤；`gen-test.md` 填一行 `> 本变更走轻量通道，此文档不适用`。
 - 其余文字为 bug 描述；为空则询问用户。
 
 ## 执行步骤
@@ -25,7 +25,7 @@ argument-hint: <问题描述或需求编号+问题描述，如 STO-001 下单接
    - 复现测试确实从红转绿
    - 该仓库全量测试无回归
 4. 若根因涉及设计偏差，同步更新 design.md 并在汇报中标注。
-5. **文档收尾（轻量通道）**：BUG-xxx 目录下 design.md 记录根因分析；gen-test.md 与 review.md 各填一行 `> 本变更走轻量通道，此文档不适用`。
+5. **文档收尾（轻量通道）**：BUG-xxx 目录下 design.md 记录根因分析；run-test.md 记一行回归结论（全量测试通过）；review.md 不填——交付前由 `/agile:review` 轻量形态生成一行验收确认。
 
 ## 输出
 

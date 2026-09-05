@@ -25,7 +25,7 @@ claude plugin install agile
 └── plugins/
     └── agile/                        # SDD/TDD 主插件
         ├── .claude-plugin/plugin.json
-        ├── commands/                 # 13 个 /agile:xxx 斜杠命令
+        ├── commands/                 # 15 个 /agile:xxx 斜杠命令
         ├── agents/                   # 7 个角色 subagent
         ├── skills/sdd-tdd-method/    # 共享方法论
         └── .mcp.json                 # 捆绑 agile mcp MCP Server

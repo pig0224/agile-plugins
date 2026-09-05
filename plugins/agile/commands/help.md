@@ -21,6 +21,8 @@ disable-model-invocation: true
 | /agile:frontend | 前端分层开发与浏览器测试编排 | 前端 |
 | /agile:ui | UI 设计与组件库全生命周期（建设/原型/维护） | UI |
 | /agile:run-test | Stage 2：测试执行与验收报告 | 测试 |
+| /agile:review | 验收汇总与门禁判定（可交付 PR 门禁，不代验收） | 负责人 |
+| /agile:release | 发布前置检查与 release.md 记录（发布动作人工） | 负责人 |
 | /agile:fix-bug | 快速修复：自主根因诊断→修复→验证 | 全员 |
 | /agile:add-task | 补充遗漏的开发任务（不动已有任务） | 全员 |
 | /agile:feedback | 收集会话错误，生成标准问题反馈报告 | 全员 |

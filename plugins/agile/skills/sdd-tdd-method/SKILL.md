@@ -19,7 +19,7 @@ description: agile 工作区的 SDD/TDD 研发方法论与文档规范。凡执�
 
 CLI 与 MCP：工作区操作（sync/status/doctor 等）通过 Bash 执行 `agile <command>`，或调用捆绑 MCP 工具 `mcp__plugins_agile_agile__*`（task 目录创建只有 MCP 工具 `agile_task_create`，无 CLI 命令）。**不要手工造 git submodule 命令，交给 agile CLI。**
 
-## 2. 需求编号任务目录（STO / BUG / OPS）
+## 2. 需求编号任务目录与通道判定（STO / BUG / OPS）
 
 `process-docs/<编号>/` 标准任务目录（STO-xxx 业务需求 / BUG-xxx 缺陷修复 / OPS-xxx 技术变更），由 MCP 工具 `agile_task_create` 生成（task 能力不暴露为 CLI 命令，插件命令统一经 MCP 调用）。五文档 + 两份角色卫星文件，共 7 个 .md：
 
@@ -35,6 +35,19 @@ CLI 与 MCP：工作区操作（sync/status/doctor 等）通过 Bash 执行 `agi
 
 当前需求编号贯穿始终：所有命令产出都写入对应 `process-docs/<编号>/`。
 
+### 通道判定（所有命令先判再动）
+
+**两维正交**：性质（编号前缀）定拍板人，深度（完整 / 轻量）定填写量。
+
+| 形态 | 判定 | 典型场景 | 目录创建 |
+|---|---|---|---|
+| 完整 | 抽屉三 `requirements/<编号>/` 有 PRD 产物 | 需产品定稿 PRD/AC 的需求 | `/agile:sync-req <编号>` |
+| STO 轻量 | 产品一句话确认分配 STO 编号，无 PRD | mini feat、文案/样式调整 | `/agile:sync-req <编号> <一句话需求>` |
+| BUG | 缺陷，无需拍板（回归正确） | 行为与预期不符 | `/agile:fix-bug`（无编号顺延 BUG-xxx） |
+| OPS | 技术变更，运维拍板 | 重构、依赖升级、CI 微调 | `/agile:sync-req <编号> <改动说明>` |
+
+**轻量机读标记**：`requirement.md` 头部含 `> 本变更走轻量通道` 即轻量形态，各命令按此自适应——architect 输出三五行方案简述（design.md）；review 一行验收确认（报告人确认修复生效（BUG）/ 提需求人确认（STO 轻量）/ 负责人自查（OPS））；release 涉及部署才记一行。**不变**：TDD 红线不豁免（bug 修复必须复现测试 Red→Green）；worktree、main 禁直推、PR、CI 门禁照走。详细规范见团队 SOP「轻量通道」节。
+
 ## 3. SDD（Spec-Driven Design）流程主线
 
 ```
@@ -49,7 +62,7 @@ CLI 与 MCP：工作区操作（sync/status/doctor 等）通过 Bash 执行 `agi
 ```
 
 **硬规则：**
-1. 没有 `design.md` 不得进入开发阶段（SDD 红线）。**轻量通道豁免**：STO 轻量 / BUG-xxx / OPS-xxx 编号（判定与填写规范见团队 SOP「轻量通道」节）下，design.md 可由「根因分析」（BUG）或三五行方案简述（STO 轻量 / OPS）替代；TDD 红线（规则 2）**不豁免**——bug 修复必须先有复现测试。
+1. 没有 `design.md` 不得进入开发阶段（SDD 红线）。**轻量通道豁免**：STO 轻量 / BUG-xxx / OPS-xxx 编号（判定见 §2 通道判定）下，design.md 可由「根因分析」（BUG）或三五行方案简述（STO 轻量 / OPS）替代；TDD 红线（规则 2）**不豁免**——bug 修复必须先有复现测试。
 2. 没有失败测试不得写实现代码（TDD 红线；脚手架/接口签名除外）。
 3. 所有产物先落盘到 process-docs，再写代码；代码变更与文档同步更新。
 4. **提交红线（add 归人工）**：绝对不执行 `git add`——哪些变更进入提交由人工审阅决定；每个 TDD 循环完成后，把建议的 commit message（`STO-xxx(red|green|refactor): <内容>`）登记到本角色文件（implementation-be.md / implementation-fe.md）。人工 add 完成后，可汇总执行 `git commit`，但 commit 前必须 `git status` 检查：若仍有本次变更相关的未暂存文件，提醒人工补充 add（不得自行 add），确认无遗漏后才提交。`git push` 一律人工；**决不允许发版**（创建/推送 tag、触发 Release workflow 等一切发版动作只能由人工处理）。只读 git 命令（status/log/diff/blame）不受限制。
@@ -101,6 +114,8 @@ CLI 与 MCP：工作区操作（sync/status/doctor 等）通过 Bash 执行 `agi
 | /agile:frontend | 前端分层开发 |
 | /agile:ui | UI/组件库生命周期 |
 | /agile:run-test | Stage 2 测试执行与验收 |
+| /agile:review | 验收汇总与门禁判定 |
+| /agile:release | 发布前置检查与记录 |
 | /agile:add-task | 补充遗漏任务 |
 | /agile:fix-bug | 根因诊断修复 |
 | /agile:feedback | 问题反馈报告 |
