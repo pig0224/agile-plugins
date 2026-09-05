@@ -17,6 +17,7 @@ argument-hint: <需求编号，如 STO-001> [--only P0] [--repo 仓库路径]
 1. 读 design.md「涉及模块」表确定要跑的项目（`projects/` 下的目录）。
 2. 调用 **test-engineer** subagent（Task 工具委派，auto 模式）：
    - 逐仓库执行标准测试命令（从 package.json scripts / Makefile / pom.xml 读取）
+   - **e2e 用例**（gen-test.md「前端用例」节中标 `e2e` 的条目）：在前端项目执行其 e2e 脚本（如 `pnpm e2e`）；stage 环境已部署时指向 stage 做冒烟。项目尚未引入 e2e 框架时标「未执行」并在报告中注明缺口
    - 按案例清单核对结果；失败的记录现象与初步归因，继续其余案例
 3. 产出 `process-docs/<编号>/run-test.md`：范围、执行环境、逐案例结果表、失败清单、通过率、结论（通过验收 / 有条件通过 / 不通过）。
 

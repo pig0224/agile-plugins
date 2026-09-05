@@ -26,6 +26,7 @@ tools: Read, Write, Edit, Glob, Grep, Bash
 - 启动 dev server（仓库的 `npm run dev`），用浏览器打开验证：
   - 页面可渲染、无控制台错误
   - 关键交互路径走通（对照 AC）
+- **关键路径固化为 e2e 脚本**：按 gen-test.md「前端用例」节中标 `e2e` 的用例落地到前端项目的 e2e 脚本（如 `e2e/*.spec.ts`）；项目未引入 e2e 框架时先与负责人确认选型再引入，供 /agile:run-test 与 stage 冒烟复用。
 - 无法自动化的部分，输出验证步骤与结果记录。
 
 ## 开发环境约定
