@@ -19,9 +19,9 @@ description: agile 工作区的 SDD/TDD 研发方法论与文档规范。凡执�
 
 CLI 与 MCP：工作区操作（sync/status/doctor 等）通过 Bash 执行 `agile <command>`，或调用捆绑 MCP 工具 `mcp__plugins_agile_agile__*`（task 目录创建只有 MCP 工具 `agile_task_create`，无 CLI 命令）。**不要手工造 git submodule 命令，交给 agile CLI。**
 
-## 2. 需求编号（STO-xxx）任务目录
+## 2. 需求编号任务目录（STO / BUG / OPS）
 
-`process-docs/STO-xxx/` 标准任务目录，由 MCP 工具 `agile_task_create` 生成（task 能力不暴露为 CLI 命令，插件命令统一经 MCP 调用）。五文档 + 两份角色卫星文件，共 7 个 .md：
+`process-docs/<编号>/` 标准任务目录（STO-xxx 业务需求 / BUG-xxx 缺陷修复 / OPS-xxx 技术变更），由 MCP 工具 `agile_task_create` 生成（task 能力不暴露为 CLI 命令，插件命令统一经 MCP 调用）。五文档 + 两份角色卫星文件，共 7 个 .md：
 
 - `requirement.md` — 需求说明与验收标准（AC）。产品/需求侧填充。
 - `design.md` — 技术设计。**SDD 核心：开发前必须先完成**。参考抽屉一/二规范。
@@ -49,7 +49,7 @@ CLI 与 MCP：工作区操作（sync/status/doctor 等）通过 Bash 执行 `agi
 ```
 
 **硬规则：**
-1. 没有 `design.md` 不得进入开发阶段（SDD 红线）。
+1. 没有 `design.md` 不得进入开发阶段（SDD 红线）。**轻量通道豁免**：STO 轻量 / BUG-xxx / OPS-xxx 编号（判定与填写规范见团队 SOP「轻量通道」节）下，design.md 可由「根因分析」（BUG）或三五行方案简述（STO 轻量 / OPS）替代；TDD 红线（规则 2）**不豁免**——bug 修复必须先有复现测试。
 2. 没有失败测试不得写实现代码（TDD 红线；脚手架/接口签名除外）。
 3. 所有产物先落盘到 process-docs，再写代码；代码变更与文档同步更新。
 4. **提交红线（add 归人工）**：绝对不执行 `git add`——哪些变更进入提交由人工审阅决定；每个 TDD 循环完成后，把建议的 commit message（`STO-xxx(red|green|refactor): <内容>`）登记到本角色文件（implementation-be.md / implementation-fe.md）。人工 add 完成后，可汇总执行 `git commit`，但 commit 前必须 `git status` 检查：若仍有本次变更相关的未暂存文件，提醒人工补充 add（不得自行 add），确认无遗漏后才提交。`git push` 一律人工；**决不允许发版**（创建/推送 tag、触发 Release workflow 等一切发版动作只能由人工处理）。只读 git 命令（status/log/diff/blame）不受限制。

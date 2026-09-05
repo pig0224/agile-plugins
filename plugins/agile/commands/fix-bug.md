@@ -5,6 +5,8 @@ argument-hint: <问题描述或需求编号+问题描述，如 STO-001 下单接
 
 # /agile:fix-bug — 快速修复
 
+团队 SOP **轻量通道的 BUG 形态**标准入口：缺陷修复（回归正确行为，无需产品拍板）走此通道——worktree + PR 纪律不变，design.md 填根因分析，gen-test/review 填一行「本变更走轻量通道，此文档不适用」（见 SOP「轻量通道」节）。
+
 先阅读 skill `sdd-tdd-method`，然后按以下步骤执行。
 
 ## 输入解析
@@ -14,7 +16,7 @@ argument-hint: <问题描述或需求编号+问题描述，如 STO-001 下单接
 
 ## 执行步骤
 
-1. **环境检查**：`agile doctor --offline` + `git status`；工作区 dirty 时停下询问用户（修复应基于干净基线）。
+1. **环境检查**：`agile doctor --offline` + `git status`；工作区 dirty 时停下询问用户（修复应基于干净基线）。修复一律在需求分支的 worktree 内进行，无对应 worktree 时先 `agile worktree create feat/<编号>`（轻量通道 worktree 纪律不变）。
 2. 调用 **bug-hunter** subagent（Task 工具委派），传入：
    - bug 描述、涉及仓库（从描述推断或让用户指定）、任务编号
    - 要求完整走「复现 → 定位 → 根因 → 最小修复 → 回归验证 → 登记」闭环
@@ -23,6 +25,7 @@ argument-hint: <问题描述或需求编号+问题描述，如 STO-001 下单接
    - 复现测试确实从红转绿
    - 该仓库全量测试无回归
 4. 若根因涉及设计偏差，同步更新 design.md 并在汇报中标注。
+5. **文档收尾（轻量通道）**：BUG-xxx 目录下 design.md 记录根因分析；gen-test.md 与 review.md 各填一行 `> 本变更走轻量通道，此文档不适用`。
 
 ## 输出
 
