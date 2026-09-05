@@ -11,7 +11,7 @@ argument-hint: <子命令与参数，如 build 建设组件库 | prototype STO-0
 
 1. 读抽屉三 UI 规范、抽屉二前端工程规范。
 2. 调用 **ui-designer** subagent：从 0 到 1建设组件库（设计 token、基础组件 5-8 个起步、目录结构、README、测试）。
-3. 完成后建议 `agile init project <name> --type vue|react` 落库并注册 registry。
+3. 完成后建议 `agile init project <name> --template vue3-vite|react-vite` 落库并登记模板注册中心。
 
 ## 模式二：prototype STO-xxx（页面原型）
 
