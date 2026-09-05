@@ -26,7 +26,7 @@ argument-hint: <需求编号> [仓库路径或模块名，如 STO-001 projects/o
    - 需求编号、design.md 路径、测试案例文档路径、worktree 路径、任务清单（本轮要完成的任务）
    - 任务分批：单次委派不超过 5 个任务，完成一批汇报后再继续下一批
 3. subagent 逐任务执行 TDD 循环并更新 implementation-be.md。
-4. 每批完成后校验：在 worktree 目录运行该仓库标准测试命令，确认绿色。
+4. **复核（主会话执行，不得让 subagent 自查替代）**：在 worktree 目录运行该仓库标准测试命令确认绿色；抽查 diff 是否最小、是否仅覆盖本轮任务、TDD 循环记录是否完整；发现偏差退回 subagent 修复——**不得以「subagent 不可靠」为由改由主会话直接实施**（分工红线见 skill）。
 
 ## 闭环条件
 
