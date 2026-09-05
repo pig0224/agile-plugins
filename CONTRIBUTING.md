@@ -26,9 +26,9 @@ claude plugin marketplace add .     # 本地市场（开发热加载：改文件
 ## 插件内容约定
 
 - 命令只做「前置校验 → Task 委派 agent → 复核汇报」，实现细节写在 agent 里
-- 共享知识放 skill；产物全中文；不硬编码抽屉路径与 git 命令（经 workspace.yaml / CLI / MCP）
-- 文件系统操作经 CLI/MCP（如任务目录用 MCP `agile_task_create`），不手搓命令
-- 有写操作的 MCP 工具保持 dry-run 默认或显式确认参数
+- 共享知识放 skill；产物全中文；不硬编码抽屉路径与 git 命令（经 settings.json / CLI）
+- 文件系统操作经 CLI（如外部资源用 `agile sync`），不手搓命令；任务目录七文件按 sdd-tdd-method SKILL 附录 A 模板由命令直接创建（幂等）
+- 涉及破坏性写操作时先 dry-run 或显式向用户确认
 
 ## 报告问题
 

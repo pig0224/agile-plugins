@@ -4,7 +4,7 @@ labels: ["bug"]
 body:
   - type: markdown
     attributes:
-      value: 感谢反馈！请尽量填写以下信息，便于快速定位。建议先运行 `agile doctor --json` 附上输出。
+      value: 感谢反馈！请尽量填写以下信息，便于快速定位。建议先运行 `agile sync --dry-run` 附上输出。
   - type: textarea
     id: what-happened
     attributes:

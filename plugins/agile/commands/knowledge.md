@@ -13,7 +13,7 @@ argument-hint: build <建设提示词> 或 capture <主题> [--from <编号/路�
 
 | 环境 | 库定位 |
 |---|---|
-| agile workspace 内（有 `.agile/workspace.yaml`） | 三库齐备：`tech-specs/`、`biz-tech-docs/`、`biz-product-docs/`（路径先读 workspace.yaml 的 `paths` 段） |
+| agile workspace 内（有 `.agile/settings.json`） | 三库齐备：`tech-specs/`、`biz-tech-docs/`、`biz-product-docs/`（路径先读 settings.json 的 `paths` 段） |
 | 知识库仓库内（直接检出 tech-specs 或 biz-tech-docs 仓库） | **单库模式**：当前 git 仓库即目标库，仅支持 tech / team 操作；capture 的 `--from <编号>` 不可用（无 process-docs），`--from <路径>` 与缺省会话可用 |
 | 都不在 | 提示「进入 agile workspace 或知识库仓库后使用」并停止 |
 

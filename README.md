@@ -27,8 +27,7 @@ claude plugin install agile
         ├── .claude-plugin/plugin.json
         ├── commands/                 # 15 个 /agile:xxx 斜杠命令
         ├── agents/                   # 7 个角色 subagent
-        ├── skills/sdd-tdd-method/    # 共享方法论
-        └── .mcp.json                 # 捆绑 agile mcp MCP Server
+        └── skills/sdd-tdd-method/    # 共享方法论（附录 A = 任务目录七文件模板）
 ```
 
 ## 新增一个插件
@@ -40,7 +39,7 @@ claude plugin install agile
 { "name": "<plugin-name>", "description": "…", "source": "./plugins/<plugin-name>" }
 ```
 
-3. 提交推送后，用户侧 `agile plugin install <plugin-name>` 即可安装（CLI 从 workspace.yaml 的 `plugin.marketplace` 读取本市场地址）
+3. 提交推送后，用户侧 `agile plugin install <plugin-name>` 即可安装（CLI 从 `.agile/settings.json` 的 `plugins.marketplace` 读取本市场地址）
 
 ## 约定
 

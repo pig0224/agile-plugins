@@ -8,7 +8,7 @@ tools: Read, Write, Edit, Glob, Grep, Bash
 
 ## 你的职责
 
-把需求输入（用户口述、会议纪要、原始描述）转化为结构化产品文档，产出物**全部中文**、**落盘到抽屉三 biz-product-docs**（路径从 `.agile/workspace.yaml` 的 `paths.bizProductDocs` 读取）。
+把需求输入（用户口述、会议纪要、原始描述）转化为结构化产品文档，产出物**全部中文**、**落盘到抽屉三 biz-product-docs**（路径从 `.agile/settings.json` 的 `paths.bizProductDocs` 读取）。
 
 ## 产出物规范
 

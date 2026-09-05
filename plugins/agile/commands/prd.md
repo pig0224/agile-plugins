@@ -14,7 +14,7 @@ argument-hint: <需求编号或需求描述，如 STO-001 或一段需求文字>
 
 ## 执行步骤
 
-1. 读 `.agile/workspace.yaml` 获取 `paths.bizProductDocs`（抽屉三路径）。
+1. 读 `.agile/settings.json` 获取 `paths.bizProductDocs`（抽屉三路径）。
 2. 调用 **product-manager** subagent（Task 工具委派），传入：
    - 需求编号与需求描述（`$ARGUMENTS` 全文）
    - 抽屉三路径

@@ -9,7 +9,7 @@ argument-hint: <需求编号> [仓库路径，如 STO-001 projects/frontend-web]
 
 ## 前置校验
 
-1. 解析 `$ARGUMENTS`：第一段为需求编号，第二段（可选）为前端项目名（缺省时扫描 `projects/` 下含 vue/react 特征的项目，用 `agile foreach 'ls package.json'` 或直接 Glob 识别）。
+1. 解析 `$ARGUMENTS`：第一段为需求编号，第二段（可选）为前端项目名（缺省时扫描 `projects/` 下含 vue/react 特征的项目——按 package.json 依赖特征 Glob/读取识别）。
 2. 校验 `process-docs/<编号>/design.md` 已填充（SDD 红线）。未填充则停止。
 3. 读 `process-docs/<编号>/menu-tree.md`（或 feature-tree）确认页面范围。
 4. `git status` 确认工作区干净；dirty 则询问。

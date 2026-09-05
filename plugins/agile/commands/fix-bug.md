@@ -11,12 +11,12 @@ argument-hint: <问题描述或需求编号+问题描述，如 STO-001 下单接
 
 ## 输入解析
 
-- `$ARGUMENTS` 中若含需求编号（STO-xxx/BUG-xxx）则登记到该任务目录；不含则视为新缺陷，调用 MCP 工具 `agile_task_create` 创建 `BUG-xxx`（列出 `process-docs/` 现有编号顺延），并就地轻量初始化：`requirement.md` 头部标记 `> 本变更走轻量通道（BUG）` + 正文落缺陷描述与复现步骤；`gen-test.md` 填一行 `> 本变更走轻量通道，此文档不适用`。
+- `$ARGUMENTS` 中若含需求编号（STO-xxx/BUG-xxx）则登记到该任务目录；不含则视为新缺陷——列出 `process-docs/` 现有编号顺延得到 `BUG-xxx`，按 skill `sdd-tdd-method` **附录 A 模板**直接创建 `process-docs/BUG-xxx/` 七文件（幂等），并就地轻量初始化：`requirement.md` 头部标记 `> 本变更走轻量通道（BUG）` + 正文落缺陷描述与复现步骤；`gen-test.md` 填一行 `> 本变更走轻量通道，此文档不适用`。
 - 其余文字为 bug 描述；为空则询问用户。
 
 ## 执行步骤
 
-1. **环境检查**：`agile doctor --offline` + `git status`；工作区 dirty 时停下询问用户（修复应基于干净基线）。修复一律在需求分支的 worktree 内进行，无对应 worktree 时先 `agile worktree create feat/<编号>`（轻量通道 worktree 纪律不变）。
+1. **环境检查**：`git status`（dirty 时停下询问用户，修复应基于干净基线）；外部资源未就位时先 `agile sync`。修复一律在需求分支的 worktree 内进行，无对应 worktree 时先 `agile worktree create feat/<编号>`（轻量通道 worktree 纪律不变）。
 2. 调用 **bug-hunter** subagent（Task 工具委派），传入：
    - bug 描述、涉及仓库（从描述推断或让用户指定）、任务编号
    - 要求完整走「复现 → 定位 → 根因 → 最小修复 → 回归验证 → 登记」闭环

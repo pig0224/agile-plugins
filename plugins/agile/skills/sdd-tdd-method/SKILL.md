@@ -7,7 +7,7 @@ description: agile 工作区的 SDD/TDD 研发方法论与文档规范。凡执�
 
 ## 1. 工作区结构（一个根、五个抽屉）
 
-工作区根 = 存在 `.agile/workspace.yaml` 的目录。**一切路径先读 `.agile/workspace.yaml` 的 `paths` 段获得**，默认约定：
+工作区根 = 存在 `.agile/settings.json` 的目录。**一切路径先读 `.agile/settings.json` 的 `paths` 段获得**，默认约定：
 
 | 抽屉 | 默认路径 | 内容 | 角色 |
 |---|---|---|---|
@@ -17,11 +17,11 @@ description: agile 工作区的 SDD/TDD 研发方法论与文档规范。凡执�
 | 四 | `projects/` | 项目代码（workspace 单仓内普通目录） | 开发 |
 | 五 | `process-docs/` | 过程产物（按需求编号归档，workspace 根仓库内） | 全员 |
 
-CLI 与 MCP：工作区操作（sync/status/doctor 等）通过 Bash 执行 `agile <command>`，或调用捆绑 MCP 工具 `mcp__plugins_agile_agile__*`（task 目录创建只有 MCP 工具 `agile_task_create`，无 CLI 命令）。**不要手工造 git submodule 命令，交给 agile CLI。**
+CLI 直调：工作区操作（sync / config / worktree / template / plugin 等）通过 Bash 执行 `agile <command>`（CLI 是插件的硬依赖，未安装时先提示用户 `npm i -g fcc-agile-cli`）。**不要手工造 git submodule 命令，交给 agile CLI。**
 
 ## 2. 需求编号任务目录与通道判定（STO / BUG / OPS）
 
-`process-docs/<编号>/` 标准任务目录（STO-xxx 业务需求 / BUG-xxx 缺陷修复 / OPS-xxx 技术变更），由 MCP 工具 `agile_task_create` 生成（task 能力不暴露为 CLI 命令，插件命令统一经 MCP 调用）。五文档 + 两份角色卫星文件，共 7 个 .md：
+`process-docs/<编号>/` 标准任务目录（STO-xxx 业务需求 / BUG-xxx 缺陷修复 / OPS-xxx 技术变更），**由创建它的插件命令（/agile:sync-req、/agile:fix-bug、bug-hunter）按附录 A 模板直接创建**（幂等：已存在的文件不覆盖）。五文档 + 两份角色卫星文件，共 7 个 .md：
 
 - `requirement.md` — 需求说明与验收标准（AC）。产品/需求侧填充。
 - `design.md` — 技术设计。**SDD 核心：开发前必须先完成**。参考抽屉一/二规范。
@@ -120,3 +120,137 @@ CLI 与 MCP：工作区操作（sync/status/doctor 等）通过 Bash 执行 `agi
 | /agile:fix-bug | 根因诊断修复 |
 | /agile:feedback | 问题反馈报告 |
 | /agile:knowledge | 知识库建设与沉淀 |
+
+## 附录 A：任务目录七文件模板（创建规范）
+
+创建 `process-docs/<编号>/` 时按以下模板逐一生成（`{{id}}` 替换为编号；**幂等**：目录与文件已存在则跳过，绝不覆盖既有内容）。轻量通道（STO 轻量 / BUG / OPS）只额外初始化 `requirement.md` 与 `gen-test.md` 的差异内容（见各命令），其余文件仍按模板创建骨架。
+
+**requirement.md**：
+
+```markdown
+# {{id}} 需求说明
+
+> 由 /agile:sync-req（完整）或 /agile:fix-bug（BUG）创建，agile:prd / agile:sync-req 会填充此文档。
+
+## 背景
+
+（需求来源、业务背景）
+
+## 目标
+
+（本需求要达成的目标）
+
+## 验收标准（AC）
+
+- [ ] AC1: ...
+- [ ] AC2: ...
+```
+
+**design.md**：
+
+```markdown
+# {{id}} 技术设计
+
+> 由 agile:architect 填充（SDD：先设计后开发）。参考抽屉一/二规范。
+
+## 方案概述
+
+## 涉及模块
+
+| 模块 | 仓库 | 改动类型 |
+|---|---|---|
+| | | |
+
+## 接口设计
+
+## 状态机 / 数据模型
+
+## 风险与取舍
+```
+
+**implementation.md**：
+
+```markdown
+# {{id}} 实施记录（任务分配）
+
+> 主文件：任务分配表在 design.md 冻结时填写，之后**只读**；执行状态在各角色文件的任务清单中体现。
+> 分工红线：后端只写 [implementation-be.md](implementation-be.md)，前端只写 [implementation-fe.md](implementation-fe.md)。
+
+## 任务分配
+
+| # | 任务 | 归属 | 明细 |
+|---|---|---|---|
+| 1 | | be / fe | [BE-1](implementation-be.md) / [FE-1](implementation-fe.md) |
+
+## 联调约定
+
+（接口对齐方式、环境、时间；双方知会）
+```
+
+**implementation-be.md**：
+
+```markdown
+# {{id}} 后端实施记录
+
+> 本文件由**后端专属维护**（agile:backend / TDD：Red → Green → Refactor）；前端记录见 [implementation-fe.md](implementation-fe.md)。
+
+## 任务清单
+
+- [ ] BE-1:
+
+## TDD 循环记录
+
+| # | 测试（先写） | 实现后状态 |
+|---|---|---|
+| 1 | | |
+
+## 变更清单
+```
+
+**implementation-fe.md**：
+
+```markdown
+# {{id}} 前端实施记录
+
+> 本文件由**前端专属维护**（agile:frontend / 分层开发：接口层 → 组件层 → 页面层）；后端记录见 [implementation-be.md](implementation-be.md)。
+
+## 任务清单
+
+- [ ] FE-1:
+
+## 测试记录
+
+| # | 测试（先写） | 实现后状态 |
+|---|---|---|
+| 1 | | |
+
+## 变更清单
+```
+
+**review.md**：
+
+```markdown
+# {{id}} 评审记录
+
+## Code Review 结论
+
+## 问题与修复
+
+## 遗留问题
+```
+
+**release.md**：
+
+```markdown
+# {{id}} 发布记录
+
+## 发布内容
+
+## 涉及仓库与 commit
+
+| 仓库 | 分支 | commit |
+|---|---|---|
+| | | |
+
+## 回滚方案
+```

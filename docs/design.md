@@ -13,8 +13,7 @@ agile-plugins/                       # 插件市场仓库
         ├── .claude-plugin/plugin.json
         ├── commands/                # 15 个命令（安装后 /agile:xxx）
         ├── agents/                  # 7 个角色 subagent
-        ├── skills/sdd-tdd-method/   # 共享方法论
-        └── .mcp.json                # 捆绑 agile mcp MCP Server
+        └── skills/sdd-tdd-method/   # 共享方法论（附录 A = 任务目录七文件模板）
 ```
 
 **职责分离**：命令 = 人机入口（前置校验 + 委派 + 复核汇报）；agent = 具体执行（产出文档/代码）；skill = 共享知识（所有命令开头要求先读）。命令体内不写实现细节，保证角色 prompt 集中且可独立演化。
@@ -23,7 +22,7 @@ agile-plugins/                       # 插件市场仓库
 
 ```
 agile plugin install [name] [--marketplace <url>]
-  → 读 workspace.yaml plugin.marketplace（默认官方 git 地址，可指向团队私有市场）
+  → 读 .agile/settings.json 的 plugins.marketplace（默认官方 git 地址，可指向团队私有市场）
   → claude plugin marketplace add <git 地址>
   → claude plugin install <name>@fcc
   → 记录 .agile/plugin.yaml（source = 市场地址）
@@ -65,13 +64,14 @@ agile plugin install [name] [--marketplace <url>]
 | /agile:knowledge | -（主会话直接执行，**分工例外**） | build：知识库骨架 + 提纲 + README 导航；capture：会话/过程产物提炼的长期结论文档 + README 导航 |
 | /agile:help | -（静态） | 命令总览 + 流程图 + workspace 状态 |
 
-## 5. 与 CLI/MCP 的协作
+## 5. 与 CLI 的协作
 
-命令体指示模型通过以下方式调用 CLI 能力（不手工造 git 命令）：
-- Bash 执行 `agile status / worktree create / doctor / template list`
-- 捆绑 MCP 工具（`agile mcp`）：`agile_status`、`agile_sync`（默认 dryRun）、`agile_template_list`、`agile_task_create`（task 能力仅 MCP 暴露，/agile:sync-req 等命令经它创建任务目录）、`agile_doctor` 等
+命令体指示模型通过 Bash 调用 CLI 能力（不手工造 git 命令）：
+- Bash 执行 `agile sync / config / worktree create / template list / plugin ...`
 
-抽屉路径不硬编码：所有命令/agent 先读 `.agile/workspace.yaml` 的 `paths` 段。
+任务目录（process-docs/<编号>/ 七文件）由创建它的命令按 sdd-tdd-method SKILL 附录 A 模板直接创建（幂等，无 CLI/MCP 依赖）。
+
+抽屉路径不硬编码：所有命令/agent 先读 `.agile/settings.json` 的 `paths` 段。
 
 ## 6. 规范引用优先级（写入 agent prompt）
 

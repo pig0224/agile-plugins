@@ -1,6 +1,6 @@
 # CLAUDE.md — agile-plugins 仓库导航
 
-本仓库是 **Claude Code 插件市场（marketplace）**：`.claude-plugin/marketplace.json` 声明全部插件，主插件在 `plugins/agile/`。**新增插件无需改动 agile-cli**（CLI 从 workspace.yaml 的 `plugin.marketplace` 指向本仓库）。
+本仓库是 **Claude Code 插件市场（marketplace）**：`.claude-plugin/marketplace.json` 声明全部插件，主插件在 `plugins/agile/`。**新增插件无需改动 agile-cli**（CLI 从 `.agile/settings.json` 的 `plugins.marketplace` 指向本仓库）。
 
 ## 协作红线（优先级最高）
 
@@ -26,8 +26,7 @@ plugins/agile/
   .claude-plugin/plugin.json       # 插件清单（name: agile）
   commands/                        # 15 个 /agile:xxx 斜杠命令
   agents/                          # 7 个角色 subagent
-  skills/sdd-tdd-method/           # 共享方法论（命令按需引用）
-  .mcp.json                        # 捆绑 agile mcp MCP Server
+  skills/sdd-tdd-method/           # 共享方法论（附录 A = 任务目录七文件模板）
 docs/design.md                     # 设计文档
 ```
 
