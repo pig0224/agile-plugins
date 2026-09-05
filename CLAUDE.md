@@ -24,7 +24,7 @@ claude plugin install agile
 .claude-plugin/marketplace.json    # 市场清单：plugins[] → source（相对路径）
 plugins/agile/
   .claude-plugin/plugin.json       # 插件清单（name: agile）
-  commands/                        # 12 个 /agile:xxx 斜杠命令
+  commands/                        # 13 个 /agile:xxx 斜杠命令
   agents/                          # 7 个角色 subagent
   skills/sdd-tdd-method/           # 共享方法论（命令按需引用）
   .mcp.json                        # 捆绑 agile mcp MCP Server

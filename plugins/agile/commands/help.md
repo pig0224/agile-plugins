@@ -24,6 +24,7 @@ disable-model-invocation: true
 | /agile:fix-bug | 快速修复：自主根因诊断→修复→验证 | 全员 |
 | /agile:add-task | 补充遗漏的开发任务（不动已有任务） | 全员 |
 | /agile:feedback | 收集会话错误，生成标准问题反馈报告 | 全员 |
+| /agile:knowledge | 知识库建设与沉淀（build 辅助建设 / capture 从会话与过程产物提炼） | 架构 |
 | /agile:help | 本帮助 | - |
 
 2. 输出 SDD/TDD 流程主线：

@@ -1,6 +1,6 @@
 # agile-plugins 设计
 
-> Claude Code 插件市场：12 个斜杠命令 + 7 个角色 subagent + 1 个方法论 skill。本仓库独立分发（git），**新增插件无需升级 [agile-cli](https://github.com/pig0224/agile-cli)**。
+> Claude Code 插件市场：13 个斜杠命令 + 7 个角色 subagent + 1 个方法论 skill。本仓库独立分发（git），**新增插件无需升级 [agile-cli](https://github.com/pig0224/agile-cli)**。
 
 ## 1. 市场仓库结构
 
@@ -11,7 +11,7 @@ agile-plugins/                       # 插件市场仓库
 └── plugins/
     └── agile/                       # SDD/TDD 主插件
         ├── .claude-plugin/plugin.json
-        ├── commands/                # 12 个命令（安装后 /agile:xxx）
+        ├── commands/                # 13 个命令（安装后 /agile:xxx）
         ├── agents/                  # 7 个角色 subagent
         ├── skills/sdd-tdd-method/   # 共享方法论
         └── .mcp.json                # 捆绑 agile mcp MCP Server
@@ -60,6 +60,7 @@ agile plugin install [name] [--marketplace <url>]
 | /agile:fix-bug | bug-hunter | 最小修复 + 复现测试 + 文档登记（无编号则 BUG-xxx） |
 | /agile:add-task | -（只追加） | implementation.md 任务清单追加 |
 | /agile:feedback | -（收集会话） | `process-docs/<编号>/feedback-<日期>.md` |
+| /agile:knowledge | -（主会话直接执行，**分工例外**） | build：知识库骨架 + 提纲 + README 导航；capture：会话/过程产物提炼的长期结论文档 + README 导航 |
 | /agile:help | -（静态） | 命令总览 + 流程图 + workspace 状态 |
 
 ## 5. 与 CLI/MCP 的协作
