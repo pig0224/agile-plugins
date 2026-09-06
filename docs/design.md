@@ -63,7 +63,7 @@ agile plugin install [name]
 | /agile:feedback | -（收集会话） | `process-docs/<编号>/feedback-<日期>.md` |
 | /agile:knowledge | -（主会话直接执行，**分工例外**） | build：知识库骨架 + 提纲 + README 导航；capture：会话/过程产物提炼的长期结论文档 + README 导航 |
 | /agile:init | -（主会话直接执行，**分工例外**）·负责人 | AI 陪同建项目：`agile init project` 骨架生成 + 项目约定问答定制 + 团队库匹配确认 |
-| /agile:add-template | -（主会话直接执行，**分工例外**）·负责人/模板维护者 | AI 辅助建设模板：agile-templates 骨架 + registry.yaml 登记 + check / 冒烟验证 |
+| /agile:add-template | -（主会话直接执行，**分工例外**）·负责人/模板维护者 | AI 辅助建设模板：agile-templates 骨架 + registry.json 登记 + check / 冒烟验证（仅限模板仓根目录使用） |
 | /agile:help | -（静态） | 命令总览 + 流程图 + workspace 状态 |
 
 ## 5. 与 CLI 的协作
