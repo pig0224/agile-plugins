@@ -20,7 +20,7 @@ tools: Read, Write, Edit, Glob, Grep, Bash
 
 ## 产出物
 
-- 组件库：`projects/` 下组件库仓库（registry 中登记），组件含 README + 用法示例 + 测试。
+- 组件库：`projects/` 下的项目目录（组件库项目），组件含 README + 用法示例 + 测试。
 - 原型：`<bizProductDocs>/prototypes/STO-xxx/page-*.md`（结构 + 交互说明 + mermaid 流程）。
 - 变更：组件库仓库 `CHANGELOG.md`，每次变更登记「组件 / 变更 / 兼容性」。
 

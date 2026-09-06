@@ -21,6 +21,10 @@ argument-hint: <需求编号，如 STO-001> [--only P0] [--repo 仓库路径]
    - 按案例清单核对结果；失败的记录现象与初步归因，继续其余案例
 3. 产出 `process-docs/<编号>/run-test.md`：范围、执行环境、逐案例结果表、失败清单、通过率、结论（通过验收 / 有条件通过 / 不通过）。报告引用的关键截图归档到 `process-docs/<编号>/assets/`（少量）；运行产物（`test-results/`、`playwright-report/` 等）不提交 git。
 
+## 轻量通道降级
+
+`requirement.md` 头部带轻量标记（`> 本变更走轻量通道`）或编号为 BUG / OPS 时，**不产出完整 Stage 2 报告**：只在 `run-test.md` 记一行回归/验证结论（BUG：全量测试通过的回归结论；STO 轻量 / OPS：验证结论），不产出逐案例结果表（对齐团队 SOP「轻量通道」填法）。TDD 红线不豁免——bug 修复的复现测试仍必须验证 Red→Green。
+
 ## 诚实原则
 
 - 没执行的一律标「未执行」；禁止推断填充。

@@ -25,7 +25,7 @@ claude plugin install agile
 └── plugins/
     └── agile/                        # SDD/TDD 主插件
         ├── .claude-plugin/plugin.json
-        ├── commands/                 # 15 个 /agile:xxx 斜杠命令
+        ├── commands/                 # 17 个 /agile:xxx 斜杠命令
         ├── agents/                   # 7 个角色 subagent
         └── skills/sdd-tdd-method/    # 共享方法论（附录 A = 任务目录七文件模板）
 ```
@@ -46,6 +46,7 @@ claude plugin install agile
 - 插件名（plugin.json `name`）= marketplace 条目名 = `plugins/` 下目录名，三者一致
 - 插件文案全部中文；agent 的 `description` 用第三人称描述"何时使用"
 - 市场名固定 `fcc`（`claude plugin install <name>@fcc`）
+- `plugin.json` 有意不写 `version`（commit SHA 更新模式），`claude plugin validate` 的 version warning 可忽略，勿补回 `version` 字段
 
 ## 开发
 

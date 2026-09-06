@@ -1,6 +1,6 @@
 ---
 name: sdd-tdd-method
-description: agile 工作区的 SDD/TDD 研发方法论与文档规范。凡执行 agile:prd / agile:architect / agile:backend / agile:frontend / agile:gen-test / agile:run-test 等 agile 系列命令时必须先阅读本 skill。涵盖：一个根五个抽屉的目录约定、需求编号任务目录、SDD 先设计后开发、TDD Red-Green-Refactor 循环、过程产物五文档的填写规范。
+description: agile 工作区的 SDD/TDD 研发方法论与文档规范。凡执行 agile:prd / agile:architect / agile:backend / agile:frontend / agile:gen-test / agile:run-test 等 agile 系列命令时必须先阅读本 skill。涵盖：一个根五个抽屉的目录约定、需求编号任务目录、SDD 先设计后开发、TDD Red-Green-Refactor 循环、过程产物五文档 + 两角色卫星文件（任务目录 7 个 .md，完整档案 9 个）的填写规范。
 ---
 
 # agile SDD/TDD 方法论
@@ -17,7 +17,7 @@ description: agile 工作区的 SDD/TDD 研发方法论与文档规范。凡执�
 | 四 | `projects/` | 项目代码（workspace 单仓内普通目录） | 开发 |
 | 五 | `process-docs/` | 过程产物（按需求编号归档，workspace 根仓库内） | 全员 |
 
-CLI 直调：工作区操作（sync / config / worktree / template / plugin 等）通过 Bash 执行 `agile <command>`（CLI 是插件的硬依赖，未安装时先提示用户 `npm i -g fcc-agile-cli`）。**不要手工造 git submodule 命令，交给 agile CLI。**
+CLI 直调：工作区操作（sync / config / worktree / template / plugin 等）通过 Bash 执行 `agile <command>`（CLI 是插件的硬依赖，未安装时先提示用户 `npm i -g fcc-agile-cli`）。**submodule 已废弃（2.0）：tech-specs 恒为外部仓库；biz-tech-docs 默认是 workspace 内普通目录（登记为外部仓库后独立成库、被 .gitignore 忽略）——commit/push 一律由人工处理，AI 不代做。**
 
 ## 2. 需求编号任务目录与通道判定（STO / BUG / OPS）
 
@@ -25,13 +25,13 @@ CLI 直调：工作区操作（sync / config / worktree / template / plugin 等�
 
 - `requirement.md` — 需求说明与验收标准（AC）。产品/需求侧填充。
 - `design.md` — 技术设计。**SDD 核心：开发前必须先完成**。参考抽屉一/二规范。
-- `implementation.md` — 实施记录主文件：**任务分配表**（design 冻结时填写，之后只读）+ 联调约定。
+- `implementation.md` — 实施记录主文件：**任务分配表**（design 冻结时填写，之后**只读，仅允许按 design 冻结结论追加一行**（add-task））+ 联调约定。
 - `implementation-be.md` — **后端专属**实施记录：任务清单、TDD 循环记录、变更清单。前端禁写。
 - `implementation-fe.md` — **前端专属**实施记录：任务清单、测试记录、变更清单。后端禁写。
 - `review.md` — 评审记录。
 - `release.md` — 发布记录与回滚方案。
 
-> 文件级隔离：前后端并行开发（同一需求分支）时各写各的角色文件，git 合并零冲突。测试案例文档 gen-test.md 同理分「后端用例」「前端用例」两节。gen-test.md 与 run-test.md 由 /agile:gen-test、/agile:run-test 阶段产出（不在附录 A 初始模板之列）——任务目录完整档案共 9 个 .md。
+> 文件级隔离：前后端并行开发（同一需求分支）时各写各的角色文件，git 合并零冲突。测试案例文档 gen-test.md 同理分「后端用例」「前端用例」两节。gen-test.md 骨架随任务目录创建（由 /agile:gen-test 填充，模板见附录 A），run-test.md 由 /agile:run-test 阶段产出（不在附录 A 初始模板之列）——任务目录完整档案共 9 个 .md。
 
 当前需求编号贯穿始终：所有命令产出都写入对应 `process-docs/<编号>/`。
 
@@ -46,7 +46,7 @@ CLI 直调：工作区操作（sync / config / worktree / template / plugin 等�
 | BUG | 缺陷，无需拍板（回归正确） | 行为与预期不符 | `/agile:fix-bug`（无编号顺延 BUG-xxx） |
 | OPS | 技术变更，运维拍板 | 重构、依赖升级、CI 微调 | `/agile:sync-req <编号> <改动说明>` |
 
-**轻量机读标记**：`requirement.md` 头部含 `> 本变更走轻量通道` 即轻量形态，各命令按此自适应——architect 输出三五行方案简述（design.md）；review 一行验收确认（报告人确认修复生效（BUG）/ 提需求人确认（STO 轻量）/ 负责人自查（OPS））；release 涉及部署才记一行。**不变**：TDD 红线不豁免（bug 修复必须复现测试 Red→Green）；worktree、main 禁直推、PR、CI 门禁照走。**升级出口**：过程中发现影响面超出预期（涉及接口契约 / 数据模型 / 业务行为明显变化）→ 停止轻量流程，提示用户按团队 SOP「轻量通道」页「编号变更与升级出口」节**人工处理**换号与文档补全——AI 不自行执行编号变更、目录改名或分支操作。详细规范见团队 SOP「轻量通道」节。
+**轻量机读标记**：`requirement.md` 头部含 `> 本变更走轻量通道` 即轻量形态，各命令按此自适应——architect 输出三五行方案简述（design.md）；review 一行验收确认（报告人确认修复生效（BUG）/ 提需求人确认（STO 轻量）/ 负责人自查（OPS））；run-test 不产出完整 Stage 2 报告，只在 run-test.md 记一行回归/验证结论；release 涉及部署才记一行。**不变**：TDD 红线不豁免（bug 修复必须复现测试 Red→Green）；worktree、main 禁直推、PR、CI 门禁照走。**升级出口**：过程中发现影响面超出预期（涉及接口契约 / 数据模型 / 业务行为明显变化）→ 停止轻量流程，提示用户按团队 SOP「轻量通道」页「编号变更与升级出口」节**人工处理**换号与文档补全——AI 不自行执行编号变更、目录改名或分支操作。详细规范见团队 SOP「轻量通道」节。
 
 ## 3. SDD（Spec-Driven Design）流程主线
 
@@ -232,16 +232,48 @@ CLI 直调：工作区操作（sync / config / worktree / template / plugin 等�
 ## 变更清单
 ```
 
+**gen-test.md**：
+
+```markdown
+# {{id}} 测试案例
+
+> 由 /agile:gen-test（test-engineer）按 requirement.md 的 AC 与 design.md 填充（Stage 1，先于实现）。开发期各自只在本方节内补充/勾选。
+
+## 后端用例
+
+| 编号 | 类型 | 描述 | 自动化映射 | 状态 |
+|---|---|---|---|---|
+| | 单测 | | | |
+
+## 前端用例
+
+| 编号 | 类型 | 描述 | 自动化映射 | 状态 |
+|---|---|---|---|---|
+| | 单测 / e2e | | | |
+
+（e2e 用例归入「前端用例」节：类型标 `e2e`，自动化映射指向前端项目的 e2e 脚本（如 `e2e/*.spec.ts`），只覆盖关键路径。）
+
+> **轻量通道豁免**：本变更走轻量通道（STO 轻量 / BUG / OPS）时不填用例表，本文件只保留一行 `> 本变更走轻量通道，此文档不适用`。
+```
+
 **review.md**：
 
 ```markdown
 # {{id}} 评审记录
 
-## Code Review 结论
+> 由 /agile:review 汇总填写：只记录与格式化验收结论、判定门禁，不代替人工验收。
 
-## 问题与修复
+## 验收矩阵
 
-## 遗留问题
+| 验收项 | 验收人 | 环境 | 结论 |
+|---|---|---|---|
+| | | | |
+
+## 未闭环清单
+
+## 门禁结论
+
+（✅ 可交付 PR / ⛔ 不可交付）
 ```
 
 **release.md**：

@@ -11,7 +11,7 @@ tools: Read, Write, Edit, Glob, Grep, Bash
 - `process-docs/STO-xxx/design.md`（实现依据；缺失时停止并报告）
 - `biz-product-docs/`（抽屉三：UI 规范、交互设计规范——样式与交互不得违背）
 - `biz-tech-docs/`（抽屉二：前端工程规范、既有组件清单）
-- 目标仓库：registry 中的前端项目（如 projects/frontend-web）
+- 目标仓库：`projects/` 下的前端项目目录（如 projects/frontend-web）
 
 ## 分层开发顺序
 
@@ -23,6 +23,7 @@ tools: Read, Write, Edit, Glob, Grep, Bash
 
 ## 浏览器验证
 
+- **浏览器验证通过 Bash 驱动 Playwright 脚本 / e2e 执行（模板已内置 e2e 骨架），以脚本输出为准，不虚构浏览器结论。**
 - 启动 dev server（仓库的 `npm run dev`），用浏览器打开验证：
   - 页面可渲染、无控制台错误
   - 关键交互路径走通（对照 AC）
@@ -33,7 +34,7 @@ tools: Read, Write, Edit, Glob, Grep, Bash
 ## 开发环境约定
 
 - `agile worktree create feat/STO-xxx` 创建/进入隔离环境（workspace 级 worktree，远程分支已存在时自动跟踪检出）。
-- **文件归属红线**：只写 `implementation-fe.md`（任务清单、测试记录、变更清单）；禁止修改 `implementation-be.md`、`implementation.md` 主文件（任务分配冻结后只读）与 design.md（接口变更需知会负责人改）。
+- **文件归属红线**：只写 `implementation-fe.md`（任务清单、测试记录、变更清单）；禁止修改 `implementation-be.md`、`implementation.md` 主文件（冻结后只读，仅允许按 design 冻结结论在任务分配表追加一行（add-task））与 design.md（接口变更需知会负责人改）。
 - 提交约定同后端（add 归人工）：**绝对不执行 `git add`**，建议的 commit message（`STO-xxx(red|green|refactor): <内容>`）登记到 implementation-fe.md；人工 add 完成后可汇总 commit（先检查无遗漏未暂存文件，有则提醒人工补 add）。
 
 ## 自检与输出

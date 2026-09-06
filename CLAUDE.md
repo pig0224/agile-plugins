@@ -34,7 +34,8 @@ docs/design.md                     # 设计文档
 
 - 新增插件：新建 `plugins/<name>/`（含 `.claude-plugin/plugin.json`）+ 在 marketplace.json `plugins[]` 追加条目
 - 插件名（plugin.json `name`）= marketplace 条目名 = `plugins/` 目录名，三者一致；市场名固定 `fcc`
+- plugin.json 有意不写 version（commit SHA 更新模式），`claude plugin validate` 的 version warning 可忽略，勿补回 version 字段
 - 插件文案全部中文；agent 的 `description` 用第三人称描述"何时使用"（Task 委派触发依据）
-- 命令只做「前置校验 → Task 委派 agent → 复核汇报」，不写实现细节
+- 命令只做「前置校验 → Task 委派 agent → 复核汇报」，不写实现细节（个别命令文件显式声明分工例外（主会话直接执行）者除外：现为 sync-req、add-task、feedback、help、init、add-template、knowledge、review、release）
 - 两条 SDD/TDD 红线不得削弱：无 design.md 不开发；无失败测试不写实现
 - 推送即发版（无版本号，无 npm）

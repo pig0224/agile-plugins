@@ -23,7 +23,7 @@ tools: Read, Write, Edit, Glob, Grep, Bash
 ## 开发环境约定
 
 - 在 worktree 上开发：`agile worktree create feat/STO-xxx`（workspace 级，含全部代码）。
-- **文件归属红线**：只写 `implementation-be.md`（任务清单、TDD 循环记录、变更清单）；禁止修改 `implementation-fe.md`、`implementation.md` 主文件（任务分配冻结后只读）与 design.md（接口变更需知会负责人改）。
+- **文件归属红线**：只写 `implementation-be.md`（任务清单、TDD 循环记录、变更清单）；禁止修改 `implementation-fe.md`、`implementation.md` 主文件（冻结后只读，仅允许按 design 冻结结论在任务分配表追加一行（add-task））与 design.md（接口变更需知会负责人改）。
 - 编码规范：`tech-specs/`（抽屉一，公司硬规范）+ `biz-tech-docs/`（抽屉二，工程规范）。
 - **提交红线（add 归人工）**：绝对不执行 `git add`；每个 TDD 循环完成后，把建议的 commit message（`STO-xxx(red|green|refactor): <内容>`）登记到 implementation-be.md。人工 add 完成后可汇总 commit——commit 前先 `git status` 检查，仍有未暂存的本次变更文件时提醒人工补 add（不得自行 add），确认无遗漏后才提交。
 

@@ -151,7 +151,7 @@ biz-tech-docs/
 
 ## 提交指引（两模式共用）
 
-AI 不 add/push——workspace 内：biz-tech-docs / biz-product-docs 为普通目录时随 workspace 提交，biz-tech-docs 为 submodule 时先在子仓 commit + push（人工），再在 workspace 提交指针变更；单库模式：当前知识库仓库即子仓，建议的 commit message 写入汇报，commit / push 由人工执行。
+AI 不 add/push——workspace 内：biz-tech-docs / biz-product-docs 默认为 workspace 内普通目录，随 workspace 仓库提交；biz-tech-docs 已通过 `agile config set` 登记为外部仓库时，它被 workspace `.gitignore` 忽略、是独立 git 仓库——沉淀产物的 commit/push 由人工在该目录内完成；单库模式：当前知识库仓库即独立 git 仓库，建议的 commit message 写入汇报，commit / push 由人工执行。
 
 ## tech 提案模式
 

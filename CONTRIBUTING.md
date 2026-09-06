@@ -25,7 +25,7 @@ claude plugin marketplace add .     # 本地市场（开发热加载：改文件
 
 ## 插件内容约定
 
-- 命令只做「前置校验 → Task 委派 agent → 复核汇报」，实现细节写在 agent 里
+- 命令只做「前置校验 → Task 委派 agent → 复核汇报」，实现细节写在 agent 里（个别命令文件显式声明分工例外（主会话直接执行）者除外：现为 sync-req、add-task、feedback、help、init、add-template、knowledge、review、release）
 - 共享知识放 skill；产物全中文；不硬编码抽屉路径与 git 命令（经 settings.json / CLI）
 - 文件系统操作经 CLI（如外部资源用 `agile sync`），不手搓命令；任务目录七文件按 sdd-tdd-method SKILL 附录 A 模板由命令直接创建（幂等）
 - 涉及破坏性写操作时先 dry-run 或显式向用户确认

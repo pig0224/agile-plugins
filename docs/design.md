@@ -1,6 +1,6 @@
 # agile-plugins 设计
 
-> Claude Code 插件市场：15 个斜杠命令 + 7 个角色 subagent + 1 个方法论 skill。本仓库独立分发（git），**新增插件无需升级 [agile-cli](https://github.com/pig0224/agile-cli)**。
+> Claude Code 插件市场：17 个斜杠命令 + 7 个角色 subagent + 1 个方法论 skill。本仓库独立分发（git），**新增插件无需升级 [agile-cli](https://github.com/pig0224/agile-cli)**。
 
 ## 1. 市场仓库结构
 
@@ -11,7 +11,7 @@ agile-plugins/                       # 插件市场仓库
 └── plugins/
     └── agile/                       # SDD/TDD 主插件
         ├── .claude-plugin/plugin.json
-        ├── commands/                # 15 个命令（安装后 /agile:xxx）
+        ├── commands/                # 17 个命令（安装后 /agile:xxx）
         ├── agents/                  # 7 个角色 subagent
         └── skills/sdd-tdd-method/   # 共享方法论（附录 A = 任务目录七文件模板）
 ```
@@ -21,11 +21,11 @@ agile-plugins/                       # 插件市场仓库
 ## 2. 安装链路（CLI 零知识）
 
 ```
-agile plugin install [name] [--marketplace <url>]
+agile plugin install [name]
   → 读 .agile/settings.json 的 plugins.marketplace（默认官方 git 地址，可指向团队私有市场）
   → claude plugin marketplace add <git 地址>
   → claude plugin install <name>@fcc
-  → 记录 .agile/plugin.yaml（source = 市场地址）
+  → 记录到 .agile/settings.json 的 plugins.dependencies（{ marketplace }）
 ```
 
 新增插件：市场仓库加 `plugins/<name>/`（含 `.claude-plugin/plugin.json`）+ 登记 marketplace.json 的 `plugins[]`。用户侧 `agile plugin install <name>` 即完成，CLI 不发版。
@@ -59,9 +59,11 @@ agile plugin install [name] [--marketplace <url>]
 | /agile:review | -（主会话直接执行，**分工例外**） | `process-docs/<编号>/review.md`（验收矩阵 + 门禁判定，不代验收） |
 | /agile:release | -（主会话直接执行，**分工例外**） | `process-docs/<编号>/release.md`（前置检查 + 回滚方案 + 发布记录） |
 | /agile:fix-bug | bug-hunter | 最小修复 + 复现测试 + 文档登记（无编号则 BUG-xxx） |
-| /agile:add-task | -（只追加） | implementation.md 任务清单追加 |
+| /agile:add-task | -（只追加） | `implementation.md` 任务分配表追加一行（主文件冻结后只读，仅允许此追加） |
 | /agile:feedback | -（收集会话） | `process-docs/<编号>/feedback-<日期>.md` |
 | /agile:knowledge | -（主会话直接执行，**分工例外**） | build：知识库骨架 + 提纲 + README 导航；capture：会话/过程产物提炼的长期结论文档 + README 导航 |
+| /agile:init | -（主会话直接执行，**分工例外**）·负责人 | AI 陪同建项目：`agile init project` 骨架生成 + 项目约定问答定制 + 团队库匹配确认 |
+| /agile:add-template | -（主会话直接执行，**分工例外**）·负责人/模板维护者 | AI 辅助建设模板：agile-templates 骨架 + registry.yaml 登记 + check / 冒烟验证 |
 | /agile:help | -（静态） | 命令总览 + 流程图 + workspace 状态 |
 
 ## 5. 与 CLI 的协作
@@ -82,9 +84,9 @@ agile plugin install [name] [--marketplace <url>]
 
 ## 7. 命令 frontmatter 约定
 
-- `description`：中文、动词开头，是模型自动触发的依据，须准确描述功能
+- `description`：中文，以产物/职能命名、简洁达意即可，是模型自动触发的依据，须准确描述功能
 - `argument-hint`：提示参数形态（如 `<需求编号> [仓库路径]`）
-- `disable-model-invocation: true`：仅人工触发的命令（help/feedback）
+- `disable-model-invocation: true`：仅人工触发的命令（help/feedback/review/release）
 - 委派类命令不设 `allowed-tools`（委派的 agent 自带 tools 白名单）
 
 ## 8. 校验
