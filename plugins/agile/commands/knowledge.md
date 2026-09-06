@@ -52,7 +52,7 @@ biz-tech-docs/
 **选择性调取**：build 调研 / capture 引用既有内容时，识别当前技术栈，**只调取「匹配的技术栈领域 + 通用领域」**；其他技术栈领域不混入、不作为依据（go-zero 工作区不读 springboot 领域，反之亦然）。技术栈识别优先级：
 
 1. 提示词或参数显式指明（如「我用的是 go-zero」）
-2. 扫当前 workspace 的 `projects/` 标志文件（go.mod → go 系、pom.xml → springboot、package.json → 前端/Node 等）
+2. 扫当前 workspace 的 `projects/` 标志文件（一层：`projects/*/`——单例与组合成员项目全部平铺；go.mod → go 系、pom.xml → springboot、package.json → 前端/Node 等）
 3. 都无法确定时询问用户
 
 ## build — 辅助建设

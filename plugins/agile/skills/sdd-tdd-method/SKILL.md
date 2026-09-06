@@ -14,7 +14,7 @@ description: agile 工作区的 SDD/TDD 研发方法论与文档规范。凡执�
 | 一 | `tech-specs/` | 公司级技术规范（技术栈、SQL、安全硬规范） | 全员遵守 |
 | 二 | `biz-tech-docs/` | 团队技术设计知识库（架构、状态机、技术方案、工程规范） | 架构师 |
 | 三 | `biz-product-docs/` | 产品设计知识库（PRD、产品规范、UI 规范、交互规范） | 产品经理 |
-| 四 | `projects/` | 项目代码（workspace 单仓内普通目录） | 开发 |
+| 四 | `projects/` | 项目代码（workspace 单仓内普通目录；单例与组合模板成员项目全部平铺） | 开发 |
 | 五 | `process-docs/` | 过程产物（按需求编号归档，workspace 根仓库内） | 全员 |
 
 CLI 直调：工作区操作（sync / config / worktree / template / plugin 等）通过 Bash 执行 `agile <command>`（CLI 是插件的硬依赖，未安装时先提示用户 `npm i -g fcc-agile-cli`）。**submodule 已废弃（2.0）：tech-specs 恒为外部仓库；biz-tech-docs 默认是 workspace 内普通目录（登记为外部仓库后独立成库、被 .gitignore 忽略）——commit/push 一律由人工处理，AI 不代做。**
@@ -95,7 +95,7 @@ CLI 直调：工作区操作（sync / config / worktree / template / plugin 等�
 1. `tech-specs/`（公司硬规范，冲突时优先级最高）
 2. `biz-tech-docs/`（团队规范与既有设计，保持一致，禁止重复造轮子）
 3. `biz-product-docs/`（产品/UI 规范，前端实现必须对齐）
-4. 项目级约定：`projects/<name>/CLAUDE.md`（入口索引：技术栈 / 命令速查 / 硬规则）与其指向的 `docs/conventions.md`、`docs/architecture.md`（由模板经 `init project` 生成，随项目入库）
+4. 项目级约定：`projects/<name>/CLAUDE.md`（入口索引：技术栈 / 命令速查 / 硬规则）与其指向的 `docs/conventions.md`、`docs/architecture.md`（由模板经 `init project` 生成，随项目入库；单例与组合成员项目平铺，每个项目各一份）
 5. 当前任务 `design.md`（本次的具体决策）
 
 **有效性过滤（硬规则）**：仅使用状态为「有效」的技术文档/知识条目作为依据——frontmatter `状态` 为 `已废弃` 或 `已被替代` 的条目**不得引用**（`已被替代` 的顺其正文链接取新文档）；无状态字段的存量文档视为有效，发现内容可疑时向用户确认。
