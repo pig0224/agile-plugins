@@ -13,7 +13,7 @@ disable-model-invocation: true
 
 | 命令 | 用途 | 建议角色 |
 |---|---|---|
-| /agile:prd | 从需求产出 PRD、AC、功能树与菜单树 | 产品 |
+| /agile:prd | 从需求产出 PRD、AC、功能树与菜单树（负责人执行，需求源自外部平台文档） | 负责人 |
 | /agile:sync-req | 需求产物从抽屉三同步到 process-docs，准备开发目录 | 全员 |
 | /agile:architect | 技术方案设计（SDD：先设计后开发） | 架构 |
 | /agile:gen-test | Stage 1：测试案例生成（先于实现） | 测试 |
