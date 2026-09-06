@@ -1,11 +1,11 @@
 ---
-description: 命令总览：展示 agile 插件全部可用命令及 SDD/TDD 流程主线说明
+description: 命令总览：展示 agile 插件全部可用命令及 SDD/TDD 流程主线说明。分工红线显式例外：信息汇总类命令，不委派 subagent、主会话直接执行
 disable-model-invocation: true
 ---
 
 # agile 插件命令总览
 
-先读 skill `sdd-tdd-method`（若已安装本插件则自动可用）了解方法论，然后按下面的表格输出。
+先读 skill `sdd-tdd-method`（若已安装本插件则自动可用）了解方法论，然后按下面的表格输出。**分工例外声明**：本命令在主会话直接执行、不委派 subagent——信息汇总类命令，无独立实施工作（SKILL 分工红线中「个别命令文件显式声明的例外」）。
 
 ## 输出要求
 
@@ -26,6 +26,8 @@ disable-model-invocation: true
 | /agile:fix-bug | 快速修复：自主根因诊断→修复→验证 | 全员 |
 | /agile:add-task | 补充遗漏的开发任务（不动已有任务） | 全员 |
 | /agile:feedback | 收集会话错误，生成标准问题反馈报告 | 全员 |
+| /agile:init | AI 陪同初始化项目（模板选择、约定问答定制、团队库匹配、辅助能力配置） | 全员 |
+| /agile:add-template | AI 辅助建设 agile-templates 新模板（设计问答、骨架生成、登记与冒烟验证） | 架构 |
 | /agile:knowledge | 知识库建设与沉淀（build 辅助建设 / capture 从会话与过程产物提炼） | 架构 |
 | /agile:help | 本帮助 | - |
 

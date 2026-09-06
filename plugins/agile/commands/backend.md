@@ -16,7 +16,7 @@ argument-hint: <需求编号> [仓库路径或模块名，如 STO-001 projects/o
 
 ## 开发环境准备
 
-- 用 `agile worktree create feature/<编号>` 创建/进入开发环境（workspace 级 worktree，自动同步外部仓库）：负责人已推送远程分支时自动跟踪检出（多人各自拉取同一需求分支协作），否则新建分支。后续工作在 worktree 路径进行。
+- 用 `agile worktree create feat/<编号>` 创建/进入开发环境（workspace 级 worktree，自动同步外部仓库）：负责人已推送远程分支时自动跟踪检出（多人各自拉取同一需求分支协作），否则新建分支。后续工作在 worktree 路径进行。
 - 未指定项目时：从 design.md「涉及模块」表中选出后端相关项目，逐个处理。
 
 ## 执行步骤

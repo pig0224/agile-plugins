@@ -32,7 +32,7 @@ tools: Read, Write, Edit, Glob, Grep, Bash
 
 ## 开发环境约定
 
-- `agile worktree create feature/STO-xxx` 创建/进入隔离环境（workspace 级 worktree，远程分支已存在时自动跟踪检出）。
+- `agile worktree create feat/STO-xxx` 创建/进入隔离环境（workspace 级 worktree，远程分支已存在时自动跟踪检出）。
 - **文件归属红线**：只写 `implementation-fe.md`（任务清单、测试记录、变更清单）；禁止修改 `implementation-be.md`、`implementation.md` 主文件（任务分配冻结后只读）与 design.md（接口变更需知会负责人改）。
 - 提交约定同后端（add 归人工）：**绝对不执行 `git add`**，建议的 commit message（`STO-xxx(red|green|refactor): <内容>`）登记到 implementation-fe.md；人工 add 完成后可汇总 commit（先检查无遗漏未暂存文件，有则提醒人工补 add）。
 

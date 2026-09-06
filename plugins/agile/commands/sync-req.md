@@ -1,15 +1,16 @@
 ---
-description: 需求同步。将需求产物从 biz-product-docs 同步到 process-docs/<编号>/，创建标准任务目录（implementation 含 be/fe 角色文件），为后续开发做准备。轻量通道（无 PRD 产物）时以一句话需求轻量创建目录
+description: 需求同步。将需求产物从 biz-product-docs 同步到 process-docs/<编号>/，创建标准任务目录（implementation 含 be/fe 角色文件），为后续开发做准备。轻量通道（无 PRD 产物）时以一句话需求轻量创建目录。分工红线显式例外：本命令为文件操作类，不委派 subagent、主会话直接执行
 argument-hint: <需求编号> [一句话需求]；有 PRD 产物走完整同步，无则轻量创建
 ---
 
 # /agile:sync-req — 需求产物同步
 
-先阅读 skill `sdd-tdd-method`，然后按以下步骤执行。
+先阅读 skill `sdd-tdd-method`，然后按以下步骤执行。**分工例外声明**：本命令在主会话直接执行、不委派 subagent——纯文件操作（目录创建、产物同步），无独立实施工作（SKILL 分工红线中「个别命令文件显式声明的例外」）。
 
 ## 输入
 
 - 需求编号：`$ARGUMENTS` 第一个词（必填；为空时列出 `process-docs/` 下现有编号目录请用户选择）。
+- **编号查重**：用户给的编号若 `process-docs/<编号>/` 已存在，**停下汇报「编号已被占用」**（列出现有目录的 requirement 主题与通道形态），请用户换号；同号续用（同需求补建目录）须经用户明确确认——幂等规则会保护已有文件不覆盖。
 - 一句话需求：其余文字（可选）——轻量通道（STO 轻量 / OPS）使用。
 
 ## 执行步骤

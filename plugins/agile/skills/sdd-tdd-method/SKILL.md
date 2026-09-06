@@ -31,7 +31,7 @@ CLI 直调：工作区操作（sync / config / worktree / template / plugin 等�
 - `review.md` — 评审记录。
 - `release.md` — 发布记录与回滚方案。
 
-> 文件级隔离：前后端并行开发（同一需求分支）时各写各的角色文件，git 合并零冲突。测试案例文档 gen-test.md 同理分「后端用例」「前端用例」两节。
+> 文件级隔离：前后端并行开发（同一需求分支）时各写各的角色文件，git 合并零冲突。测试案例文档 gen-test.md 同理分「后端用例」「前端用例」两节。gen-test.md 与 run-test.md 由 /agile:gen-test、/agile:run-test 阶段产出（不在附录 A 初始模板之列）——任务目录完整档案共 9 个 .md。
 
 当前需求编号贯穿始终：所有命令产出都写入对应 `process-docs/<编号>/`。
 
@@ -46,7 +46,7 @@ CLI 直调：工作区操作（sync / config / worktree / template / plugin 等�
 | BUG | 缺陷，无需拍板（回归正确） | 行为与预期不符 | `/agile:fix-bug`（无编号顺延 BUG-xxx） |
 | OPS | 技术变更，运维拍板 | 重构、依赖升级、CI 微调 | `/agile:sync-req <编号> <改动说明>` |
 
-**轻量机读标记**：`requirement.md` 头部含 `> 本变更走轻量通道` 即轻量形态，各命令按此自适应——architect 输出三五行方案简述（design.md）；review 一行验收确认（报告人确认修复生效（BUG）/ 提需求人确认（STO 轻量）/ 负责人自查（OPS））；release 涉及部署才记一行。**不变**：TDD 红线不豁免（bug 修复必须复现测试 Red→Green）；worktree、main 禁直推、PR、CI 门禁照走。详细规范见团队 SOP「轻量通道」节。
+**轻量机读标记**：`requirement.md` 头部含 `> 本变更走轻量通道` 即轻量形态，各命令按此自适应——architect 输出三五行方案简述（design.md）；review 一行验收确认（报告人确认修复生效（BUG）/ 提需求人确认（STO 轻量）/ 负责人自查（OPS））；release 涉及部署才记一行。**不变**：TDD 红线不豁免（bug 修复必须复现测试 Red→Green）；worktree、main 禁直推、PR、CI 门禁照走。**升级出口**：过程中发现影响面超出预期（涉及接口契约 / 数据模型 / 业务行为明显变化）→ 停止轻量流程，提示用户按团队 SOP「轻量通道」页「编号变更与升级出口」节**人工处理**换号与文档补全——AI 不自行执行编号变更、目录改名或分支操作。详细规范见团队 SOP「轻量通道」节。
 
 ## 3. SDD（Spec-Driven Design）流程主线
 

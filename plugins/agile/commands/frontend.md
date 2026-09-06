@@ -11,12 +11,12 @@ argument-hint: <需求编号> [仓库路径，如 STO-001 projects/frontend-web]
 
 1. 解析 `$ARGUMENTS`：第一段为需求编号，第二段（可选）为前端项目名（缺省时扫描 `projects/` 下含 vue/react 特征的项目——按 package.json 依赖特征 Glob/读取识别）。
 2. 校验 `process-docs/<编号>/design.md` 已填充（SDD 红线）。未填充则停止。
-3. 读 `process-docs/<编号>/menu-tree.md`（或 feature-tree）确认页面范围。
+3. 读 `process-docs/<编号>/menu-tree.md`（或 feature-tree）确认页面范围；**文件不存在时（轻量通道 / BUG 无 PRD 产物）跳过本步**——页面范围以 design.md「涉及模块」与用户输入为准，向用户确认后再动手。
 4. `git status` 确认工作区干净；dirty 则询问。
 
 ## 开发环境准备
 
-`agile worktree create feature/<编号>` 创建/进入开发环境（自动同步外部仓库）：负责人已推送远程分支时自动跟踪检出（多人各自拉取同一需求分支协作），否则新建分支。后续在 worktree 中工作。
+`agile worktree create feat/<编号>` 创建/进入开发环境（自动同步外部仓库）：负责人已推送远程分支时自动跟踪检出（多人各自拉取同一需求分支协作），否则新建分支。后续在 worktree 中工作。
 
 ## 执行步骤
 
