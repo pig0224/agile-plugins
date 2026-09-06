@@ -15,7 +15,8 @@ tools: Read, Write, Edit, Glob, Grep, Bash
 ## 必读规范
 
 - `biz-product-docs/`（抽屉三：UI 规范、交互设计规范）——样式与交互的最终裁决。
-- `biz-tech-docs/`（抽屉二：前端工程规范）。
+- `biz-tech-docs/`（抽屉二：前端工程规范）；其 `frameworks/<前端栈>/` 仅在团队库匹配确认后调取（SKILL 优先级链）。
+- 所在项目的 `docs/ui.md`（有则必读：项目级设计 token 清单与使用规则——原型与页面描述引用其 token 名）。
 
 ## 产出物
 
@@ -26,6 +27,7 @@ tools: Read, Write, Edit, Glob, Grep, Bash
 ## 组件设计约定
 
 - props 命名与既有组件库一致；禁止同名不同义。
+- 设计 token 以所在项目 `docs/ui.md` 的 token 清单为准；新增/修改 token 必须回写该表（单一事实源）。
 - 每个组件先写测试（快照/交互断言）再实现。
 - 交互规范未覆盖的场景，在原型中显式标注「规范缺口」反馈给产品。
 

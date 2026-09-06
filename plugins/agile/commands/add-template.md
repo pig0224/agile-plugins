@@ -38,6 +38,7 @@ argument-hint: [模板名或技术栈描述]；无参进入交互设计
   - `CLAUDE.md`：项目级入口索引（技术栈 / 命令速查 / 硬规则 / 规范索引）；命令速查与实际 package.json scripts / Makefile 目标一致；团队规范段指向 `../../biz-tech-docs/` 并带**「⛔ 栈领域待人工确认」**标记
   - `docs/conventions.md`：目录（初始骨架如实 + 增长建议）/ 命名 / 测试 + 团队补充约定节
   - `docs/architecture.md`：ADR 骨架（背景 / 决策 / 后果三段式）+ ADR-001 初始条目
+- **前端栈模板加 `docs/ui.md`**（非强制校验，check.mjs 不查）：UI 设计 token 清单空表 + Token 管理方式 + 使用规则骨架（形态对齐 vue3-vite / react-vite 现有文件）
 - README（运行/测试命令）+ 构建特征文件（package.json / go.mod / pom.xml / tsconfig.json 之一）+ **至少一个可运行测试**（TDD 起点）+ .gitignore
 - **模板中立原则**：预填默认值只来自模板自身选型与社区惯例，**不引入 `frameworks/<栈>/` 具体条款**——团队库领域只在项目级经 `/agile:init` 第 ④ 步确认后引入
 
