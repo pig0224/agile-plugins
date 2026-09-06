@@ -95,11 +95,14 @@ CLI 直调：工作区操作（sync / config / worktree / template / plugin 等�
 1. `tech-specs/`（公司硬规范，冲突时优先级最高）
 2. `biz-tech-docs/`（团队规范与既有设计，保持一致，禁止重复造轮子）
 3. `biz-product-docs/`（产品/UI 规范，前端实现必须对齐）
-4. 当前任务 `design.md`（本次的具体决策）
+4. 项目级约定：`projects/<name>/CLAUDE.md`（入口索引：技术栈 / 命令速查 / 硬规则）与其指向的 `docs/conventions.md`、`docs/architecture.md`（由模板经 `init project` 生成，随项目入库）
+5. 当前任务 `design.md`（本次的具体决策）
 
 **有效性过滤（硬规则）**：仅使用状态为「有效」的技术文档/知识条目作为依据——frontmatter `状态` 为 `已废弃` 或 `已被替代` 的条目**不得引用**（`已被替代` 的顺其正文链接取新文档）；无状态字段的存量文档视为有效，发现内容可疑时向用户确认。
 
 **技术栈选择性引用**：tech / team 知识库按「通用领域 + 技术栈领域」划分（`frameworks/<栈>/`）——引用时只取与当前项目技术栈匹配的领域 + 通用领域，其他技术栈领域的文档不作为本项目依据。
+
+**团队库匹配人工确认（硬规则）**：项目级 `CLAUDE.md` 的团队规范段存在「⛔ 栈领域待人工确认」标记时（`init project` 生成即带），AI 必须先发起确认再使用团队栈领域——列出 `biz-tech-docs/frameworks/` 实际存在的目录，按项目技术栈给出建议匹配项，**以 AI 提问、人工回答的方式**确定引用哪个领域（或确认无匹配），确认后把该标记段改写为具体领域路径并附确认人与日期；**人工未确认前只引用通用领域**，不混入其他技术栈、不臆造领域名；上层无匹配领域时显式提示缺口（`/agile:knowledge capture` 沉淀或 tech-specs 提案）。
 
 ## 7. 命令速查
 
@@ -116,6 +119,8 @@ CLI 直调：工作区操作（sync / config / worktree / template / plugin 等�
 | /agile:run-test | Stage 2 测试执行与验收 |
 | /agile:review | 验收汇总与门禁判定 |
 | /agile:release | 发布前置检查与记录 |
+| /agile:init | AI 陪同初始化项目（问答定制 + 团队库确认 + 辅助能力配置） |
+| /agile:add-template | AI 辅助建设新模板（骨架 + 登记 + 校验 + 冒烟） |
 | /agile:add-task | 补充遗漏任务 |
 | /agile:fix-bug | 根因诊断修复 |
 | /agile:feedback | 问题反馈报告 |
