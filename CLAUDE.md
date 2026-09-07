@@ -24,7 +24,7 @@ claude plugin install agile
 .claude-plugin/marketplace.json    # 市场清单：plugins[] → source（相对路径）
 plugins/agile/
   .claude-plugin/plugin.json       # 插件清单（name: agile）
-  commands/                        # 17 个 /agile:xxx 斜杠命令
+  commands/                        # 18 个 /agile:xxx 斜杠命令
   agents/                          # 7 个角色 subagent
   skills/sdd-tdd-method/           # 共享方法论（附录 A = 任务目录七文件模板）
 docs/design.md                     # 设计文档
@@ -36,6 +36,6 @@ docs/design.md                     # 设计文档
 - 插件名（plugin.json `name`）= marketplace 条目名 = `plugins/` 目录名，三者一致；市场名固定 `fcc`
 - plugin.json 有意不写 version（commit SHA 更新模式），`claude plugin validate` 的 version warning 可忽略，勿补回 version 字段
 - 插件文案全部中文；agent 的 `description` 用第三人称描述"何时使用"（Task 委派触发依据）
-- 命令只做「前置校验 → Task 委派 agent → 复核汇报」，不写实现细节（个别命令文件显式声明分工例外（主会话直接执行）者除外：现为 sync-req、add-task、feedback、help、init、add-template、knowledge、review、release）
+- 命令只做「前置校验 → Task 委派 agent → 复核汇报」，不写实现细节（个别命令文件显式声明分工例外（主会话直接执行）者除外：现为 sync-req、add-task、feedback、help、init、add-template、share-template、knowledge、review、release）
 - 两条 SDD/TDD 红线不得削弱：无 design.md 不开发；无失败测试不写实现
 - 推送即发版（无版本号，无 npm）

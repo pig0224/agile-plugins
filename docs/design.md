@@ -1,6 +1,6 @@
 # agile-plugins 设计
 
-> Claude Code 插件市场：17 个斜杠命令 + 7 个角色 subagent + 1 个方法论 skill。本仓库独立分发（git），**新增插件无需升级 [agile-cli](https://github.com/pig0224/agile-cli)**。
+> Claude Code 插件市场：18 个斜杠命令 + 7 个角色 subagent + 1 个方法论 skill。本仓库独立分发（git），**新增插件无需升级 [agile-cli](https://github.com/pig0224/agile-cli)**。
 
 ## 1. 市场仓库结构
 
@@ -11,7 +11,7 @@ agile-plugins/                       # 插件市场仓库
 └── plugins/
     └── agile/                       # SDD/TDD 主插件
         ├── .claude-plugin/plugin.json
-        ├── commands/                # 17 个命令（安装后 /agile:xxx）
+        ├── commands/                # 18 个命令（安装后 /agile:xxx）
         ├── agents/                  # 7 个角色 subagent
         └── skills/sdd-tdd-method/   # 共享方法论（附录 A = 任务目录七文件模板）
 ```
@@ -64,6 +64,7 @@ agile plugin install [name]
 | /agile:knowledge | -（主会话直接执行，**分工例外**） | build：知识库骨架 + 提纲 + 根导航登记；capture：会话/过程产物提炼的长期结论文档 + 导航双登记（根导航 + 模块内 README）；sync-template：组合模板根耦合资产按 `类型: tech\|product` frontmatter 同步进 biz-tech-docs / biz-product-docs（快照来自 `.agile/solutions/<组合>/`，`init project` 带出） |
 | /agile:init | -（主会话直接执行，**分工例外**）·负责人 | AI 陪同建项目：`agile init project` 骨架生成 + 项目约定问答定制 + 团队库匹配确认 |
 | /agile:add-template | -（主会话直接执行，**分工例外**）·负责人/模板维护者 | AI 辅助建设模板：agile-templates 骨架 + registry.json 登记 + check / 冒烟验证（仅限模板仓根目录使用） |
+| /agile:share-template | -（主会话直接执行，**分工例外**）·架构/模板维护者 | workspace 项目 → 模板：清理审计 + 占位符还原 + 打包落盘 + registry.json 登记 + check / 冒烟（仅限 workspace 内使用） |
 | /agile:help | -（静态） | 命令总览 + 流程图 + workspace 状态 |
 
 ## 5. 与 CLI 的协作
