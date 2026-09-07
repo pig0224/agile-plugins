@@ -132,12 +132,12 @@ biz-tech-docs/
 - [旧版分页规范](engineering/旧版分页规范.md) — 已被替代 → [分页规范](engineering/分页规范.md)（2026-05）
 ````
 
-**模块导航**（领域目录内 `README.md`，如 `frameworks/go-zero/README.md`）：
+**模块导航**（领域目录内 `README.md`，如 `frameworks/go-zero/README.md`；面包屑只链库根——通用领域（`architecture/` 等）在库根下一层链 `../README.md`，`frameworks/<栈>/` 深两层链 `../../README.md`）：
 
 ````markdown
 # go-zero
 
-> go-zero 在本团队的使用知识。根导航见 [上一级](../README.md)（frameworks 根）与 [库根](../../README.md)。
+> go-zero 在本团队的使用知识。根导航见 [库根](../../README.md)。
 
 - [服务骨架与中间件约定](服务骨架与中间件约定.md) — 项目统一骨架、中间件挂载顺序（2026-08）
 - [logx 与日志规范对接](logx与日志规范对接.md) — logx 配置对齐团队日志规范（2026-08）

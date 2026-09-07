@@ -24,7 +24,7 @@ argument-hint: [模板名/组合名或技术栈描述]；无参进入交互设�
 
 **占位符与 `/agile:init` 语义相反**：init 把 `{{name}}`/`{{safeName}}` 替换为真实项目名；建模板必须**原样保留**占位符。
 
-**CLI 依赖**：冒烟需支持 singles/solutions 布局与组合生成的 CLI（当前为 ≥ 2.1.0，更早版本不识别该布局）；执行前先 `agile --version` 核实。
+**CLI 依赖**：冒烟需支持 singles/solutions 布局与组合生成的 CLI（布局自 2.1.0 引入，更早版本不识别；生成清单断点续建语义需 ≥ 2.2.0）；执行前先 `agile --version` 核实。
 
 ## 流程总览（四流程 × 共用收口）
 
@@ -96,7 +96,7 @@ A/B/C 产出单例模板，D 产出组合模板；**④ 登记 + 校验、⑤ �
 2. 做**最小组合级定制**（按问答中的成员职责定位）：各成员 README / CLAUDE.md 首段改写为组合语境的定位描述（含成员间协作约定一句话）；不预造业务功能
 3. 组合专属深度定制（新页面、新接口、成员间协议等）**按实际需求另行开发**（SDD/TDD 流程或人工），本命令只负责把组合结构与登记打通；定制期间保持成员测试可跑（起点自带）
 
-**③ 出口检查（测试基线）**：每个新骨架目录内测试实际跑绿后，才允许进入 ④。**跑绿后、进入 ④ 前，清理成员/模板目录内的安装与构建产物**——产物不入库（模板仓 .gitignore 已排除），但会污染后续流程：CLI 直读模板仓复制时会受产物干扰（≤ 2.1.0 撞 junction 直接崩溃 EISDIR，agile-cli issue #<编号，由维护者填>；≥ 2.2.0 复制侧已修复为自动忽略产物，模板目录保持无产物仍是基线要求）。按栈清理实际产生的产物，常见清单：`node_modules`、`.next`、`dist`、`build`、`coverage`、`pnpm-lock.yaml`、`package-lock.json`、`next-env.d.ts`。示例命令（对每个成员/模板目录执行，路径换成实际目录）：
+**③ 出口检查（测试基线）**：每个新骨架目录内测试实际跑绿后，才允许进入 ④。**跑绿后、进入 ④ 前，清理成员/模板目录内的安装与构建产物**——产物不入库（`scripts/check.mjs` 契约 11 产物黑名单全树强制拦截，CI 会红），但会污染后续流程：CLI 直读模板仓复制时会受产物干扰（≤ 2.1.0 撞 junction 直接崩溃 EISDIR，agile-cli issue #<编号，由维护者填>；≥ 2.2.0 复制侧已修复为自动忽略产物，模板目录保持无产物仍是基线要求）。按栈清理实际产生的产物，常见清单：`node_modules`、`.next`、`dist`、`build`、`coverage`、`pnpm-lock.yaml`、`package-lock.json`、`next-env.d.ts`——完整黑名单以 `scripts/check.mjs` 契约 11 为准（另含 `.turbo`、`.vitest`、`yarn.lock`、`*.tsbuildinfo`，符号链接/junction 一并报错）。示例命令（对每个成员/模板目录执行，路径换成实际目录）：
 
 ```powershell
 # PowerShell 5.1（在 agile-templates 仓库根目录执行）
@@ -136,20 +136,11 @@ rm -rf solutions/<组合名>/<成员名>/{node_modules,.next,dist,build,coverage
 
 数组顺序 = 生成顺序；成员名 `^[a-z][a-z0-9-]*$` 且全局唯一。
 
-`node scripts/check.mjs` 全绿——重点覆盖：条目形状与未知字段、JSON 重复键、数组重复登记（singles / solutions / 同组合 projects）、目录派生存在性、登记与成员目录**双向一致**（缺成员目录 / 幽灵成员目录均报错）、成员名**全局唯一**（vs 模板 / 组合名 / 其他组合成员）、规范骨架三文件、根一级目录白名单。
+`node scripts/check.mjs` 全绿——重点覆盖：条目形状与未知字段、JSON 重复键、数组重复登记（singles / solutions / 同组合 projects）、目录派生存在性、登记与成员目录**双向一致**（缺成员目录 / 幽灵成员目录均报错）、成员名**全局唯一**（vs 模板 / 组合名 / 其他组合成员）、规范骨架三文件、根一级目录白名单、模板内容卫生三项（产物黑名单 / package.json name 占位符 / README 测试命令存在性）。
 
 ### ⑤ 冒烟验证（共用收口，验收清单先行）
 
-先核实 CLI ≥ 2.1.0（`agile --version`），不满足则提示升级后重试。**再核实模板目录无安装产物残留**（③ 出口检查清理的兜底复核）：
-
-```bash
-find singles solutions -type d \( -name node_modules -o -name .next -o -name dist -o -name build -o -name coverage \)   # 应无输出
-```
-
-```powershell
-# PowerShell 5.1（在 agile-templates 仓库根目录执行）
-Get-ChildItem singles, solutions -Recurse -Directory -Force -Include node_modules, .next, dist, build, coverage   # 应无输出
-```
+先核实 CLI ≥ 2.2.0（`agile --version`），不满足则提示升级后重试。**再核实模板目录无安装产物残留**（③ 出口检查清理的兜底复核）——④ 的 `node scripts/check.mjs` 已按契约 11 全树强制扫描产物黑名单（产物目录 / 锁文件 / `*.tsbuildinfo` / 符号链接，含 `.turbo`、`.vitest`），check 全绿即无残留，无需重复手工扫描。
 
 **先向用户列出本次冒烟断言清单（按流程选取下述验证点），经确认后逐条实际执行。**
 
@@ -178,4 +169,4 @@ agile init project demo-<组合名> --template <组合名>
 
 ### ⑥ 汇报（共用收口）
 
-文件清单（组合附「成员 → 派生起点」映射表）+ 设计定稿摘要 + check / 冒烟结果 + registry.json 变更说明（单例 singles 数组 / 组合 solutions 数组）+ 提醒人工 add / push（本仓推送即发版；**须待 CLI ≥ 2.1.0 发出后再 push**）。
+文件清单（组合附「成员 → 派生起点」映射表）+ 设计定稿摘要 + check / 冒烟结果 + registry.json 变更说明（单例 singles 数组 / 组合 solutions 数组）+ 提醒人工 add / push（本仓推送即发版，人工处理）。
