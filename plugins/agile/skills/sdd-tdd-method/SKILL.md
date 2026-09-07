@@ -121,6 +121,7 @@ CLI 直调：工作区操作（sync / config / worktree / template / plugin 等�
 | /agile:release | 发布前置检查与记录 |
 | /agile:init | AI 陪同初始化项目（问答定制 + 团队库确认 + 辅助能力配置） |
 | /agile:add-template | AI 辅助建设新模板（骨架 + 登记 + 校验 + 冒烟） |
+| /agile:share-template | 把 workspace 项目打包为模板（清理审计 + 占位符还原 + 登记 + 校验 + 冒烟） |
 | /agile:add-task | 补充遗漏任务 |
 | /agile:fix-bug | 根因诊断修复 |
 | /agile:feedback | 问题反馈报告 |

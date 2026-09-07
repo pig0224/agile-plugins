@@ -28,6 +28,7 @@ disable-model-invocation: true
 | /agile:feedback | 收集会话错误，生成标准问题反馈报告 | 全员 |
 | /agile:init | AI 陪同初始化项目（模板选择、约定问答定制、团队库匹配、辅助能力配置） | 全员 |
 | /agile:add-template | AI 辅助建设 agile-templates 新模板（设计问答、骨架生成、登记与冒烟验证） | 架构 |
+| /agile:share-template | 把 workspace 既有项目打包为模板（清理审计、占位符还原、登记与冒烟验证） | 架构 |
 | /agile:knowledge | 知识库建设与沉淀（build 辅助建设 / capture 从会话与过程产物提炼） | 架构 |
 | /agile:help | 本帮助 | - |
 
