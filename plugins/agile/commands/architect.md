@@ -21,7 +21,7 @@ argument-hint: <需求编号，如 STO-001>
    - **通道深度**：requirement.md 头部含 `本变更走轻量通道` 标记时为轻量——design.md 按 SOP 轻量填法输出**三五行方案简述**（STO 轻量 / OPS），不做完整设计
 2. subagent 产出 `process-docs/<编号>/design.md`。
 3. 审查产出（自己读一遍 design.md）：
-   - 涉及项目是否都在 `projects/` 目录中存在（不在则列出并建议 `agile init project <name> --template <模板>`）
+   - 涉及项目是否都在 `projects/` 目录中存在（不在则列出并建议 `agile init project --template <模板>`）
    - 是否有 TBD 项
 4. 汇报：设计要点摘要、涉及仓库、接口数、TBD 列表。
 

@@ -112,7 +112,7 @@ rsync -a --exclude=node_modules --exclude=.next --exclude=dist --exclude=build -
 **组合根两件套**（组合场景，check.mjs 契约 14）：
 
 - workspace 存在 `.agile/solutions/<原组合名>/` 快照（`init project` ≥ 2.3.0 带出）→ 整体复制回目标仓 `solutions/<组合名>/{CLAUDE.md,docs/}`（**不做占位替换**——组合根资产禁含 `{{name}}`/`{{safeName}}`），并审阅内容是否仍准确（组合更名时逐处核对旧名引用）
-- 无快照 → 按契约 14 现建：`solutions/<组合名>/CLAUDE.md`（组合定位一句话 + 成员清单（成员名 → 职责，**不写具体落盘目录名**——`--member` 覆盖在生成时才确定）+ 耦合资产导航）+ `solutions/<组合名>/docs/` 逐篇落盘（归总判据：≥2 成员共享或跨成员协作协议；每篇顶部 frontmatter 标 `类型: tech|product`——`/agile:knowledge sync-template` 按此同步进抽屉）
+- 无快照 → 按契约 14 现建：`solutions/<组合名>/CLAUDE.md`（组合定位一句话 + 成员清单（成员名 → 职责，**不写具体落盘目录名**——`--name` 键值覆盖在生成时才确定）+ 耦合资产导航）+ `solutions/<组合名>/docs/` 逐篇落盘（归总判据：≥2 成员共享或跨成员协作协议；每篇顶部 frontmatter 标 `类型: tech|product`——`/agile:knowledge sync-template` 按此同步进抽屉）
 - **迁移纪律**：成员骨架中已存在的跨成员共享内容迁入组合根 docs/，成员侧不保留正文副本（同 add-template 流程 D）
 
 **registry.json 登记**：**只追加、不重排/不改既有条目**（diff 最小化）。单例 → `singles` 数组；组合 → `solutions` 数组 + `projects` 成员数组（**数组顺序 = 生成顺序**；成员不登记进 `singles`）。条目形状同 add-template ④（name + 一句话 description 必填，language / framework 可选）。
@@ -127,11 +127,11 @@ rsync -a --exclude=node_modules --exclude=.next --exclude=dist --exclude=build -
 mkdir ../tpl-smoke && cd ../tpl-smoke
 agile init workspace
 agile config set template-repo <目标仓本地绝对路径>
-agile init project demo-<名> --template <模板名或组合名>
+agile init project --template <模板名或组合名>
 ```
 
 - **单例验证三件事**：生成物完整（骨架三文件带出）、`{{name}}` / `{{safeName}}` 替换正确、项目测试可跑
-- **组合验证六件事**（同 add-template ⑤）：成员平铺落盘、占位符替换抽查、成员测试可跑、`--member` 覆盖可生效（可选）、重跑补缺语义正确、组合根两件套快照带出（需 CLI ≥ 2.3.0，低于则跳过并注明）
+- **组合验证六件事**（同 add-template ⑤）：成员平铺落盘、占位符替换抽查、成员测试可跑、`--name` 键值覆盖可生效（可选）、重跑补缺语义正确、组合根两件套快照带出（需 CLI ≥ 2.3.0，低于则跳过并注明）
 - **round-trip 对照**：再生成项目与源项目关键结构对照（目录树 / 关键文件 / README 命令），确认打包无遗漏
 - 完成后清理临时目录
 
@@ -140,4 +140,4 @@ agile init project demo-<名> --template <模板名或组合名>
 - 目标仓变更清单（新增模板目录 / registry.json 追加条目）+ 处置清单执行结果（剔除/脱敏/中立化逐项）+ check 与冒烟结果
 - 沉淀知识去向说明：项目内沉淀随打包；跨成员规范在组合根 docs/（使用方经 `/agile:knowledge sync-template` 进抽屉）；workspace 抽屉知识未入模板
 - **移交红线**：AI 不 add / 不 commit / 不 push——目标仓变更由人工审阅后处理；**模板仓 push 即发版**（无 npm、无 tag，使用方拉到即生效），发布步骤见文档站「模板开发指南 · 导出后如何发布」
-- 使用方验证路径：`agile template update`（或 `agile sync`）→ `agile template list` → `agile init project ... --template <名>`
+- 使用方验证路径：`agile template update`（或 `agile sync`）→ `agile template list` → `agile init project --template <名>`

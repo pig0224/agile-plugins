@@ -84,7 +84,7 @@ biz-tech-docs/
 
 把组合模板根归总的耦合约定/规范按资产类型同步进抽屉。组合模板的跨成员知识不写进成员项目（否则 `init project` 平铺后各成员带副本，知识散落 `projects/`），而是归总在组合根 `CLAUDE.md` + `docs/`（模板仓 check.mjs 契约 14 强制）；`init project` 成功后 CLI 自动把两件套快照到 workspace `.agile/solutions/<组合名>/`。本模式从该快照同步，**最终形态符合 workspace「1 根 5 抽屉」范式**：知识落在抽屉，不散落 `projects/`。仅 workspace 内可用。
 
-1. **定位快照**：读 `.agile/solutions/` 下的组合目录。带组合名参数 → 同步指定组合；缺省 → 列出全部组合（各含耦合文档数）供用户选择。`.agile/solutions/` 不存在或为空 → 提示先 `agile init project <系统标签> --template <组合名>` 生成（或人工从模板仓 `solutions/<组合>/` 复制），停止。
+1. **定位快照**：读 `.agile/solutions/` 下的组合目录。带组合名参数 → 同步指定组合；缺省 → 列出全部组合（各含耦合文档数）供用户选择。`.agile/solutions/` 不存在或为空 → 提示先 `agile init project --template <组合名>` 生成（或人工从模板仓 `solutions/<组合>/` 复制），停止。
 2. **读组合导航与资产**：读快照 `CLAUDE.md`（组合定位 / 成员清单 / 耦合资产导航）与 `docs/*.md` 全部耦合文档。每篇顶部 frontmatter 的 `类型` 决定去向：`tech` → biz-tech-docs（抽屉二），`product` → biz-product-docs（抽屉三）；frontmatter 缺失或不合法时按三问判别法推断并向用户确认（正常应不会出现——模板仓 check.mjs 会拦，出现即快照来自旧版模板）。
 3. **逐篇定落点**：按「知识/规范划分约定」建议目录（通用领域 or `frameworks/<栈>/`——技术栈从组合成员项目识别，见「选择性调取」的识别优先级）。tech-specs 不接收（公司级只读）。目标库已有同名/同主题文档 → 展示差异，人工决定 跳过 / 覆盖 / 另名，不静默覆盖。
 4. **同步落盘**：正文复制进目标库并按需整理（条款型写成条款清单）；frontmatter 重写为知识库规范——`领域` = 落点目录相对路径、`创建` = 今天、`来源` = `<workspace 名>/模板 <组合名>`、`状态` = 有效。快照文件本身不动（同步是复制不是移动，快照保留作来源记录）。
