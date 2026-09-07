@@ -28,7 +28,7 @@ body:
     attributes:
       label: 环境信息
       description: OS / Node 版本 / git 版本 / `agile version` 输出
-      placeholder: Windows 10 · Node 24 · git 2.47 · agile-cli 2.0.0
+      placeholder: Windows 10 · Node 24 · git 2.47 · agile-cli 2.2.0
   - type: dropdown
     id: severity
     attributes:

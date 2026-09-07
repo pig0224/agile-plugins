@@ -61,7 +61,7 @@ agile plugin install [name]
 | /agile:fix-bug | bug-hunter | 最小修复 + 复现测试 + 文档登记（无编号则 BUG-xxx） |
 | /agile:add-task | -（只追加） | `implementation.md` 任务分配表追加一行（主文件冻结后只读，仅允许此追加） |
 | /agile:feedback | -（收集会话） | `process-docs/<编号>/feedback-<日期>.md` |
-| /agile:knowledge | -（主会话直接执行，**分工例外**） | build：知识库骨架 + 提纲 + README 导航；capture：会话/过程产物提炼的长期结论文档 + README 导航 |
+| /agile:knowledge | -（主会话直接执行，**分工例外**） | build：知识库骨架 + 提纲 + 根导航登记；capture：会话/过程产物提炼的长期结论文档 + 导航双登记（根导航 + 模块内 README）；sync-template：组合模板根耦合资产按 `类型: tech\|product` frontmatter 同步进 biz-tech-docs / biz-product-docs（快照来自 `.agile/solutions/<组合>/`，`init project` 带出） |
 | /agile:init | -（主会话直接执行，**分工例外**）·负责人 | AI 陪同建项目：`agile init project` 骨架生成 + 项目约定问答定制 + 团队库匹配确认 |
 | /agile:add-template | -（主会话直接执行，**分工例外**）·负责人/模板维护者 | AI 辅助建设模板：agile-templates 骨架 + registry.json 登记 + check / 冒烟验证（仅限模板仓根目录使用） |
 | /agile:help | -（静态） | 命令总览 + 流程图 + workspace 状态 |
@@ -80,7 +80,10 @@ agile plugin install [name]
 1. `tech-specs/`（抽屉一，公司硬规范，冲突时最高优先级）
 2. `biz-tech-docs/`（抽屉二，团队设计，保持一致、禁止重复造轮子）
 3. `biz-product-docs/`（抽屉三，产品/UI 规范，前端必须对齐）
-4. 当前任务 `design.md`（本次具体决策）
+4. 项目级约定：`projects/<name>/CLAUDE.md`（入口索引：技术栈 / 命令速查 / 硬规则）与其指向的 `docs/conventions.md`、`docs/architecture.md`（由模板经 `init project` 生成，随项目入库；每个项目各一份）
+5. 当前任务 `design.md`（本次具体决策）
+
+三条硬规则（与 sdd-tdd-method SKILL §6 一致）：**有效性过滤**——frontmatter `状态` 为「已废弃 / 已被替代」的知识条目不得引用；**技术栈选择性引用**——tech / team 库只取与当前项目技术栈匹配的领域 + 通用领域；**团队库匹配人工确认**——项目 CLAUDE.md 带「⛔ 栈领域待人工确认」标记时，先 AI 提问、人工回答确定 `frameworks/` 领域匹配，未确认前只引用通用领域。
 
 ## 7. 命令 frontmatter 约定
 

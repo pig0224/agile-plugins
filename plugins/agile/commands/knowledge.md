@@ -1,13 +1,13 @@
 ---
-description: 知识库建设与沉淀。build 辅助建设知识库（判库、调库调研、提纲、落盘骨架）；capture 从会话、过程产物、历史材料沉淀长期结论。可在 agile workspace 内使用，也可脱离 workspace 直接在 tech-specs / biz-tech-docs 仓库内使用。分工红线显式例外：素材在主会话上下文中，本命令不委派 subagent、主会话直接执行
-argument-hint: build <建设提示词> 或 capture <主题> [--from <编号/路径/项目>]，均可选 [--to team/product/tech]；无参显示库概况
+description: 知识库建设与沉淀。build 辅助建设知识库（判库、调库调研、提纲、落盘骨架）；capture 从会话、过程产物、历史材料沉淀长期结论；sync-template 把组合模板根归总的耦合约定/规范按资产类型同步进抽屉（biz-tech-docs / biz-product-docs，仅 workspace 内）。可在 agile workspace 内使用，也可脱离 workspace 直接在 tech-specs / biz-tech-docs 仓库内使用。分工红线显式例外：素材在主会话上下文中，本命令不委派 subagent、主会话直接执行
+argument-hint: build <建设提示词> 或 capture <主题> [--from <编号/路径/项目>]，均可选 [--to team/product/tech]；或 sync-template [组合名]；无参显示库概况
 ---
 
 # /agile:knowledge — 知识库建设与沉淀
 
 先阅读 skill `sdd-tdd-method`（在 workspace 内时）。**分工例外声明**：本命令在主会话直接执行、不委派 subagent——素材是主会话对话历史与用户指认的材料，subagent 拿不到（SKILL 分工红线中「个别命令文件显式声明的例外」）。
 
-无参执行：输出当前环境下可用知识库的概况（各库领域目录数、文档数、README 导航最后更新时间）+ 双模式说明，提示用户选择。
+无参执行：输出当前环境下可用知识库的概况（各库领域目录数、文档数、README 导航最后更新时间；workspace 内另列 `.agile/solutions/` 下可同步的组合模板）+ 三模式说明，提示用户选择。
 
 ## 运行环境与库定位
 
@@ -80,7 +80,20 @@ biz-tech-docs/
 5. **登记导航**：根 `README.md` 对应分组 + 所在模块 README（若存在）追加条目（**双登记**）——**任何新文档必须登记导航**，不允许只落文件不入导航（与 build 一致的硬规则）。
 6. **输出提交指引**（见下）。
 
-## 文档模板（两模式共用）
+## sync-template — 组合模板耦合资产同步
+
+把组合模板根归总的耦合约定/规范按资产类型同步进抽屉。组合模板的跨成员知识不写进成员项目（否则 `init project` 平铺后各成员带副本，知识散落 `projects/`），而是归总在组合根 `CLAUDE.md` + `docs/`（模板仓 check.mjs 契约 14 强制）；`init project` 成功后 CLI 自动把两件套快照到 workspace `.agile/solutions/<组合名>/`。本模式从该快照同步，**最终形态符合 workspace「1 根 5 抽屉」范式**：知识落在抽屉，不散落 `projects/`。仅 workspace 内可用。
+
+1. **定位快照**：读 `.agile/solutions/` 下的组合目录。带组合名参数 → 同步指定组合；缺省 → 列出全部组合（各含耦合文档数）供用户选择。`.agile/solutions/` 不存在或为空 → 提示先 `agile init project <系统标签> --template <组合名>` 生成（或人工从模板仓 `solutions/<组合>/` 复制），停止。
+2. **读组合导航与资产**：读快照 `CLAUDE.md`（组合定位 / 成员清单 / 耦合资产导航）与 `docs/*.md` 全部耦合文档。每篇顶部 frontmatter 的 `类型` 决定去向：`tech` → biz-tech-docs（抽屉二），`product` → biz-product-docs（抽屉三）；frontmatter 缺失或不合法时按三问判别法推断并向用户确认（正常应不会出现——模板仓 check.mjs 会拦，出现即快照来自旧版模板）。
+3. **逐篇定落点**：按「知识/规范划分约定」建议目录（通用领域 or `frameworks/<栈>/`——技术栈从组合成员项目识别，见「选择性调取」的识别优先级）。tech-specs 不接收（公司级只读）。目标库已有同名/同主题文档 → 展示差异，人工决定 跳过 / 覆盖 / 另名，不静默覆盖。
+4. **同步落盘**：正文复制进目标库并按需整理（条款型写成条款清单）；frontmatter 重写为知识库规范——`领域` = 落点目录相对路径、`创建` = 今天、`来源` = `<workspace 名>/模板 <组合名>`、`状态` = 有效。快照文件本身不动（同步是复制不是移动，快照保留作来源记录）。
+5. **登记导航**：根 `README.md` 对应分组 + 所在模块 README（若存在）追加条目（**双登记**硬规则，与 build / capture 一致）。
+6. **输出提交指引**（见下）。
+
+> 同步是**一次性搬运**：进抽屉后文档由团队随开发演进，模板更新不自动回流；模板侧重度升级时可重跑本模式，按第 3 步差异对比逐篇处理。
+
+## 文档模板（三模式共用）
 
 ````markdown
 ---
@@ -99,7 +112,7 @@ biz-tech-docs/
 ````
 
 - `状态` 取值：`有效` / `已废弃` / `已被替代`（被替代时在正文标注指向新文档的链接）；`领域` 填目录相对路径。
-- `来源` 格式 **`<workspace 名>/<素材>`**（素材 = 需求编号 / 会话 / 材料路径）——workspace 名读 `.agile/settings.json` 的 `name`；单库模式用当前仓库名（如 `biz-tech-docs/会话讨论`）。
+- `来源` 格式 **`<workspace 名>/<素材>`**（素材 = 需求编号 / 会话 / 材料路径 / `模板 <组合名>`）——workspace 名读 `.agile/settings.json` 的 `name`；单库模式用当前仓库名（如 `biz-tech-docs/会话讨论`）。
 - 决策型知识按四章结构写；规范条款型知识「结论 / 方案」节写成**条款清单**（每条一个硬性约定），配正例/反例代码片段，不写成叙述散文。
 
 ## 导航模板（两层）
@@ -132,12 +145,12 @@ biz-tech-docs/
 - [旧版分页规范](engineering/旧版分页规范.md) — 已被替代 → [分页规范](engineering/分页规范.md)（2026-05）
 ````
 
-**模块导航**（领域目录内 `README.md`，如 `frameworks/go-zero/README.md`）：
+**模块导航**（领域目录内 `README.md`，如 `frameworks/go-zero/README.md`；面包屑只链库根——通用领域（`architecture/` 等）在库根下一层链 `../README.md`，`frameworks/<栈>/` 深两层链 `../../README.md`）：
 
 ````markdown
 # go-zero
 
-> go-zero 在本团队的使用知识。根导航见 [上一级](../README.md)（frameworks 根）与 [库根](../../README.md)。
+> go-zero 在本团队的使用知识。根导航见 [库根](../../README.md)。
 
 - [服务骨架与中间件约定](服务骨架与中间件约定.md) — 项目统一骨架、中间件挂载顺序（2026-08）
 - [logx 与日志规范对接](logx与日志规范对接.md) — logx 配置对齐团队日志规范（2026-08）
@@ -149,13 +162,13 @@ biz-tech-docs/
 2. **归档单一位置**：归档只放根导航「归档」分组，模块导航不设归档、只列有效文档。
 3. **模块导航建立时机**：`frameworks/<栈>/` 必建；通用领域文档 ≥3 篇才建，不搞单文档仪式。
 
-## 提交指引（两模式共用）
+## 提交指引（三模式共用）
 
 AI 不 add/push——workspace 内：biz-tech-docs / biz-product-docs 默认为 workspace 内普通目录，随 workspace 仓库提交；biz-tech-docs 已通过 `agile config set` 登记为外部仓库时，它被 workspace `.gitignore` 忽略、是独立 git 仓库——沉淀产物的 commit/push 由人工在该目录内完成；单库模式：当前知识库仓库即独立 git 仓库，建议的 commit message 写入汇报，commit / push 由人工执行。
 
 ## tech 提案模式
 
-tech-specs 为公司级规范（团队只读）。build / capture 涉及公司规范缺失、过时、冲突时**不直接写 tech-specs**：workspace 内落 `biz-tech-docs/proposals/` 并登记导航；单库模式（tech-specs 仓库内）不落盘，输出提案要点由人工带回团队走流程。
+tech-specs 为公司级规范（团队只读）。build / capture / sync-template 涉及公司规范缺失、过时、冲突时**不直接写 tech-specs**：workspace 内落 `biz-tech-docs/proposals/` 并登记导航；单库模式（tech-specs 仓库内）不落盘，输出提案要点由人工带回团队走流程。
 
 ## 原则
 
