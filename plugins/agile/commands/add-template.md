@@ -81,6 +81,7 @@ A/B/C 产出单例模板，D 产出组合模板；**④ 登记 + 校验、⑤ �
 - 前端栈模板加 `docs/ui.md`（非强制校验，check.mjs 不查）：UI 设计 token 清单空表 + Token 管理方式 + 使用规则骨架（模板注册中心已有前端模板时，形态对齐其 `docs/ui.md`；暂无时按本条三要素自拟）
 - README（运行/测试命令）+ 构建特征文件（package.json / go.mod / pom.xml / tsconfig.json 之一）+ **至少一个可运行测试**（TDD 起点）+ .gitignore
 - **模板中立原则**：预填默认值只来自模板自身选型与社区惯例，**不引入 `frameworks/<栈>/` 具体条款**——团队库领域只在项目级经 `/agile:init` 第 ④ 步确认后引入
+- **会话层配置不进模板**：不创建 `.claude/` 目录与 `.mcp.json` 文件（`scripts/check.mjs` 契约 15 强制——会话层配置只认 workspace 根，生成项目内的这些文件不会被读取；配置归 workspace 根，工具选型由团队自决）
 - 目录结构如实，不预建空目录
 
 **流程 A（从零手写）**：按设计定稿手写全部骨架内容。
@@ -141,7 +142,7 @@ rm -rf solutions/<组合名>/<成员名>/{node_modules,.next,dist,build,coverage
 
 数组顺序 = 生成顺序；成员名 `^[a-z][a-z0-9-]*$` 且全局唯一。
 
-`node scripts/check.mjs` 全绿——重点覆盖：条目形状与未知字段、JSON 重复键、数组重复登记（singles / solutions / 同组合 projects）、目录派生存在性、登记与成员目录**双向一致**（缺成员目录 / 幽灵成员目录均报错；组合根 `docs/` 豁免——它是耦合资产目录不是成员）、成员名**全局唯一**（vs 模板 / 组合名 / 其他组合成员）、规范骨架三文件、根一级目录白名单、模板内容卫生三项（产物黑名单 / package.json name 占位符 / README 测试命令存在性）、组合根耦合资产两件套（D：CLAUDE.md + docs/ 存在性、docs/*.md 逐篇 `类型: tech|product` frontmatter、组合根资产占位符禁用）。
+`node scripts/check.mjs` 全绿——重点覆盖：条目形状与未知字段、JSON 重复键、数组重复登记（singles / solutions / 同组合 projects）、目录派生存在性、登记与成员目录**双向一致**（缺成员目录 / 幽灵成员目录均报错；组合根 `docs/` 豁免——它是耦合资产目录不是成员）、成员名**全局唯一**（vs 模板 / 组合名 / 其他组合成员）、规范骨架三文件、根一级目录白名单、模板内容卫生四项（产物黑名单 / package.json name 占位符 / README 测试命令存在性 / 会话层配置黑名单）、组合根耦合资产两件套（D：CLAUDE.md + docs/ 存在性、docs/*.md 逐篇 `类型: tech|product` frontmatter、组合根资产占位符禁用）。
 
 ### ⑤ 冒烟验证（共用收口，验收清单先行）
 

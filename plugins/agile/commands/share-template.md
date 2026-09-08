@@ -64,7 +64,7 @@ argument-hint: "[项目目录名...]；无参扫 projects/ 盘点"
 |---|---|---|
 | 敏感与业务数据 | `.env` 真实值、硬编码密钥/凭据/内网地址、真实用户数据与业务数据、业务专属 mock、LICENSE/配置中的个人信息 | 剔除或脱敏（改占位样例） |
 | 团队定制 | CLAUDE.md 已确认的团队规范段（含确认人/日期）、conventions 团队补充节、docs/ui.md 团队 token 值、`frameworks/<栈>/` 条款引用、真实 ADR 决策记录 | 公共仓：**中立化**（恢复「⛔ 栈领域待人工确认」标记与模板初始骨架语义）；私有仓：默认**保留**（团队实践共享正是打包价值）——逐项用户定夺 |
-| 工程卫生 | `node_modules` / `.next` / `dist` / `build` / `coverage` 等产物、锁文件（pnpm-lock.yaml / package-lock.json / yarn.lock / *.tsbuildinfo）、`.git`、`.claude/` 本地设置、IDE 文件、符号链接/junction | 一律剔除（check.mjs 契约 11 产物黑名单全树强制拦截） |
+| 工程卫生 | `node_modules` / `.next` / `dist` / `build` / `coverage` 等产物、锁文件（pnpm-lock.yaml / package-lock.json / yarn.lock / *.tsbuildinfo）、`.git`、`.claude/` 本地设置、`.mcp.json`、IDE 文件、符号链接/junction | 一律剔除（check.mjs 契约 11 产物黑名单 + 契约 15 会话层配置黑名单全树强制拦截） |
 
 辅助检测示例（源项目根执行，结果并入处置清单）：
 
@@ -88,14 +88,14 @@ Get-ChildItem -Recurse -Directory -Include node_modules,dist,build,coverage,.nex
 ```powershell
 # PowerShell 5.1：复制后剔除（源项目不动，剔除只发生在目标仓副本）
 Copy-Item -Recurse projects\<项目目录> ..\agile-templates\singles\<模板名>
-$strip = 'node_modules', '.next', 'dist', 'build', 'coverage', '.git', '.claude', '.idea', '.vscode', 'pnpm-lock.yaml', 'package-lock.json', 'yarn.lock'
+$strip = 'node_modules', '.next', 'dist', 'build', 'coverage', '.git', '.claude', '.mcp.json', '.idea', '.vscode', 'pnpm-lock.yaml', 'package-lock.json', 'yarn.lock'
 $strip | ForEach-Object { $p = Join-Path '..\agile-templates\singles\<模板名>' $_; if (Test-Path $p) { Remove-Item $p -Recurse -Force -Confirm:$false } }
 ```
 
 ```bash
 # POSIX bash：rsync 边复制边剔除（尾斜杠语义 = 复制目录内容）
 rsync -a --exclude=node_modules --exclude=.next --exclude=dist --exclude=build --exclude=coverage \
-  --exclude=.git --exclude=.claude --exclude=.idea --exclude=.vscode \
+  --exclude=.git --exclude=.claude --exclude=.mcp.json --exclude=.idea --exclude=.vscode \
   --exclude=pnpm-lock.yaml --exclude=package-lock.json --exclude=yarn.lock \
   projects/<项目目录>/ ../agile-templates/singles/<模板名>/
 ```
@@ -119,7 +119,7 @@ rsync -a --exclude=node_modules --exclude=.next --exclude=dist --exclude=build -
 
 ### ⑤ 校验 + 冒烟（验收清单先行）
 
-`node scripts/check.mjs`（目标仓根目录）全绿——重点覆盖：条目形状与未知字段、JSON 重复键、数组重复登记、目录派生存在性、登记与成员目录**双向一致**（组合根 `docs/` 豁免）、三段全局唯一、规范骨架三文件、内容卫生三项（产物黑名单 / package.json name 占位符 / README 测试命令）、组合根两件套（组合场景：CLAUDE.md + docs/ 存在性、逐篇 `类型: tech|product` frontmatter、占位符禁用）。
+`node scripts/check.mjs`（目标仓根目录）全绿——重点覆盖：条目形状与未知字段、JSON 重复键、数组重复登记、目录派生存在性、登记与成员目录**双向一致**（组合根 `docs/` 豁免）、三段全局唯一、规范骨架三文件、内容卫生四项（产物黑名单 / package.json name 占位符 / README 测试命令 / 会话层配置黑名单）、组合根两件套（组合场景：CLAUDE.md + docs/ 存在性、逐篇 `类型: tech|product` frontmatter、占位符禁用）。
 
 **先向用户列出本次冒烟断言清单，经确认后逐条实际执行**（临时 workspace + 目标仓本地路径作模板源，直读不走缓存）：
 

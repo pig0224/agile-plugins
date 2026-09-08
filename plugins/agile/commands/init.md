@@ -76,8 +76,8 @@ agile init project --template <组合名> [--name 成员名=目录名 ...]
 |---|---|---|
 | 事实登记（不问，只读） | 环境检测：`node / go / java / mvn / make / git` 版本 + Playwright 浏览器 | 结果写入 CLAUDE.md 新增「环境要求」节（工具 + 最低版本 + 本机实况）；缺失项分流：npm 能装的进入下行推荐，JDK/Maven 类列入人工待办 |
 | 确认制，AI 自动安装 | 框架 AI 能力包之 CLI（含 Playwright 浏览器 `npx playwright install chromium`） | 每项单独确认后执行；优先项目 devDep + `npx` 调用（版本锁进 package.json），须全局安装的先说明影响 |
-| 确认制，AI 写文件 | 能力包之 MCP / design.md / llms.txt | MCP → 写项目 `.mcp.json`；design.md / llms.txt → 登记 CLAUDE.md「辅助开发配置」节 + 用途（如「AI 生成 UI 前读 design.md」） |
-| 仅建议，人工配 | skills 安装、权限白名单 | 输出复制即用的命令/清单进汇报；白名单只放测试/构建/只读类命令；不写任何配置 |
+| 确认制，AI 写文件 | 能力包之 MCP / design.md / llms.txt | MCP → 写 **workspace 根** `.mcp.json`（同名 server 已存在则跳过并汇报；项目内不落——根会话不读取子目录的会话层配置，SKILL 硬规则 7）；design.md / llms.txt → 登记 CLAUDE.md「辅助开发配置」节 + 用途（如「AI 生成 UI 前读 design.md」） |
+| 仅建议，人工配 | skills 安装、权限白名单 | 输出复制即用的命令/清单进汇报；白名单只放测试/构建/只读类命令，落点 = workspace 根 `.claude/settings.json`（项目内不落，SKILL 硬规则 7）；不写任何配置 |
 
 **框架 AI 能力包推荐来源**（按序取第一个可用）：
 
@@ -116,4 +116,5 @@ agile init project --template <组合名> [--name 成员名=目录名 ...]
 ## 红线
 
 - 本命令不改 agile-templates 模板；不执行 git commit / push；不执行 skills 安装与权限配置（仅建议）
+- 不在 `projects/<项目>/` 内创建 `.claude/` 目录、`.mcp.json` 等会话层配置——会话层配置只认 workspace 根（SKILL 硬规则 7「壳层边界」）
 - 引用团队库条目时遵守 SKILL「有效性过滤」硬规则（仅「有效」状态）
