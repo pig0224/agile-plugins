@@ -17,7 +17,7 @@ description: agile 工作区的 SDD/TDD 研发方法论与文档规范。凡执�
 | 四 | `projects/` | 项目代码（workspace 单仓内普通目录；单例与组合模板成员项目全部平铺） | 开发 |
 | 五 | `process-docs/` | 过程产物（按需求编号归档，workspace 根仓库内） | 全员 |
 
-CLI 直调：工作区操作（sync / config / worktree / template / plugin 等）通过 Bash 执行 `agile <command>`（CLI 是插件的硬依赖，未安装时先提示用户 `npm i -g fcc-agile-cli`）。**submodule 已废弃（2.0）：tech-specs 恒为外部仓库；biz-tech-docs 默认是 workspace 内普通目录（登记为外部仓库后独立成库、被 .gitignore 忽略）——commit/push 一律由人工处理，AI 不代做。**
+CLI 直调：工作区操作（sync / config / worktree / template / plugin 等）通过 Bash 执行 `agile <command>`（CLI 是插件的硬依赖，未安装时先提示用户 `npm i -g fcc-agile-cli`）。**submodule 已废弃（2.0）：tech-specs 与 biz-tech-docs 默认都是 workspace 内普通目录（随仓库提交获得版本管理；登记为外部仓库后独立成库、被 .gitignore 忽略、由 agile sync 管理）——commit/push 一律由人工处理，AI 不代做。**
 
 ## 2. 需求编号任务目录与通道判定（STO / BUG / OPS）
 

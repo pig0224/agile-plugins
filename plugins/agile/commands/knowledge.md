@@ -1,5 +1,5 @@
 ---
-description: 知识库建设与沉淀。build 辅助建设知识库（判库、调库调研、提纲、落盘骨架）；capture 从会话、过程产物、历史材料沉淀长期结论；sync-template 把组合模板根归总的耦合约定/规范按资产类型同步进抽屉（biz-tech-docs / biz-product-docs，仅 workspace 内）。可在 agile workspace 内使用，也可脱离 workspace 直接在 tech-specs / biz-tech-docs 仓库内使用。分工红线显式例外：素材在主会话上下文中，本命令不委派 subagent、主会话直接执行
+description: 知识库建设与沉淀。build 辅助建设知识库（判库、调库调研、提纲、落盘骨架）；capture 从会话、过程产物、历史材料沉淀长期结论；sync-template 把组合模板根归总的耦合约定/规范按资产类型同步进抽屉（biz-tech-docs / biz-product-docs，仅 workspace 内）。可在 agile workspace 内使用，也可脱离 workspace 直接在独立检出的 tech-specs / biz-tech-docs 仓库内使用（单库模式）。分工红线显式例外：素材在主会话上下文中，本命令不委派 subagent、主会话直接执行
 argument-hint: build <建设提示词> 或 capture <主题> [--from <编号/路径/项目>]，均可选 [--to team/product/tech]；或 sync-template [组合名]；无参显示库概况
 ---
 
@@ -14,7 +14,7 @@ argument-hint: build <建设提示词> 或 capture <主题> [--from <编号/路�
 | 环境 | 库定位 |
 |---|---|
 | agile workspace 内（有 `.agile/settings.json`） | 三库齐备：`tech-specs/`、`biz-tech-docs/`、`biz-product-docs/`（路径先读 settings.json 的 `paths` 段） |
-| 知识库仓库内（直接检出 tech-specs 或 biz-tech-docs 仓库） | **单库模式**：当前 git 仓库即目标库，仅支持 tech / team 操作；capture 的 `--from <编号>` 不可用（无 process-docs），`--from <路径>` 与缺省会话可用 |
+| 知识库仓库内（独立检出的 tech-specs 或 biz-tech-docs 仓库——workspace 内登记为外部仓库的目录即此形态，或另行 clone 检出） | **单库模式**：当前 git 仓库即目标库，仅支持 tech / team 操作；capture 的 `--from <编号>` 不可用（无 process-docs），`--from <路径>` 与缺省会话可用 |
 | 都不在 | 提示「进入 agile workspace 或知识库仓库后使用」并停止 |
 
 biz-product-docs 绑定具体产品，始终随 workspace 使用，不提供单库模式。tech-specs（公司一份）与 biz-tech-docs（团队共享）本质是跨 workspace 资产——脱离 workspace 直接维护与在 workspace 内沉淀同样是一等用法。
