@@ -1,5 +1,5 @@
 ---
-description: 知识库建设与沉淀。build 辅助建设知识库（判库、调库调研、提纲、落盘骨架）；capture 从会话、过程产物、历史材料沉淀长期结论；sync-template 把组合模板根归总的耦合约定/规范按资产类型同步进抽屉（biz-tech-docs / biz-product-docs，仅 workspace 内）。可在 agile workspace 内使用，也可脱离 workspace 直接在独立检出的 tech-specs / biz-tech-docs 仓库内使用（单库模式）。分工红线显式例外：素材在主会话上下文中，本命令不委派 subagent、主会话直接执行
+description: 知识库建设与沉淀。build 辅助建设知识库（判库、调库调研、提纲、落盘骨架）；capture 从会话、过程产物、历史材料沉淀长期结论；sync-template 把组合模板根归总的耦合约定/规范按资产类型同步进抽屉（tech-specs / biz-tech-docs / biz-product-docs，仅 workspace 内）。可在 agile workspace 内使用，也可脱离 workspace 直接在独立检出的 tech-specs / biz-tech-docs 仓库内使用（单库模式）。分工红线显式例外：素材在主会话上下文中，本命令不委派 subagent、主会话直接执行
 argument-hint: build <建设提示词> 或 capture <主题> [--from <编号/路径/项目>]，均可选 [--to team/product/tech]；或 sync-template [组合名]；无参显示库概况
 ---
 
@@ -17,7 +17,7 @@ argument-hint: build <建设提示词> 或 capture <主题> [--from <编号/路�
 | 知识库仓库内（独立检出的 tech-specs 或 biz-tech-docs 仓库——workspace 内登记为外部仓库的目录即此形态，或另行 clone 检出） | **单库模式**：当前 git 仓库即目标库，仅支持 tech / team 操作；capture 的 `--from <编号>` 不可用（无 process-docs），`--from <路径>` 与缺省会话可用 |
 | 都不在 | 提示「进入 agile workspace 或知识库仓库后使用」并停止 |
 
-biz-product-docs 绑定具体产品，始终随 workspace 使用，不提供单库模式。tech-specs（公司一份）与 biz-tech-docs（团队共享）本质是跨 workspace 资产——脱离 workspace 直接维护与在 workspace 内沉淀同样是一等用法。
+biz-product-docs 绑定具体产品，始终随 workspace 使用，不提供单库模式。tech-specs（公司级规范，登记为外部仓库后全公司共享一份）与 biz-tech-docs（团队共享）本质是可跨 workspace 的资产——脱离 workspace 直接维护与在 workspace 内沉淀同样是一等用法。
 
 ## 目标知识库
 
@@ -25,7 +25,7 @@ biz-product-docs 绑定具体产品，始终随 workspace 使用，不提供单�
 |---|---|---|---|
 | `team` | 团队技术设计知识库 | `biz-tech-docs/` | 负责人/架构师 |
 | `product` | 产品设计知识库 | `biz-product-docs/` | 产品 |
-| `tech` | 公司级技术规范 | `tech-specs/` | **只读 → 提案模式**（见下） |
+| `tech` | 公司级技术规范 | `tech-specs/` | 可写入（与 team 对称；重大变更走提案，见下） |
 
 **三问判别法**（定 `--to`，两模式通用；`--to` 缺省时用它推断）：
 
@@ -46,7 +46,7 @@ biz-tech-docs/
 │   ├── go-zero/
 │   ├── springboot/
 │   └── ant-design/
-└── proposals/                # tech 提案落点（仅 biz-tech-docs）
+└── proposals/                # tech 重大变更提案落点（仅 biz-tech-docs）
 ```
 
 **选择性调取**：build 调研 / capture 引用既有内容时，识别当前技术栈，**只调取「匹配的技术栈领域 + 通用领域」**；其他技术栈领域不混入、不作为依据（go-zero 工作区不读 springboot 领域，反之亦然）。技术栈识别优先级：
@@ -59,7 +59,7 @@ biz-tech-docs/
 
 素材还没有或不完整，辅助把知识库建起来。输入一句话提示（如「我用的是 go-zero 后端 + ant.design 前端」），输出「建什么、放哪、每篇写什么」并落盘骨架。
 
-1. **判库**：解析提示词，按三问判别法判定涉及的知识库与领域；命中多个候选落点（如 UI 框架同时涉及 `team` 的框架用法与 `product` 的 UI 规范）时全部列出供选择，不替用户决定。`--to` 显式指定时跳过推断直接采用，仍向用户确认落点。
+1. **判库**：解析提示词，按三问判别法判定涉及的知识库与领域——**AI 判断，不逐次确认**：单一直觉落点直接采用，汇报中写明判定理由；命中多个候选落点（如 UI 框架同时涉及 `team` 的框架用法与 `product` 的 UI 规范）或用户有异议时列出供选择。`--to` 显式指定时直接采用。
 2. **调库调研**：读目标库 README 导航 + 按划分约定**选择性调取**（匹配技术栈领域 + 通用领域）+ 读相关既有文档；跨库对齐——查 tech-specs 有无相关硬规范、兄弟库有无既有内容（避免重复造文档）。汇报：已有 X、缺失 Y。
 3. **建设方案**：给出建议新建的目录/文档清单，**每篇附提纲**（章节骨架 + 每节该写什么的说明）。目录落位遵循划分约定——新技术栈在 `frameworks/` 下新建对应栈目录（含模块导航 README 骨架），通用内容进通用领域。
 4. **确认后落盘**：用户确认清单后逐篇创建——frontmatter 模板 + 提纲 + 用户已提供的信息；未知内容标「待补充」，不臆造。
@@ -75,7 +75,7 @@ biz-tech-docs/
    - `--from STO-xxx`：读 `process-docs/<编号>/` 过程产物（design.md、run-test.md、feedback 等），**只提炼其中的长期结论**，过程记录本身不沉淀（仅 workspace 内可用）
    - `--from <路径或项目名>`：用户指认的历史材料（文档、`projects/<项目>` 的结构与约定）
 2. **提炼过滤**：只留长期有效、可复用的结论；一次性过程细节丢弃（知识库与 process-docs 的分界线）。
-3. **判库定落点**：`--to` 缺省时按三问判别法推断，显式指定时直接采用；写入前向用户确认（目录 + 文件名），落位遵循划分约定。
+3. **判库定落点**：`--to` 缺省时按三问判别法推断并直接采用（汇报写明落点与理由，用户可纠正），显式指定时直接采用；落位遵循划分约定。唯一保留的确认：目标库已有同名/同主题文档时，先展示差异再动笔（跳过 / 覆盖 / 另名由人工决定），不静默覆盖。
 4. **写文档**：按文档模板落盘（frontmatter + 章节），素材结论填入，缺失处标「待补充」。
 5. **登记导航**：根 `README.md` 对应分组 + 所在模块 README（若存在）追加条目（**双登记**）——**任何新文档必须登记导航**，不允许只落文件不入导航（与 build 一致的硬规则）。
 6. **输出提交指引**（见下）。
@@ -85,8 +85,8 @@ biz-tech-docs/
 把组合模板根归总的耦合约定/规范按资产类型同步进抽屉。组合模板的跨成员知识不写进成员项目（否则 `init project` 平铺后各成员带副本，知识散落 `projects/`），而是归总在组合根 `CLAUDE.md` + `docs/`（模板仓 check.mjs 契约 14 强制）；`init project` 成功后 CLI 自动把两件套快照到 workspace `.agile/solutions/<组合名>/`。本模式从该快照同步，**最终形态符合 workspace「1 根 5 抽屉」范式**：知识落在抽屉，不散落 `projects/`。仅 workspace 内可用。
 
 1. **定位快照**：读 `.agile/solutions/` 下的组合目录。带组合名参数 → 同步指定组合；缺省 → 列出全部组合（各含耦合文档数）供用户选择。`.agile/solutions/` 不存在或为空 → 提示先 `agile init project --template <组合名>` 生成（或人工从模板仓 `solutions/<组合>/` 复制），停止。
-2. **读组合导航与资产**：读快照 `CLAUDE.md`（组合定位 / 成员清单 / 耦合资产导航）与 `docs/*.md` 全部耦合文档。每篇顶部 frontmatter 的 `类型` 决定去向：`tech` → biz-tech-docs（抽屉二），`product` → biz-product-docs（抽屉三）；frontmatter 缺失或不合法时按三问判别法推断并向用户确认（正常应不会出现——模板仓 check.mjs 会拦，出现即快照来自旧版模板）。
-3. **逐篇定落点**：按「知识/规范划分约定」建议目录（通用领域 or `frameworks/<栈>/`——技术栈从组合成员项目识别，见「选择性调取」的识别优先级）。tech-specs 不接收（公司级只读）。目标库已有同名/同主题文档 → 展示差异，人工决定 跳过 / 覆盖 / 另名，不静默覆盖。
+2. **读组合导航与资产**：读快照 `CLAUDE.md`（组合定位 / 成员清单 / 耦合资产导航）与 `docs/*.md` 全部耦合文档。每篇顶部 frontmatter 的 `类型` 给出初步去向：`tech` → tech-specs / biz-tech-docs 分诊（见第 3 步），`product` → biz-product-docs（抽屉三）；frontmatter 缺失或不合法时按三问判别法推断并向用户确认（正常应不会出现——模板仓 check.mjs 会拦，出现即快照来自旧版模板）。
+3. **逐篇定落点**：`类型: tech` 的文档先按三问判别法分诊——公司级硬规范（换产品还成立）→ `tech-specs/`（抽屉一），团队级实现知识 → `biz-tech-docs/`（抽屉二），AI 分诊并在汇报中附分诊清单（每篇落点 + 理由），异议再调；再按「知识/规范划分约定」建议目录（通用领域 or `frameworks/<栈>/`——技术栈从组合成员项目识别，见「选择性调取」的识别优先级）。目标库已有同名/同主题文档 → 展示差异，人工决定 跳过 / 覆盖 / 另名，不静默覆盖。
 4. **同步落盘**：正文复制进目标库并按需整理（条款型写成条款清单）；frontmatter 重写为知识库规范——`领域` = 落点目录相对路径、`创建` = 今天、`来源` = `<workspace 名>/模板 <组合名>`、`状态` = 有效。快照文件本身不动（同步是复制不是移动，快照保留作来源记录）。
 5. **登记导航**：根 `README.md` 对应分组 + 所在模块 README（若存在）追加条目（**双登记**硬规则，与 build / capture 一致）。
 6. **输出提交指引**（见下）。
@@ -164,11 +164,15 @@ biz-tech-docs/
 
 ## 提交指引（三模式共用）
 
-AI 不 add/push——workspace 内：biz-tech-docs / biz-product-docs 默认为 workspace 内普通目录，随 workspace 仓库提交；biz-tech-docs 已通过 `agile config set` 登记为外部仓库时，它被 workspace `.gitignore` 忽略、是独立 git 仓库——沉淀产物的 commit/push 由人工在该目录内完成；单库模式：当前知识库仓库即独立 git 仓库，建议的 commit message 写入汇报，commit / push 由人工执行。
+AI 不 add/push——workspace 内：tech-specs / biz-tech-docs / biz-product-docs 默认为 workspace 内普通目录，随 workspace 仓库提交；tech-specs / biz-tech-docs 已通过 `agile config set` 登记为外部仓库时，它们被 workspace `.gitignore` 忽略、是独立 git 仓库——沉淀产物的 commit/push 由人工在该目录内完成（启用分支保护时走 PR 评审）；单库模式：当前知识库仓库即独立 git 仓库，建议的 commit message 写入汇报，commit / push 由人工执行。
 
-## tech 提案模式
+## tech-specs 写入规则与重大变更提案
 
-tech-specs 为公司级规范（团队只读）。build / capture / sync-template 涉及公司规范缺失、过时、冲突时**不直接写 tech-specs**：workspace 内落 `biz-tech-docs/proposals/` 并登记导航；单库模式（tech-specs 仓库内）不落盘，输出提案要点由人工带回团队走流程。
+tech-specs（公司级规范）可写入，与 team 库对称：日常条款新增/修正，build / capture / sync-template 判为 tech 后**直接落 `tech-specs/` 本体**，双登记导航照旧；入库把关在人工审阅（AI 不 add/push），不在命令层禁写。
+
+日常 / 重大由 **AI 初筛**：只约束本项目或本团队自身实践的 → 日常条款直接落；会约束其他团队、推翻既有公司条款、切换选型的 → 按重大变更处理并在汇报中说明理由，用户可随时要求转提案或改直落。**修改既有公司条款前必须先向用户展示新旧对照**，确认后才动笔——AI 判断落点与初筛，人工把关变更与入库。
+
+**重大变更走提案**：影响面超出本团队（选型切换、全体迁移、需公司其他团队评审背书）或用户明确要求先提案时，**不直接改正文**——workspace 内落 `biz-tech-docs/proposals/` 并登记导航，由人工提交公司流程；单库模式（tech-specs 仓库内）输出提案要点由人工带回。提案评审通过后按文档模板落 tech-specs 正文。
 
 ## 原则
 

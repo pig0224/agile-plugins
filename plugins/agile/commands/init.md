@@ -66,7 +66,7 @@ agile init project --template <组合名> [--name 成员名=目录名 ...]
 
 - 列出 `biz-tech-docs/frameworks/` 实际存在的目录，按项目技术栈给出建议匹配项，**AI 提问、人工回答**
 - 确认 → 把项目 `CLAUDE.md` 团队规范段改写为具体领域路径 + 确认人与日期
-- 确认无匹配 → 显式提示缺口（`/agile:knowledge capture` 沉淀或 tech-specs 提案），不臆造领域名
+- 确认无匹配 → 显式提示缺口（`/agile:knowledge capture` 沉淀或 tech-specs 提案/条款修正），不臆造领域名
 - 用户明确「暂不确认」→ 保留「⛔ 待人工确认」标记，本会话不再重复发起；后续会话首次需要栈领域时按 SKILL 硬规则触发
 - **未确认前只引用通用领域**；此状态决定第 ⑤ 步推荐来源（见下）
 
