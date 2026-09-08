@@ -21,7 +21,7 @@ CLI 直调：工作区操作（sync / config / worktree / template / plugin 等�
 
 ## 2. 需求编号任务目录与通道判定（STO / BUG / OPS）
 
-`process-docs/<编号>/` 标准任务目录（STO-xxx 业务需求 / BUG-xxx 缺陷修复 / OPS-xxx 技术变更），**由创建它的插件命令（/agile:sync-req、/agile:fix-bug、bug-hunter）按附录 A 模板直接创建**（幂等：已存在的文件不覆盖）。五文档 + 两份角色卫星文件 + gen-test.md 骨架（模板见附录 A），初始创建共 8 个 .md：
+`process-docs/<编号>/` 标准任务目录（STO-xxx 业务需求 / BUG-xxx 缺陷修复 / OPS-xxx 技术变更），**由创建它的插件命令（/agile:sync-req、/agile:fix-bug；后者无编号时由其委派的 bug-hunter subagent 创建）按附录 A 模板直接创建**（幂等：已存在的文件不覆盖）。五文档 + 两份角色卫星文件 + gen-test.md 骨架（模板见附录 A），初始创建共 8 个 .md：
 
 - `requirement.md` — 需求说明与验收标准（AC）。产品/需求侧填充。
 - `design.md` — 技术设计。**SDD 核心：开发前必须先完成**。参考抽屉一/二规范。

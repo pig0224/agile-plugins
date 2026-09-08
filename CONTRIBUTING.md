@@ -21,11 +21,11 @@ claude plugin marketplace add .     # 本地市场（开发热加载：改文件
 
 1. 分支开发（`feat/<描述>` 或 `fix/<描述>`），推送后开 PR 指向 main
 2. CI 自动执行 `claude plugin validate .`，全绿是合并前提
-3. 维护者 review（CODEOWNERS 自动请求）后合并——**merge 即发版**，所有用户立即可用
+3. 维护者 review 后合并——**merge 即发版**，所有用户立即可用
 
 ## 插件内容约定
 
-- 命令只做「前置校验 → Task 委派 agent → 复核汇报」，实现细节写在 agent 里（个别命令文件显式声明分工例外（主会话直接执行）者除外：现为 sync-req、add-task、feedback、help、init、add-template、knowledge、review、release）
+- 命令只做「前置校验 → Task 委派 agent → 复核汇报」，实现细节写在 agent 里（个别命令文件显式声明分工例外（主会话直接执行）者除外：现为 sync-req、add-task、feedback、help、init、add-template、share-template、knowledge、review、release）
 - 共享知识放 skill；产物全中文；不硬编码抽屉路径与 git 命令（经 settings.json / CLI）
 - 文件系统操作经 CLI（如外部资源用 `agile sync`），不手工拼装命令；任务目录（初始 8 个 .md）按 sdd-tdd-method SKILL 附录 A 模板由命令直接创建（幂等）
 - 涉及破坏性写操作时先 dry-run 或显式向用户确认

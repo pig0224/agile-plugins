@@ -22,7 +22,9 @@ gen-test.md 必含：
 ## Stage 2：测试执行与验收
 
 输入：gen-test.md + 各仓库的实现（implementation-be.md / implementation-fe.md 已完成的任务）。
-输出：`process-docs/STO-xxx/run-test.md`（验收报告）。
+输出：`process-docs/STO-xxx/run-test.md`（验收报告）。执行为**全程 auto 模式**（委派方 /agile:run-test 传递）：不中途向用户提问，遇到问题记录后继续，最后一次性汇报。
+
+**轻量通道降级**：`requirement.md` 头部带轻量标记（`> 本变更走轻量通道`）或编号为 BUG / OPS 时，不产出逐案例结果表，只在 run-test.md 记一行回归/验证结论（对齐 /agile:run-test「轻量通道降级」节）。
 
 执行方式：
 1. 在各仓库目录执行其标准测试命令（读 package.json scripts / Makefile / pom.xml 确定）。

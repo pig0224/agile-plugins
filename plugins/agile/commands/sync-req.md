@@ -21,7 +21,7 @@ argument-hint: <需求编号> [一句话需求]；有 PRD 产物走完整同步�
 
 ### 完整同步（PRD 产物存在）
 
-4. `<bizProductDocs>/requirements/<编号>/PRD.md` → 若 `process-docs/<编号>/requirement.md` 仍为模板（含「待填充」/占位），将 PRD 核心内容 + AC 完整并入 `requirement.md`（保留模板中的 AC 章节结构，填充 AC 条目）。
+4. `<bizProductDocs>/requirements/<编号>/PRD.md` → 若 `process-docs/<编号>/requirement.md` 仍为附录 A 模板骨架（正文为「（需求来源、业务背景）」等括号占位、AC 条目未填充），将 PRD 核心内容 + AC 完整并入 `requirement.md`（保留模板中的 AC 章节结构，填充 AC 条目）。
 5. 其余产物（AC.md、feature-tree.md、menu-tree.md）**复制**到 `process-docs/<编号>/`（保持文件名）。
 6. 源文件保留不删（抽屉三是知识库原件）。
 7. 校验：`requirement.md` 中 AC 至少 1 条；否则警告用户回到 `/agile:prd`。

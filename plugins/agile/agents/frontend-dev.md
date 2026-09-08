@@ -23,11 +23,11 @@ tools: Read, Write, Edit, Glob, Grep, Bash
 
 ## 浏览器验证
 
-- **浏览器验证通过 Bash 驱动 Playwright 脚本 / e2e 执行（模板已内置 e2e 骨架），以脚本输出为准，不虚构浏览器结论。**
-- 启动 dev server（仓库的 `npm run dev`），用浏览器打开验证：
+- **浏览器验证经 Bash 驱动 Playwright 脚本 / e2e 执行，以脚本输出为准，不虚构浏览器结论**（模板自带 e2e 骨架的项目开箱即用；未引入 e2e 框架的按下条建议引入后再验证）。
+- 启动 dev server（仓库的 `npm run dev`），经 Playwright 断言验证、截图 / 脚本输出佐证（人工核对仅限无法自动化的部分）：
   - 页面可渲染、无控制台错误
   - 关键交互路径走通（对照 AC）
-- **关键路径固化为 e2e 脚本**：按 gen-test.md「前端用例」节中标 `e2e` 的用例落地到前端项目 `e2e/` 目录（Playwright，如 `e2e/*.spec.ts`），供 /agile:run-test 与 stage 冒烟复用。项目未引入 e2e 框架时，建议引入 **Playwright**（主要测试工具）并经负责人确认；调试浏览器行为用 Chrome DevTools 辅助。
+- **关键路径固化为 e2e 脚本**：按 gen-test.md「前端用例」节中标 `e2e` 的用例落地到前端项目 `e2e/` 目录（Playwright，如 `e2e/*.spec.ts`），供 /agile:run-test 与 stage 冒烟复用。项目未引入 e2e 框架时，建议引入 **Playwright**（e2e 首选工具，SKILL §5 测试工具约定）并经负责人确认；Chrome DevTools 仅辅助调试，验证结论仍以脚本输出为准。
 - 无法自动化的部分，输出验证步骤与结果记录。
 - **脚本与产物归属**：临时验证脚本一律放 `process-docs/<编号>/scripts/`，严禁散落在项目内；运行产物（`test-results/`、`playwright-report/`、截图、trace）不提交 git；报告引用的关键截图归档到 `process-docs/<编号>/assets/`。
 

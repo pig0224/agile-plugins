@@ -49,23 +49,23 @@ agile plugin install [name]
 | 命令 | 委派 agent | 产物（落盘位置） |
 |---|---|---|
 | /agile:prd | product-manager | PRD/AC/功能树/菜单树 → `<抽屉三>/requirements/<编号>/` |
-| /agile:sync-req | -（自身执行） | 复制到 `process-docs/<编号>/`，requirement.md 并入 AC |
+| /agile:sync-req | -（主会话直接执行，**分工例外**） | 复制到 `process-docs/<编号>/`，requirement.md 并入 AC |
 | /agile:architect | tech-architect | `process-docs/<编号>/design.md` |
 | /agile:gen-test | test-engineer | `process-docs/<编号>/gen-test.md`（案例表 + 自动化映射） |
-| /agile:backend | backend-dev | worktree 内 TDD 实现 + implementation.md 更新 |
+| /agile:backend | backend-dev | worktree 内 TDD 实现 + implementation-be.md 更新 |
 | /agile:frontend | frontend-dev | 接口层→组件层→页面层 分层实现 + 浏览器验证 |
 | /agile:ui | ui-designer | 组件库 / `<抽屉三>/prototypes/<编号>/` / CHANGELOG |
 | /agile:run-test | test-engineer | `process-docs/<编号>/run-test.md`（验收报告） |
 | /agile:review | -（主会话直接执行，**分工例外**） | `process-docs/<编号>/review.md`（验收矩阵 + 门禁判定，不代验收） |
 | /agile:release | -（主会话直接执行，**分工例外**） | `process-docs/<编号>/release.md`（前置检查 + 回滚方案 + 发布记录） |
 | /agile:fix-bug | bug-hunter | 最小修复 + 复现测试 + 文档登记（无编号则 BUG-xxx） |
-| /agile:add-task | -（只追加） | `implementation.md` 任务分配表追加一行（主文件冻结后只读，仅允许此追加） |
-| /agile:feedback | -（收集会话） | `process-docs/<编号>/feedback-<日期>.md` |
+| /agile:add-task | -（主会话直接执行，**分工例外**：只追加） | `implementation.md` 任务分配表追加一行（主文件冻结后只读，仅允许此追加） |
+| /agile:feedback | -（主会话直接执行，**分工例外**：收集会话） | `process-docs/<编号>/feedback-<日期>.md` |
 | /agile:knowledge | -（主会话直接执行，**分工例外**） | build：知识库骨架 + 提纲 + 根导航登记；capture：会话/过程产物提炼的长期结论文档 + 导航双登记（根导航 + 模块内 README）；sync-template：组合模板根耦合资产按 `类型: tech\|product` frontmatter 同步进 biz-tech-docs / biz-product-docs（快照来自 `.agile/solutions/<组合>/`，`init project` 带出） |
-| /agile:init | -（主会话直接执行，**分工例外**）·负责人 | AI 陪同建项目：`agile init project` 骨架生成 + 项目约定问答定制 + 团队库匹配确认 |
+| /agile:init | -（主会话直接执行，**分工例外**）·负责人 | AI 陪同建项目：`agile init project` 骨架生成 + 项目约定问答定制 + 团队库匹配确认 + 辅助开发能力配置（环境检测 / 框架 AI 能力包） |
 | /agile:add-template | -（主会话直接执行，**分工例外**）·负责人/模板维护者 | AI 辅助建设模板：agile-templates 骨架 + registry.json 登记 + check / 冒烟验证（仅限模板仓根目录使用） |
 | /agile:share-template | -（主会话直接执行，**分工例外**）·架构/模板维护者 | workspace 项目 → 模板：清理审计 + 占位符还原 + 打包落盘 + registry.json 登记 + check / 冒烟（仅限 workspace 内使用） |
-| /agile:help | -（静态） | 命令总览 + 流程图 + workspace 状态 |
+| /agile:help | -（主会话直接执行，**分工例外**：静态信息） | 命令总览 + 流程图 + workspace 状态 |
 
 ## 5. 与 CLI 的协作
 

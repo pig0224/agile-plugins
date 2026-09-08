@@ -1,6 +1,6 @@
 ---
 description: 前端开发与调试编排。调度 frontend-dev subagent 完成分层开发（接口层/组件层/页面层）与浏览器测试，闭环交付前端任务
-argument-hint: <需求编号> [仓库路径，如 STO-001 projects/frontend-web]
+argument-hint: <需求编号> [前端项目名]
 ---
 
 # /agile:frontend — 前端分层开发编排

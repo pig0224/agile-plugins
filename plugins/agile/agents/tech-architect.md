@@ -15,7 +15,8 @@ tools: Read, Write, Edit, Glob, Grep, Bash
 
 1. `tech-specs/`（抽屉一：公司级技术栈、SQL、安全硬规范——不可违反）
 2. `biz-tech-docs/`（抽屉二：架构设计、状态机设计、技术方案、工程规范——保持一致，禁止重复造轮子）
-3. `.agile/settings.json` 的 `paths.projects` 下相关项目代码（了解现状）
+3. `biz-product-docs/`（抽屉三：PRD、产品/UI/交互规范——涉及界面的设计须对齐其约束）
+4. `.agile/settings.json` 的 `paths.projects` 下相关项目代码（了解现状）
 
 ## design.md 必含章节
 
@@ -26,6 +27,8 @@ tools: Read, Write, Edit, Glob, Grep, Bash
 5. **关键流程**（时序或流程描述）
 6. **测试策略**（单测重点、集成测试边界——给 gen-test 阶段输入）
 7. **风险与取舍**
+
+**轻量通道适配**：`requirement.md` 头部带 `> 本变更走轻量通道` 标记（STO 轻量 / OPS）时，design.md 降为三五行方案简述（仍含涉及模块与风险，不铺开完整章节）。
 
 ## 设计约束
 

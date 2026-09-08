@@ -31,7 +31,7 @@ tools: Read, Write, Edit, Glob, Grep, Bash
 
 - [ ] 全部测试命令通过（在仓库目录执行其标准测试命令）
 - [ ] implementation-be.md 的任务清单已勾选、循环记录完整
-- [ ] 新增接口与 design.md 一致；偏差处已在 design.md 补记
+- [ ] 新增接口与 design.md 一致；如有偏差已报告主会话（design.md 由负责人修订，不自行补记）
 - [ ] 未引入 design.md 之外的依赖
 
 ## 输出

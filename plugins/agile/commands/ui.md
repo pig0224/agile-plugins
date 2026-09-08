@@ -15,7 +15,7 @@ argument-hint: <子命令与参数，如 build 建设组件库 | prototype STO-0
 2. **立项**：组件库从 0 到 1 是产品级动作，走**独立 STO 立项**（从 `/agile:prd <编号> 组件库建设` 起完整流程；规模小经确认可走轻量通道），后续开发按 SOP 生命周期执行
 3. 读抽屉三 UI 规范、抽屉二前端工程规范；团队库匹配已确认时读 `biz-tech-docs/frameworks/<前端栈>/`（未确认不读栈领域，按 SKILL 优先级链）
 4. 调用 **ui-designer** subagent：从 0 到 1 建设组件库——**设计 token 是第一批产物**（同步写入项目 `docs/ui.md` 的 token 清单）、基础组件 5-8 个起步、目录结构、README、测试（TDD）
-5. 完成后按目录状态落库：**若组件库目录尚未初始化为项目**——用 `agile init project --template vue3-vite|react-vite` 落库（继承规范骨架三文件 + 预置 `docs/ui.md`）；**若目录已存在**（第 4 步建设时已建）——跳过 init（该命令对已存在非空目录必报错），直接在该目录内补齐/调整（规范骨架三文件、`docs/ui.md`），并登记模板注册中心
+5. 落库时机（`agile init project` 只能对空目录执行，非空必报错）：**若组件库目录尚未初始化为项目且建设尚未开始（目录为空）**——先落库再进入第 4 步：模板注册中心已有前端模板（如 vue3-vite / react-vite）时用 `agile init project --template <模板名>`（继承规范骨架三文件 + 预置 `docs/ui.md`），暂无对应模板时用 `agile init project --name <目录名>` 空项目骨架；**若第 4 步已直接建设（目录非空）**——补跑 init 必报错，跳过 init，直接在该目录内补齐规范骨架三文件与 `docs/ui.md`
 6. 长期结论（组件 API 约定、主题定制经验）建议 `/agile:knowledge capture` 沉淀至团队库（组件用法 → `team frameworks/<前端栈>/`）
 
 ## 模式二：prototype STO-xxx（页面原型）

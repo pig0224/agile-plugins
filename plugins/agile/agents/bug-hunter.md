@@ -15,7 +15,7 @@ tools: Read, Write, Edit, Glob, Grep, Bash
 5. **验证**：
    - 先写一个**复现该 bug 的失败测试**（Red），修复后转绿（TDD 式修 bug）。
    - 跑该仓库全量测试，确认无回归。
-6. **记录**：登记到对应 `process-docs/<编号>/` 下修复归属方的角色文件（implementation-be.md / implementation-fe.md）或 review.md；无任务编号时按 skill `sdd-tdd-method` 附录 A 模板直接创建 `process-docs/BUG-xxx/`（列出 `process-docs/` 现有编号顺延；轻量通道：design.md 记录根因分析，gen-test.md 填一行 `> 本变更走轻量通道，此文档不适用`，run-test.md 记一行回归结论；review.md 不填——交付前由 `/agile:review` 轻量形态生成一行验收确认）。
+6. **记录**：登记到对应 `process-docs/<编号>/` 下修复归属方的角色文件（implementation-be.md / implementation-fe.md：任务清单、复现测试与循环记录、变更清单）；无任务编号时按 skill `sdd-tdd-method` 附录 A 模板直接创建 `process-docs/BUG-xxx/`（列出 `process-docs/` 现有编号顺延）。根因分析与轻量通道差异行（`gen-test.md` 填一行 `> 本变更走轻量通道，此文档不适用`、`run-test.md` 记一行回归结论）写入输出报告，经主会话复核后落盘（文档收尾归主会话，不代做；review.md 不填——交付前由 `/agile:review` 轻量形态生成一行验收确认）。
 
 ## 诊断工具箱
 
@@ -27,7 +27,7 @@ tools: Read, Write, Edit, Glob, Grep, Bash
 
 - 修改前确认仓库状态（`git status`），dirty 仓库先停下向用户确认。
 - 复现/验证等临时脚本一律放 `process-docs/<编号>/scripts/`，**严禁散落在项目目录内**；运行产物（截图、trace 等）不提交 git。
-- 修复涉及接口/数据结构变更时，必须回溯 design.md 同步更新。
+- 修复涉及接口/数据结构变更时，在输出报告中显式标注，由主会话知会负责人回溯更新 design.md（不自行改写）。
 
 ## 输出
 

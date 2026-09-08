@@ -1,5 +1,5 @@
 ---
-description: AI 辅助建设 agile-templates 新模板：四流程（A 从零手写单例 / B 派生改造单例 / C 上游脚手架引入 / D 组合模板）× 六步（位置检测 → 场景判定 → 设计问答定稿 → 骨架生成 → registry.json 登记 + check → 冒烟 → 汇报）。仅限在 agile-templates 仓库根目录使用。SDD/TDD 组织：设计定稿先行、测试基线、冒烟验收。分工红线显式例外：主会话直接执行，不委派 subagent
+description: AI 辅助建设 agile-templates 新模板：四流程（A 从零手写单例 / B 派生改造单例 / C 上游脚手架引入 / D 组合模板）× 第 0 步位置检测 + 六步（场景判定 → 设计问答定稿 → 骨架生成 → registry.json 登记 + check → 冒烟 → 汇报）。仅限在 agile-templates 仓库根目录使用。SDD/TDD 组织：设计定稿先行、测试基线、冒烟验收。分工红线显式例外：主会话直接执行，不委派 subagent
 argument-hint: "[模板名/组合名或技术栈描述]；无参进入交互设计"
 ---
 
@@ -78,7 +78,7 @@ A/B/C 产出单例模板，D 产出组合模板；**④ 登记 + 校验、⑤ �
   - `CLAUDE.md`：项目级入口索引（技术栈 / 命令速查 / 硬规则 / 规范索引）；命令速查与实际 package.json scripts / Makefile 目标一致；团队规范段指向 `../../biz-tech-docs/` 并带**「⛔ 栈领域待人工确认」**标记
   - `docs/conventions.md`：目录（初始骨架如实 + 增长建议）/ 命名 / 测试 + 团队补充约定节
   - `docs/architecture.md`：ADR 骨架（背景 / 决策 / 后果三段式）+ ADR-001 初始条目
-- 前端栈模板加 `docs/ui.md`（非强制校验，check.mjs 不查）：UI 设计 token 清单空表 + Token 管理方式 + 使用规则骨架（形态对齐 vue3-vite / react-vite 现有文件）
+- 前端栈模板加 `docs/ui.md`（非强制校验，check.mjs 不查）：UI 设计 token 清单空表 + Token 管理方式 + 使用规则骨架（模板注册中心已有前端模板时，形态对齐其 `docs/ui.md`；暂无时按本条三要素自拟）
 - README（运行/测试命令）+ 构建特征文件（package.json / go.mod / pom.xml / tsconfig.json 之一）+ **至少一个可运行测试**（TDD 起点）+ .gitignore
 - **模板中立原则**：预填默认值只来自模板自身选型与社区惯例，**不引入 `frameworks/<栈>/` 具体条款**——团队库领域只在项目级经 `/agile:init` 第 ④ 步确认后引入
 - 目录结构如实，不预建空目录
@@ -101,7 +101,7 @@ A/B/C 产出单例模板，D 产出组合模板；**④ 登记 + 校验、⑤ �
 3. 做**最小组合级定制**（按问答中的成员职责定位）：各成员 README / CLAUDE.md 首段改写为组合语境的定位描述（含成员间协作约定一句话）；不预造业务功能
 4. 组合专属深度定制（新页面、新接口、成员间协议等）**按实际需求另行开发**（SDD/TDD 流程或人工），本命令只负责把组合结构与登记打通；定制期间保持成员测试可跑（起点自带）
 
-**③ 出口检查（测试基线）**：每个新骨架目录内测试实际跑绿后，才允许进入 ④。**跑绿后、进入 ④ 前，清理成员/模板目录内的安装与构建产物**——产物不入库（`scripts/check.mjs` 契约 11 产物黑名单全树强制拦截，CI 会红），但会污染后续流程：CLI 直读模板仓复制时会受产物干扰（≤ 2.1.0 撞 junction 直接崩溃 EISDIR，agile-cli issue #<编号，由维护者填>；≥ 2.2.0 复制侧已修复为自动忽略产物，模板目录保持无产物仍是基线要求）。按栈清理实际产生的产物，常见清单：`node_modules`、`.next`、`dist`、`build`、`coverage`、`pnpm-lock.yaml`、`package-lock.json`、`next-env.d.ts`——完整黑名单以 `scripts/check.mjs` 契约 11 为准（另含 `.turbo`、`.vitest`、`yarn.lock`、`*.tsbuildinfo`，符号链接/junction 一并报错）。示例命令（对每个成员/模板目录执行，路径换成实际目录）：
+**③ 出口检查（测试基线）**：每个新骨架目录内测试实际跑绿后，才允许进入 ④。**跑绿后、进入 ④ 前，清理成员/模板目录内的安装与构建产物**——产物不入库（`scripts/check.mjs` 契约 11 产物黑名单全树强制拦截，CI 会红），但会污染后续流程：CLI 直读模板仓复制时会受产物干扰（≤ 2.1.0 撞 junction 直接崩溃 EISDIR，agile-cli issue #16；≥ 2.2.0 复制侧已修复为自动忽略产物，模板目录保持无产物仍是基线要求）。按栈清理实际产生的产物，常见清单：`node_modules`、`.next`、`dist`、`build`、`coverage`、`pnpm-lock.yaml`、`package-lock.json`、`next-env.d.ts`——完整黑名单以 `scripts/check.mjs` 契约 11 为准（另含 `.git`、`.turbo`、`.vitest`、`yarn.lock`、`*.tsbuildinfo`，符号链接/junction 一并报错）。示例命令（对每个成员/模板目录执行，路径换成实际目录）：
 
 ```powershell
 # PowerShell 5.1（在 agile-templates 仓库根目录执行）
