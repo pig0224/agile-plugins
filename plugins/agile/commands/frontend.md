@@ -11,6 +11,7 @@ argument-hint: <需求编号> [前端项目名]
 
 1. 解析 `$ARGUMENTS`：第一段为需求编号，第二段（可选）为前端项目名（缺省时扫描 `projects/` 一层（`projects/*`，单例与组合成员项目全部平铺）中含 vue/react 特征的项目——按 package.json 依赖特征 Glob/读取识别）。
 2. 校验 `process-docs/<编号>/design.md` 已填充（SDD 红线）。未填充则停止。
+   已填充时按 skill「人工修订感知流程」对照既有任务清单与已实现代码，design.md 有未登记的人工修订 → 先处置（采纳登记 / 存疑返回人工确认），防按过时设计继续开发。
 3. 读 `process-docs/<编号>/menu-tree.md`（或 feature-tree）确认页面范围；**文件不存在时（轻量通道 / BUG 无 PRD 产物）跳过本步**——页面范围以 design.md「涉及模块」与用户输入为准，向用户确认后再动手。
 4. `git status` 确认工作区干净；dirty 则询问。
 

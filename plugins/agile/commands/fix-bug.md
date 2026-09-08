@@ -17,6 +17,7 @@ argument-hint: <问题描述或需求编号+问题描述，如 STO-001 下单接
 ## 执行步骤
 
 1. **环境检查**：`git status`（dirty 时停下询问用户，修复应基于干净基线）；外部资源未就位时先 `agile sync`。修复一律在需求分支的 worktree 内进行，无对应 worktree 时先 `agile worktree create feat/<编号>`（轻量通道 worktree 纪律不变）。
+   登记到既有任务目录时，同时按 skill「人工修订感知流程」对该目录文档做人工修订感知（采纳登记 / 存疑返回人工确认）。
 2. 调用 **bug-hunter** subagent（Task 工具委派），传入：
    - bug 描述、涉及仓库（从描述推断或让用户指定）、任务编号
    - 要求完整走「复现 → 定位 → 根因 → 最小修复 → 回归验证 → 登记」闭环

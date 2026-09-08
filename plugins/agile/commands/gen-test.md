@@ -12,6 +12,7 @@ argument-hint: <需求编号，如 STO-001>
 1. 需求编号：`$ARGUMENTS`（为空时列出 `process-docs/` 下现有编号目录让用户选择）。
 2. 校验 `process-docs/<编号>/requirement.md` 已填充（含 AC）——测试案例来自 AC。缺失则停止，提示先 /agile:prd + /agile:sync-req。
 3. 校验 `process-docs/<编号>/design.md` 已填充（案例需要接口/数据模型信息）。缺失则警告并提示 /agile:architect（可选择仅基于 AC 生成，需用户确认）。
+4. 按 skill「人工修订感知流程」重读 AC / design 并对照既有 gen-test.md（存在时）：上游有未登记的人工修订 → 先处置（采纳登记 / 存疑返回人工确认），并列出映射受影响的既有用例（标注需复核）。
 
 ## 执行步骤
 

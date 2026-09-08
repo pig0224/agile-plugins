@@ -15,11 +15,12 @@ argument-hint: <需求编号或需求描述，如 STO-001 或一段需求文字>
 ## 执行步骤
 
 1. 读 `.agile/settings.json` 获取 `paths.bizProductDocs`（抽屉三路径）。
-2. 调用 **product-manager** subagent（Task 工具委派），传入：
+2. **续作感知**：`<bizProductDocs>/requirements/<编号>/` 已存在（续作/重跑）时，按 skill「人工修订感知流程」先检测既有 PRD/AC 的人工修改（git diff + 重读对照）——可采纳的并入本次产出依据，人工改过的内容不得被重新生成覆盖；存疑先返回人工确认。
+3. 调用 **product-manager** subagent（Task 工具委派），传入：
    - 需求编号与需求描述（`$ARGUMENTS` 全文）
    - 抽屉三路径
-3. subagent 产出 `PRD.md / AC.md / feature-tree.md / menu-tree.md` 到 `<bizProductDocs>/requirements/<编号>/`。
-4. 向用户汇报：产物文件清单、AC 数量、待确认问题。
+4. subagent 产出 `PRD.md / AC.md / feature-tree.md / menu-tree.md` 到 `<bizProductDocs>/requirements/<编号>/`（已存在的文件不覆盖，续作感知结论一并传入）。
+5. 向用户汇报：产物文件清单、AC 数量、待确认问题。
 
 ## 完成后建议
 

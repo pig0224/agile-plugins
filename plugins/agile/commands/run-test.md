@@ -11,6 +11,7 @@ argument-hint: <需求编号，如 STO-001> [--only P0] [--repo 仓库路径]
 
 1. 解析 `$ARGUMENTS`：需求编号，可选 `--only P0`（只跑指定优先级）、`--repo <path>`（只跑指定仓库）。
 2. 校验 `process-docs/<编号>/gen-test.md` 存在；缺失则基于 requirement.md 的 AC 现场生成精简案例清单（在报告中注明「Stage 1 缺失」）。
+   存在时按 skill「人工修订感知流程」检测 gen-test.md / requirement.md 的人工修订——用例集有变化时以最新文件为准并在报告开头注明变化点（auto 模式不中断，存疑冲突记录后继续）。
 
 ## 执行步骤
 
