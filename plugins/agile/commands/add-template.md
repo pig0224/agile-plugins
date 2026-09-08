@@ -1,6 +1,6 @@
 ---
 description: AI 辅助建设 agile-templates 新模板：四流程（A 从零手写单例 / B 派生改造单例 / C 上游脚手架引入 / D 组合模板）× 六步（位置检测 → 场景判定 → 设计问答定稿 → 骨架生成 → registry.json 登记 + check → 冒烟 → 汇报）。仅限在 agile-templates 仓库根目录使用。SDD/TDD 组织：设计定稿先行、测试基线、冒烟验收。分工红线显式例外：主会话直接执行，不委派 subagent
-argument-hint: [模板名/组合名或技术栈描述]；无参进入交互设计
+argument-hint: "[模板名/组合名或技术栈描述]；无参进入交互设计"
 ---
 
 # /agile:add-template — AI 辅助建设模板

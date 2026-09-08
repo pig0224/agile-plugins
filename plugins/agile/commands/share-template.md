@@ -1,6 +1,6 @@
 ---
 description: AI 辅助把 workspace 既有项目打包为 agile-templates 模板（/agile:add-template 的逆过程）：盘点 → 方案问答 → 清理审计（敏感数据/团队定制/工程卫生处置清单）→ 打包落盘 + registry.json 登记 → check + 冒烟 → 汇报移交。仅限在 agile workspace 内使用。分工红线显式例外：主会话直接执行，不委派 subagent
-argument-hint: [项目目录名...]；无参扫 projects/ 盘点
+argument-hint: "[项目目录名...]；无参扫 projects/ 盘点"
 ---
 
 # /agile:share-template — 把 workspace 项目打包成模板

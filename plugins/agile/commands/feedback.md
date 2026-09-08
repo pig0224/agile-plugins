@@ -1,7 +1,7 @@
 ---
 description: 收集会话中的错误信息，生成标准的问题反馈报告，便于归档与复盘。分工红线显式例外：素材在当前会话上下文中，本命令不委派 subagent、主会话直接执行
 disable-model-invocation: true
-argument-hint: [主题或需求编号]
+argument-hint: "[主题或需求编号]"
 ---
 
 # /agile:feedback — 问题反馈报告
