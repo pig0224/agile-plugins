@@ -17,7 +17,7 @@ argument-hint: <需求编号> [一句话需求]；有 PRD 产物走完整同步�
 
 1. 读 `.agile/settings.json` 获取 `paths.bizProductDocs` 与 `paths.processDocs`。
 2. **判断通道**：`<bizProductDocs>/requirements/<编号>/` 存在 PRD 产物 → 完整同步；不存在（或编号未立项）→ 轻量形态。
-3. 创建过程目录：按 skill `sdd-tdd-method` **附录 A 模板**直接创建 `process-docs/<编号>/` 与七文件（幂等：已存在的文件不覆盖）。
+3. 创建过程目录：按 skill `sdd-tdd-method` **附录 A 模板**直接创建 `process-docs/<编号>/` 与初始 8 个 .md（幂等：已存在的文件不覆盖）。
 
 ### 完整同步（PRD 产物存在）
 

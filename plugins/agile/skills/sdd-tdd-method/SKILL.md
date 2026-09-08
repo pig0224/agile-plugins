@@ -1,6 +1,6 @@
 ---
 name: sdd-tdd-method
-description: agile 工作区的 SDD/TDD 研发方法论与文档规范。凡执行 agile:prd / agile:architect / agile:backend / agile:frontend / agile:gen-test / agile:run-test 等 agile 系列命令时必须先阅读本 skill。涵盖：一个根五个抽屉的目录约定、需求编号任务目录、SDD 先设计后开发、TDD Red-Green-Refactor 循环、过程产物五文档 + 两角色卫星文件（任务目录 7 个 .md，完整档案 9 个）的填写规范。
+description: agile 工作区的 SDD/TDD 研发方法论与文档规范。凡执行 agile:prd / agile:architect / agile:backend / agile:frontend / agile:gen-test / agile:run-test 等 agile 系列命令时必须先阅读本 skill。涵盖：一个根五个抽屉的目录约定、需求编号任务目录、SDD 先设计后开发、TDD Red-Green-Refactor 循环、过程产物五文档 + 两角色卫星文件（任务目录初始 8 个 .md，完整档案 9 个）的填写规范。
 ---
 
 # agile SDD/TDD 方法论
@@ -21,7 +21,7 @@ CLI 直调：工作区操作（sync / config / worktree / template / plugin 等�
 
 ## 2. 需求编号任务目录与通道判定（STO / BUG / OPS）
 
-`process-docs/<编号>/` 标准任务目录（STO-xxx 业务需求 / BUG-xxx 缺陷修复 / OPS-xxx 技术变更），**由创建它的插件命令（/agile:sync-req、/agile:fix-bug、bug-hunter）按附录 A 模板直接创建**（幂等：已存在的文件不覆盖）。五文档 + 两份角色卫星文件，共 7 个 .md：
+`process-docs/<编号>/` 标准任务目录（STO-xxx 业务需求 / BUG-xxx 缺陷修复 / OPS-xxx 技术变更），**由创建它的插件命令（/agile:sync-req、/agile:fix-bug、bug-hunter）按附录 A 模板直接创建**（幂等：已存在的文件不覆盖）。五文档 + 两份角色卫星文件 + gen-test.md 骨架（模板见附录 A），初始创建共 8 个 .md：
 
 - `requirement.md` — 需求说明与验收标准（AC）。产品/需求侧填充。
 - `design.md` — 技术设计。**SDD 核心：开发前必须先完成**。参考抽屉一/二规范。
@@ -37,14 +37,14 @@ CLI 直调：工作区操作（sync / config / worktree / template / plugin 等�
 
 ### 通道判定（所有命令先判再动）
 
-**两维正交**：性质（编号前缀）定拍板人，深度（完整 / 轻量）定填写量。
+**两维正交**：性质（编号前缀）定审批人，深度（完整 / 轻量）定填写量。
 
 | 形态 | 判定 | 典型场景 | 目录创建 |
 |---|---|---|---|
 | 完整 | 抽屉三 `requirements/<编号>/` 有 PRD 产物 | 需产品定稿 PRD/AC 的需求 | `/agile:sync-req <编号>` |
 | STO 轻量 | 产品一句话确认分配 STO 编号，无 PRD | mini feat、文案/样式调整 | `/agile:sync-req <编号> <一句话需求>` |
-| BUG | 缺陷，无需拍板（回归正确） | 行为与预期不符 | `/agile:fix-bug`（无编号顺延 BUG-xxx） |
-| OPS | 技术变更，运维拍板 | 重构、依赖升级、CI 微调 | `/agile:sync-req <编号> <改动说明>` |
+| BUG | 缺陷，无需审批（回归正确） | 行为与预期不符 | `/agile:fix-bug`（无编号顺延 BUG-xxx） |
+| OPS | 技术变更，运维审批 | 重构、依赖升级、CI 微调 | `/agile:sync-req <编号> <改动说明>` |
 
 **轻量机读标记**：`requirement.md` 头部含 `> 本变更走轻量通道` 即轻量形态，各命令按此自适应——architect 输出三五行方案简述（design.md）；review 一行验收确认（报告人确认修复生效（BUG）/ 提需求人确认（STO 轻量）/ 负责人自查（OPS））；run-test 不产出完整 Stage 2 报告，只在 run-test.md 记一行回归/验证结论；release 涉及部署才记一行。**不变**：TDD 红线不豁免（bug 修复必须复现测试 Red→Green）；worktree、main 禁直推、PR、CI 门禁照走。**升级出口**：过程中发现影响面超出预期（涉及接口契约 / 数据模型 / 业务行为明显变化）→ 停止轻量流程，提示用户按团队 SOP「轻量通道」页「编号变更与升级出口」节**人工处理**换号与文档补全——AI 不自行执行编号变更、目录改名或分支操作。详细规范见团队 SOP「轻量通道」节。
 
@@ -127,7 +127,7 @@ CLI 直调：工作区操作（sync / config / worktree / template / plugin 等�
 | /agile:feedback | 问题反馈报告 |
 | /agile:knowledge | 知识库建设与沉淀 |
 
-## 附录 A：任务目录七文件模板（创建规范）
+## 附录 A：任务目录模板（初始 8 个 .md，创建规范）
 
 创建 `process-docs/<编号>/` 时按以下模板逐一生成（`{{id}}` 替换为编号；**幂等**：目录与文件已存在则跳过，绝不覆盖既有内容）。轻量通道（STO 轻量 / BUG / OPS）只额外初始化 `requirement.md` 与 `gen-test.md` 的差异内容（见各命令），其余文件仍按模板创建骨架。
 

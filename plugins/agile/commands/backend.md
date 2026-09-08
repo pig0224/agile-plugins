@@ -1,6 +1,6 @@
 ---
 description: 后端开发与测试编排。调度 backend-dev subagent 按 design.md 完成 TDD 开发（Red-Green-Refactor）与接口测试，闭环交付后端任务
-argument-hint: <需求编号> [仓库路径或模块名，如 STO-001 projects/order-service]
+argument-hint: <需求编号> [项目名/模块名，如 STO-001 order-service]
 ---
 
 # /agile:backend — 后端 TDD 开发编排

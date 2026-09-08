@@ -13,8 +13,8 @@ argument-hint: <需求编号> <遗漏的任务描述>
 
 ## 执行步骤（只追加原则）
 
-1. 根据任务归属确定角色文件：后端任务 → `implementation-be.md`，前端任务 → `implementation-fe.md`；读对应文件的「任务清单」章节。
-2. 根据 design.md 与 gen-test.md 把新任务描述规范化为任务条目（动词开头、可验证完成）。
+1. 校验任务目录与角色文件存在：按任务归属确定 `implementation-be.md` / `implementation-fe.md`（由 `/agile:sync-req` 创建）；缺失时提示先执行 `/agile:sync-req <编号>` 创建任务目录，停止。
+2. 读对应角色文件的「任务清单」章节；根据 design.md 与 gen-test.md 把新任务描述规范化为任务条目（动词开头、可验证完成）。
 3. **追加**到该角色文件清单末尾，编号顺延（已有任务条目、已勾选状态一律不动）；同时在 `implementation.md` 任务分配表**追加一行**（主文件冻结后只读，仅允许按 design 冻结结论追加此行，不改既有行）。
 4. 若新任务与既有任务明显重复，不追加，改为汇报重复项。
 5. 涉及新模块/新项目时，提醒检查 `projects/` 下是否已有该项目目录（没有则给出 `agile init project --template <模板>` 命令）。

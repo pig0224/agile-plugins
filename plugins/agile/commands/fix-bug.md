@@ -5,13 +5,13 @@ argument-hint: <问题描述或需求编号+问题描述，如 STO-001 下单接
 
 # /agile:fix-bug — 快速修复
 
-团队 SOP **轻量通道的 BUG 形态**标准入口：缺陷修复（回归正确行为，无需产品拍板）走此通道——worktree + PR 纪律不变，目录与文档按轻量填法（见 SOP「轻量通道」节；review.md 由 `/agile:review` 轻量形态生成一行验收确认，不填豁免声明）。
+团队 SOP **轻量通道的 BUG 形态**标准入口：缺陷修复（回归正确行为，无需产品审批）走此通道——worktree + PR 纪律不变，目录与文档按轻量填法（见 SOP「轻量通道」节；review.md 由 `/agile:review` 轻量形态生成一行验收确认，不填豁免声明）。
 
 先阅读 skill `sdd-tdd-method`，然后按以下步骤执行。
 
 ## 输入解析
 
-- `$ARGUMENTS` 中若含需求编号（STO-xxx/BUG-xxx）则登记到该任务目录；不含则视为新缺陷——列出 `process-docs/` 现有编号顺延得到 `BUG-xxx`，按 skill `sdd-tdd-method` **附录 A 模板**直接创建 `process-docs/BUG-xxx/` 七文件（幂等），并就地轻量初始化：`requirement.md` 头部标记 `> 本变更走轻量通道（BUG）` + 正文落缺陷描述与复现步骤；`gen-test.md` 填一行 `> 本变更走轻量通道，此文档不适用`。
+- `$ARGUMENTS` 中若含需求编号（STO-xxx/BUG-xxx）则登记到该任务目录；不含则视为新缺陷——列出 `process-docs/` 现有编号顺延得到 `BUG-xxx`，按 skill `sdd-tdd-method` **附录 A 模板**直接创建 `process-docs/BUG-xxx/` 任务目录（初始 8 个 .md，幂等），并就地轻量初始化：`requirement.md` 头部标记 `> 本变更走轻量通道（BUG）` + 正文落缺陷描述与复现步骤；`gen-test.md` 填一行 `> 本变更走轻量通道，此文档不适用`。
 - 其余文字为 bug 描述；为空则询问用户。
 
 ## 执行步骤

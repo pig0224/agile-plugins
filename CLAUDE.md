@@ -26,7 +26,7 @@ plugins/agile/
   .claude-plugin/plugin.json       # 插件清单（name: agile）
   commands/                        # 18 个 /agile:xxx 斜杠命令
   agents/                          # 7 个角色 subagent
-  skills/sdd-tdd-method/           # 共享方法论（附录 A = 任务目录七文件模板）
+  skills/sdd-tdd-method/           # 共享方法论（附录 A = 任务目录模板）
 docs/design.md                     # 设计文档
 ```
 

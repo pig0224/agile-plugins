@@ -13,7 +13,7 @@ agile-plugins/                       # 插件市场仓库
         ├── .claude-plugin/plugin.json
         ├── commands/                # 18 个命令（安装后 /agile:xxx）
         ├── agents/                  # 7 个角色 subagent
-        └── skills/sdd-tdd-method/   # 共享方法论（附录 A = 任务目录七文件模板）
+        └── skills/sdd-tdd-method/   # 共享方法论（附录 A = 任务目录模板）
 ```
 
 **职责分离**：命令 = 人机入口（前置校验 + 委派 + 复核汇报）；agent = 具体执行（产出文档/代码）；skill = 共享知识（所有命令开头要求先读）。命令体内不写实现细节，保证角色 prompt 集中且可独立演化。
@@ -72,7 +72,7 @@ agile plugin install [name]
 命令体指示模型通过 Bash 调用 CLI 能力（不手工造 git 命令）：
 - Bash 执行 `agile sync / config / worktree create / template list / plugin ...`
 
-任务目录（process-docs/<编号>/ 七文件）由创建它的命令按 sdd-tdd-method SKILL 附录 A 模板直接创建（幂等，无 CLI/MCP 依赖）。
+任务目录（process-docs/<编号>/，初始 8 个 .md）由创建它的命令按 sdd-tdd-method SKILL 附录 A 模板直接创建（幂等，无 CLI/MCP 依赖）。
 
 抽屉路径不硬编码：所有命令/agent 先读 `.agile/settings.json` 的 `paths` 段。
 

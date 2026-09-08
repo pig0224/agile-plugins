@@ -51,7 +51,7 @@ A/B/C 产出单例模板，D 产出组合模板；**④ 登记 + 校验、⑤ �
 
 | 项 | 说明 |
 |---|---|
-| 模板名 | 按命名建议生成候选，人工拍板 |
+| 模板名 | 按命名建议生成候选，人工审定 |
 | description | 一句话职责（registry.json 登记与 `agile template list` 展示用） |
 | language / framework | 字符串数组（可省略），如 `["TypeScript"]` / `["Vue", "Vite"]` |
 | 定位差异 | 与现有模板的差异一句话 |
@@ -62,7 +62,7 @@ A/B/C 产出单例模板，D 产出组合模板；**④ 登记 + 校验、⑤ �
 
 | 项 | 说明 |
 |---|---|
-| 组合名 | `<系统域>-<定位>` 候选，人工拍板；**全局唯一** |
+| 组合名 | `<系统域>-<定位>` 候选，人工审定；**全局唯一** |
 | description | 一句话说明该组合生成的系统 |
 | 成员构成 | 成员 = `projects` 数组条目（与 singles 同形状：name + 一句话 description；language/framework 可选），**数组顺序 = 生成顺序**；成员名取职责域且**全局唯一** |
 | 派生起点 | 每成员指定最接近的单例模板（复制作起点，可用 A/B/C 刚建的）；**仓库无对应技术栈单例时**（如组合引入仓库尚无的栈），该成员按**流程 A 从零手写**，并附加两条硬性要求（见 ③ 流程 D）；既无相近起点也不想从零时与用户确认——可先登记组合能力、成员内容分批补 |
@@ -155,7 +155,7 @@ rm -rf solutions/<组合名>/<成员名>/{node_modules,.next,dist,build,coverage
 mkdir ../tpl-smoke && cd ../tpl-smoke
 agile init workspace
 agile config set template-repo <agile-templates 本地绝对路径>   # 直读不走缓存
-agile init project demo-<模板名> --template <新模板名>
+agile init project --template <新模板名> --name demo-<模板名>
 ```
 
 验证三件事：生成物完整（规范骨架三文件带出）、`{{name}}` / `{{safeName}}` 替换正确、项目测试可跑（`npm test` / `make test` 等）。
@@ -167,7 +167,7 @@ mkdir ../tpl-smoke && cd ../tpl-smoke
 agile init workspace
 agile config set template-repo <agile-templates 本地绝对路径>
 agile template list                  # 组合应展示成员清单（含各成员 description）
-agile init project demo-<组合名> --template <组合名>
+agile init project --template <组合名>   # 缺省 --name：各成员用组合项目名称
 ```
 
 验证六件事：全部成员**平铺**落盘 `projects/<成员名>/`（无系统目录、无系统 README）、`{{name}}` = 实际成员目录名（抽查各成员 package.json name 等）、成员项目测试可跑、`--name <成员名>=<目录名>` 键值覆盖可生效（可选抽查）、**重跑同一 init** 补缺语义正确（已存在成员跳过 + warn；本地 CLI 支持生成清单时可加测：删除某成员一个生成文件后重跑，应报「与生成清单不符」硬错误而非静默跳过）、**组合根两件套快照带出**（`.agile/solutions/<组合名>/` 出现 CLAUDE.md + docs/，init 输出对应提示行与 `/agile:knowledge` 同步指引；需 ≥ 2.3.0 CLI——组合资产带出随该版本发布，`agile --version` 低于该版本时此项跳过并注明）。完成后清理临时目录。
