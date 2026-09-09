@@ -25,7 +25,7 @@ CLI 直调：工作区操作（sync / config / worktree / template / plugin 等�
 
 - `requirement.md` — 需求说明与验收标准（AC）。产品/需求侧填充。
 - `design.md` — 技术设计。**SDD 核心：开发前必须先完成**。参考抽屉一/二规范。
-- `implementation.md` — 实施记录主文件：**任务分配表**（design 冻结时填写，之后**只读，仅允许按 design 冻结结论追加一行**（add-task））+ 联调约定。
+- `implementation.md` — 实施记录主文件：**任务分配表**（由 /agile:architect 在 design 冻结时填写，之后**只读，仅允许按 design 冻结结论追加一行**（add-task））+ 联调约定。
 - `implementation-be.md` — **后端专属**实施记录：任务清单、TDD 循环记录、变更清单。前端禁写。
 - `implementation-fe.md` — **前端专属**实施记录：任务清单、测试记录、变更清单。后端禁写。
 - `review.md` — 评审记录。
@@ -241,7 +241,7 @@ CLI 直调：工作区操作（sync / config / worktree / template / plugin 等�
 ```markdown
 # {{id}} 实施记录（任务分配）
 
-> 主文件：任务分配表在 design.md 冻结时填写，之后**只读**；执行状态在各角色文件的任务清单中体现。
+> 主文件：任务分配表由 /agile:architect 在 design 冻结时填写（填表即冻结），之后**只读**；执行状态在各角色文件的任务清单中体现。
 > 分工红线：后端只写 [implementation-be.md](implementation-be.md)，前端只写 [implementation-fe.md](implementation-fe.md)。
 
 ## 任务分配

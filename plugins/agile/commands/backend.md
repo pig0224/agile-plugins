@@ -14,6 +14,7 @@ argument-hint: <需求编号> [项目名/模块名，如 STO-001 order-service]
    已填充时按 skill「人工修订感知流程」对照既有任务清单与已实现代码——design.md 有未登记的人工修订 → 先处置（采纳并登记 / 存疑返回人工确认），防按过时设计继续开发。
 3. 校验测试案例文档存在（`gen-test.md` 或 AC 内嵌案例）。缺失时警告但允许继续（TDD 红线仍在：先写失败测试）。
 4. 检查涉及项目目录存在且工作区干净（`git status`）；dirty 则停下询问用户。
+5. 读 `implementation.md` 任务分配表：仍是骨架占位（任务列为空）→ 停下向用户确认——先补跑 `/agile:architect <编号>`（幂等补填，已填不重写），或确认按 design.md「涉及模块」继续开发（表由负责人后补）。已填则对照核对任务归属。
 
 ## 开发环境准备
 
@@ -22,7 +23,7 @@ argument-hint: <需求编号> [项目名/模块名，如 STO-001 order-service]
 
 ## 执行步骤
 
-1. 从 `process-docs/<编号>/implementation-be.md` 读取任务清单（无则从 design.md 的接口/模块清单初始化；同时在 implementation.md 任务分配表确认归属）。**只写 implementation-be.md，禁止改 implementation-fe.md 与主文件。**
+1. 从 `process-docs/<编号>/implementation-be.md` 读取任务清单（无则从 design.md 的接口/模块清单初始化；对照 implementation.md 任务分配表核对任务归属）。**只写 implementation-be.md，禁止改 implementation-fe.md 与主文件。**
 2. 调用 **backend-dev** subagent（Task 工具委派），传入：
    - 需求编号、design.md 路径、测试案例文档路径、worktree 路径、任务清单（本轮要完成的任务）
    - 任务分批：单次委派不超过 5 个任务，完成一批汇报后再继续下一批

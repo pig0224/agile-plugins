@@ -14,6 +14,7 @@ argument-hint: <需求编号> [前端项目名]
    已填充时按 skill「人工修订感知流程」对照既有任务清单与已实现代码，design.md 有未登记的人工修订 → 先处置（采纳登记 / 存疑返回人工确认），防按过时设计继续开发。
 3. 读 `process-docs/<编号>/menu-tree.md`（或 feature-tree）确认页面范围；**文件不存在时（轻量通道 / BUG 无 PRD 产物）跳过本步**——页面范围以 design.md「涉及模块」与用户输入为准，向用户确认后再动手。
 4. `git status` 确认工作区干净；dirty 则询问。
+5. 读 `implementation.md` 任务分配表：仍是骨架占位（任务列为空）→ 停下向用户确认——先补跑 `/agile:architect <编号>`（幂等补填，已填不重写），或确认按 design.md「涉及模块」继续开发（表由负责人后补）。已填则对照核对任务归属。
 
 ## 开发环境准备
 
@@ -21,7 +22,7 @@ argument-hint: <需求编号> [前端项目名]
 
 ## 执行步骤
 
-1. 从 `process-docs/<编号>/implementation-fe.md` 读取/初始化前端任务清单（按「接口层→组件层→页面层」分层拆分；同时在 implementation.md 任务分配表确认归属）。**只写 implementation-fe.md，禁止改 implementation-be.md 与主文件。**
+1. 从 `process-docs/<编号>/implementation-fe.md` 读取/初始化前端任务清单（按「接口层→组件层→页面层」分层拆分；对照 implementation.md 任务分配表核对任务归属）。**只写 implementation-fe.md，禁止改 implementation-be.md 与主文件。**
 2. 调用 **frontend-dev** subagent（Task 工具委派），分批（每批 ≤5 任务）传入：
    - 需求编号、design.md、UI/交互规范路径（抽屉三）、worktree 路径、本批任务
 3. 浏览器验证（subagent 内完成，编排层复核）：dev server 启动、关键路径对照 AC 走查。
