@@ -102,7 +102,7 @@ CLI 直调：工作区操作（sync / config / worktree / template / plugin 等�
 | 固化 e2e 脚本 | 关键路径回归脚本（长期资产，随页面同 PR 演进，供 /agile:run-test 与 stage 冒烟复用；**默认不进 PR CI 门禁**——e2e flaky 且慢，各项目可选跑关键路径冒烟子集） | 项目内 `e2e/`（Playwright，如 `e2e/*.spec.ts`） | ✅ 提交 |
 | 临时验证/复现脚本 | 修 bug 复现脚本、一次性验证脚本 | `process-docs/<编号>/scripts/`（**严禁散落在 projects/ 下的项目内**） | ✅ 随需求分支提交 |
 | 运行产物 | 截图、trace、HTML 报告、test-results | 框架默认输出目录 | ❌ 一律 .gitignore，不提交 |
-| 报告证据 | run-test / 浏览器验证引用的关键截图（少量） | `process-docs/<编号>/assets/` | ✅ 提交 |
+| 报告证据 | run-test / 浏览器验证引用的关键截图（少量，归档本机供验收时出示） | `process-docs/<编号>/assets/` | ❌ 不提交（.gitignore 已忽略） |
 
 **测试工具约定**：e2e 主要测试工具 **Playwright**，辅助调试 **Chrome DevTools**；项目尚无可用测试工具时，给出「引入 Playwright（主）+ Chrome DevTools（辅助调试）」的建议，经负责人确认后引入。
 

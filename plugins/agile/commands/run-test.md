@@ -20,7 +20,7 @@ argument-hint: <需求编号，如 STO-001> [--only P0] [--repo 仓库路径]
    - 逐仓库执行标准测试命令（从 package.json scripts / Makefile / pom.xml 读取）
    - **e2e 用例**（gen-test.md「前端用例」节中标 `e2e` 的条目）：在前端项目执行其 e2e 脚本（如 `pnpm e2e`，Playwright）；stage 环境已部署时指向 stage 做冒烟。项目尚未引入 e2e 框架时标「未执行」，在报告中注明缺口并建议引入 Playwright（主）+ Chrome DevTools（辅助调试）
    - 按案例清单核对结果；失败的记录现象与初步归因，继续其余案例
-3. **增量落盘**产出 `process-docs/<编号>/run-test.md`：逐案例结果随执行随写入（中断不丢已跑结果）；报告含范围、执行环境、逐案例结果表、失败清单、通过率、结论（通过验收 / 有条件通过 / 不通过）。关键截图归档到 `process-docs/<编号>/assets/`（少量）；运行产物（`test-results/`、`playwright-report/` 等）不提交 git。
+3. **增量落盘**产出 `process-docs/<编号>/run-test.md`：逐案例结果随执行随写入（中断不丢已跑结果）；报告含范围、执行环境、逐案例结果表、失败清单、通过率、结论（通过验收 / 有条件通过 / 不通过）。关键截图归档到 `process-docs/<编号>/assets/`（少量，本机留存供验收出示——不入库，.gitignore 已忽略）；运行产物（`test-results/`、`playwright-report/` 等）不提交 git。
 
 ## 轻量通道降级
 
