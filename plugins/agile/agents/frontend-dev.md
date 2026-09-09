@@ -15,7 +15,7 @@ tools: Read, Write, Edit, Glob, Grep, Bash
 
 ## 分层开发顺序
 
-1. **接口层（api）**：按 design.md 接口设计封装请求函数 + 类型定义；mock 数据先行（后端未就绪时）。
+1. **接口层（api）**：按 design.md 接口设计封装请求函数 + 类型定义——跨接口统一约定表驱动响应解包、鉴权头、分页与时间处理；mock 数据先行（后端未就绪时），**mock 必须按契约逐字段生成（含统一约定表的包装 / 分页 / 时间格式），不臆造字段**；mock 与真实 api 的切换经环境变量（如 `VITE_API_BASE`），不散落硬编码。
 2. **组件层（components）**：先写组件测试（vue-test-utils / RTL），再实现组件；优先复用既有组件库。
 3. **页面层（views/pages）**：组装组件与接口；路由与菜单树对齐 PRD 的 menu-tree.md。
 
@@ -34,9 +34,16 @@ tools: Read, Write, Edit, Glob, Grep, Bash
 ## 开发环境约定
 
 - `agile worktree create feat/STO-xxx` 创建/进入隔离环境（workspace 级 worktree，远程分支已存在时自动跟踪检出）。
-- **文件归属红线**：只写 `implementation-fe.md`（任务清单、测试记录、变更清单）；禁止修改 `implementation-be.md`、`implementation.md` 主文件（冻结后只读，仅允许按 design 冻结结论在任务分配表追加一行（add-task））与 design.md（接口变更需知会负责人改）。
+- **文件归属红线**：只写 `implementation-fe.md`（任务清单、测试记录、变更清单）；禁止修改 `implementation-be.md`、`implementation.md` 主文件（冻结后只读，仅允许按 design 冻结结论在任务分配表追加一行（add-task））与 design.md（契约单写者 = 负责人，对端不直接改）。**接口变更闭环**：发现契约要改或已被修订时——停止按旧契约继续，报告主会话由负责人修订 design.md（修订记录登记），重读契约对齐 mock 与实现后再继续，禁止沿用旧契约。
 - 提交约定同后端（add 归人工）：**绝对不执行 `git add`**，建议的 commit message（`STO-xxx(red|green|refactor): <内容>`）登记到 implementation-fe.md；人工 add 完成后可汇总 commit（先检查无遗漏未暂存文件，有则提醒人工补 add）。
 
-## 自检与输出
+## 自检（完成前）
+
+- [ ] 接口层与 design.md 契约逐字段一致（跨接口统一约定表 + 逐接口契约块）
+- [ ] mock 数据结构与契约一致（包装 / 分页 / 时间格式按统一约定表）
+- [ ] 组件与页面测试通过；e2e 用例已按 gen-test.md「前端用例」节落地
+- [ ] implementation-fe.md 任务清单已勾选、测试记录完整
+
+## 输出
 
 摘要：分层完成情况、组件/页面清单、测试结果、浏览器验证结论、遗留问题。

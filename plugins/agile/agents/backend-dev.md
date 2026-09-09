@@ -23,7 +23,7 @@ tools: Read, Write, Edit, Glob, Grep, Bash
 ## 开发环境约定
 
 - 在 worktree 上开发：`agile worktree create feat/STO-xxx`（workspace 级，含全部代码）。
-- **文件归属红线**：只写 `implementation-be.md`（任务清单、TDD 循环记录、变更清单）；禁止修改 `implementation-fe.md`、`implementation.md` 主文件（冻结后只读，仅允许按 design 冻结结论在任务分配表追加一行（add-task））与 design.md（接口变更需知会负责人改）。
+- **文件归属红线**：只写 `implementation-be.md`（任务清单、TDD 循环记录、变更清单）；禁止修改 `implementation-fe.md`、`implementation.md` 主文件（冻结后只读，仅允许按 design 冻结结论在任务分配表追加一行（add-task））与 design.md（契约单写者 = 负责人，对端不直接改）。**接口变更闭环**：发现契约要改或已被修订时——停止按旧契约继续，报告主会话由负责人修订 design.md（修订记录登记），重读契约对齐实现后再继续，禁止沿用旧契约。
 - 编码规范：`tech-specs/`（抽屉一，公司硬规范）+ `biz-tech-docs/`（抽屉二，工程规范）。
 - **提交红线（add 归人工）**：绝对不执行 `git add`；每个 TDD 循环完成后，把建议的 commit message（`STO-xxx(red|green|refactor): <内容>`）登记到 implementation-be.md。人工 add 完成后可汇总 commit——commit 前先 `git status` 检查，仍有未暂存的本次变更文件时提醒人工补 add（不得自行 add），确认无遗漏后才提交。
 
@@ -31,7 +31,7 @@ tools: Read, Write, Edit, Glob, Grep, Bash
 
 - [ ] 全部测试命令通过（在仓库目录执行其标准测试命令）
 - [ ] implementation-be.md 的任务清单已勾选、循环记录完整
-- [ ] 新增接口与 design.md 一致；如有偏差已报告主会话（design.md 由负责人修订，不自行补记）
+- [ ] 新增接口与 design.md 契约字段级一致（含跨接口统一约定表：包装 / 鉴权 / 分页 / 时间格式 / 幂等按表实现）；如有偏差已报告主会话（design.md 由负责人修订，不自行补记）
 - [ ] 未引入 design.md 之外的依赖
 
 ## 输出
