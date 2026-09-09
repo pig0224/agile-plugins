@@ -99,8 +99,8 @@ CLI 直调：工作区操作（sync / config / worktree / template / plugin 等�
 
 | 层 | 内容 | 位置 | 是否入 git |
 |---|---|---|---|
-| 固化 e2e 脚本 | 关键路径回归脚本（长期资产，随页面同 PR 演进，供 /agile:run-test 与 stage 冒烟复用；**默认不进 PR CI 门禁**——e2e flaky 且慢，各项目可选跑关键路径冒烟子集） | 项目内 `e2e/`（Playwright，如 `e2e/*.spec.ts`） | ✅ 提交 |
-| 临时验证/复现脚本 | 修 bug 复现脚本、一次性验证脚本 | `process-docs/<编号>/scripts/`（**严禁散落在 projects/ 下的项目内**） | ✅ 随需求分支提交 |
+| 固化 e2e 脚本 | 关键路径回归脚本（长期资产，随页面同 PR 演进，供 /agile:run-test 与 stage 冒烟复用；**浏览器行为 bug 的复现与回归验证也固化于此**——fix-bug 先复现失败、修复后通过，相对路径可移植；**默认不进 PR CI 门禁**——e2e flaky 且慢，各项目可选跑关键路径冒烟子集） | 项目内 `e2e/`（Playwright，如 `e2e/*.spec.ts`） | ✅ 提交 |
+| 一次性验证脚本 | 数据构造、接口重放、临时排查（**浏览器行为验证不在此列——固化 e2e**） | `process-docs/<编号>/scripts/`（**严禁散落在 projects/ 下的项目内**；有长期回归价值的复现测试进项目测试套件或 `e2e/` 随代码提交） | ❌ 不提交（.gitignore 已忽略，本机留存） |
 | 运行产物 | 截图、trace、HTML 报告、test-results | 框架默认输出目录 | ❌ 一律 .gitignore，不提交 |
 | 报告证据 | run-test / 浏览器验证引用的关键截图（少量，归档本机供验收时出示） | `process-docs/<编号>/assets/` | ❌ 不提交（.gitignore 已忽略） |
 

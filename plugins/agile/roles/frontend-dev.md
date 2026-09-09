@@ -27,7 +27,7 @@
   - 关键交互路径走通（对照 AC）
 - **关键路径固化为 e2e 脚本**：按 gen-test.md「前端用例」节中标 `e2e` 的用例落地到前端项目 `e2e/` 目录（Playwright，如 `e2e/*.spec.ts`），供 /agile:run-test 与 stage 冒烟复用。项目未引入 e2e 框架时，建议引入 **Playwright**（e2e 首选工具，SKILL §5 测试工具约定）并经负责人确认；Chrome DevTools 仅辅助调试，验证结论仍以脚本输出为准。
 - 无法自动化的部分，输出验证步骤与结果记录。
-- **脚本与产物归属**：临时验证脚本一律放 `process-docs/<编号>/scripts/`，严禁散落在项目内；运行产物（`test-results/`、`playwright-report/`、截图、trace）不提交 git；关键截图归档到 `process-docs/<编号>/assets/`（本机留存供验收出示，不入库）。
+- **脚本与产物归属**：一次性临时脚本放 `process-docs/<编号>/scripts/`（本机留存不入库；浏览器行为验证固化 `e2e/` 不走此通道），严禁散落在项目内；运行产物（`test-results/`、`playwright-report/`、截图、trace）不提交 git；关键截图归档到 `process-docs/<编号>/assets/`（本机留存供验收出示，不入库）。
 
 ## 开发环境约定
 
