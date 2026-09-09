@@ -1,11 +1,11 @@
 ---
-description: 测试执行（Stage 2）。按测试案例执行测试脚本并生成测试验收报告 run-test.md，全程 auto 模式
+description: 测试执行（Stage 2）。按测试案例执行测试脚本并生成测试验收报告 run-test.md，全程 auto 模式。主会话按 test-engineer 角色规范 Stage 2 直接执行（分工例外，不委派 subagent）
 argument-hint: <需求编号，如 STO-001> [--only P0] [--repo 仓库路径]
 ---
 
 # /agile:run-test — 测试执行与验收（Stage 2）
 
-先阅读 skill `sdd-tdd-method`，然后**全程自动执行（auto 模式）**：不中途向用户提问，遇到问题记录后继续，最后一次性汇报。
+先阅读 skill `sdd-tdd-method`，然后**全程自动执行（auto 模式）**：不中途向用户提问，遇到问题记录后继续，最后一次性汇报。**分工例外声明**：测试执行（跑测试 → 看结果的执行循环）由主会话直接执行、不委派 subagent（SKILL 分工红线中「个别命令文件显式声明的例外」）。
 
 ## 前置校验
 
@@ -16,11 +16,11 @@ argument-hint: <需求编号，如 STO-001> [--only P0] [--repo 仓库路径]
 ## 执行步骤
 
 1. 读 design.md「涉及模块」表确定要跑的项目（`projects/` 下的目录）。
-2. 调用 **test-engineer** subagent（Task 工具委派，auto 模式）：
+2. 按 `agents/test-engineer.md` 的 **Stage 2** 角色规范在主会话直接执行（auto 模式）：
    - 逐仓库执行标准测试命令（从 package.json scripts / Makefile / pom.xml 读取）
    - **e2e 用例**（gen-test.md「前端用例」节中标 `e2e` 的条目）：在前端项目执行其 e2e 脚本（如 `pnpm e2e`，Playwright）；stage 环境已部署时指向 stage 做冒烟。项目尚未引入 e2e 框架时标「未执行」，在报告中注明缺口并建议引入 Playwright（主）+ Chrome DevTools（辅助调试）
    - 按案例清单核对结果；失败的记录现象与初步归因，继续其余案例
-3. 产出 `process-docs/<编号>/run-test.md`：范围、执行环境、逐案例结果表、失败清单、通过率、结论（通过验收 / 有条件通过 / 不通过）。报告引用的关键截图归档到 `process-docs/<编号>/assets/`（少量）；运行产物（`test-results/`、`playwright-report/` 等）不提交 git。
+3. **增量落盘**产出 `process-docs/<编号>/run-test.md`：逐案例结果随执行随写入（中断不丢已跑结果）；报告含范围、执行环境、逐案例结果表、失败清单、通过率、结论（通过验收 / 有条件通过 / 不通过）。关键截图归档到 `process-docs/<编号>/assets/`（少量）；运行产物（`test-results/`、`playwright-report/` 等）不提交 git。
 
 ## 轻量通道降级
 

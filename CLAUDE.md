@@ -25,7 +25,8 @@ claude plugin install agile
 plugins/agile/
   .claude-plugin/plugin.json       # 插件清单（name: agile）
   commands/                        # 18 个 /agile:xxx 斜杠命令
-  agents/                          # 7 个角色 subagent
+  agents/                          # 4 个角色 subagent（prd/architect/gen-test/ui 委派；run-test 引用 test-engineer 的 Stage 2 规范）
+  roles/                           # 3 个角色规范文档（主会话直做引用：backend-dev / frontend-dev / bug-hunter，无 frontmatter）
   skills/sdd-tdd-method/           # 共享方法论（附录 A = 任务目录模板）
 docs/design.md                     # 设计文档
 ```
@@ -35,7 +36,7 @@ docs/design.md                     # 设计文档
 - 新增插件：新建 `plugins/<name>/`（含 `.claude-plugin/plugin.json`）+ 在 marketplace.json `plugins[]` 追加条目
 - 插件名（plugin.json `name`）= marketplace 条目名 = `plugins/` 目录名，三者一致；市场名固定 `fcc`
 - plugin.json 有意不写 version（commit SHA 更新模式），`claude plugin validate` 的 version warning 可忽略，勿补回 version 字段
-- 插件文案全部中文；agent 的 `description` 用第三人称描述"何时使用"（Task 委派触发依据）
-- 命令只做「前置校验 → Task 委派 agent → 复核汇报」，不写实现细节（个别命令文件显式声明分工例外（主会话直接执行）者除外：现为 sync-req、add-task、feedback、help、init、add-template、share-template、knowledge、review、release）
+- 插件文案全部中文；agent 的 `description` 用第三人称描述"何时使用"（Task 委派触发依据）；roles/ 下是纯角色规范文档（无 frontmatter，不注册为 agent）
+- 命令默认「前置校验 → Task 委派 agent → 复核汇报」；主会话直接执行的命令分两类（均须命令文件显式声明分工例外）：**执行循环类**（backend / frontend / run-test / fix-bug——按 roles/*.md 角色规范直做，全程可见可纠偏）与**素材在主会话类**（sync-req、add-task、feedback、help、init、add-template、share-template、knowledge、review、release）
 - 两条 SDD/TDD 红线不得削弱：无 design.md 不开发；无失败测试不写实现
 - 推送即发版（无版本号，无 npm）

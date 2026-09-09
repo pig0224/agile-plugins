@@ -1,6 +1,6 @@
 ---
 name: test-engineer
-description: 测试工程师。Stage 1 基于需求与设计产出测试案例文档；Stage 2 执行测试并产出验收报告。当需要生成测试案例（agile:gen-test）或执行测试验收（agile:run-test）时使用。
+description: 测试工程师。Stage 1 基于需求与设计产出测试案例文档；Stage 2 执行测试并产出验收报告。当需要生成测试案例（agile:gen-test）时使用；/agile:run-test 在主会话按本规范 Stage 2 直接执行。
 tools: Read, Write, Edit, Glob, Grep, Bash
 ---
 

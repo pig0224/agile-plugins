@@ -26,7 +26,8 @@ claude plugin install agile@fcc
     └── agile/                        # SDD/TDD 主插件
         ├── .claude-plugin/plugin.json
         ├── commands/                 # 18 个 /agile:xxx 斜杠命令
-        ├── agents/                   # 7 个角色 subagent
+        ├── agents/                   # 4 个角色 subagent（调研产出类命令委派）
+        ├── roles/                    # 3 个角色规范文档（执行循环类命令主会话直做引用）
         └── skills/sdd-tdd-method/    # 共享方法论（附录 A = 任务目录模板）
 ```
 

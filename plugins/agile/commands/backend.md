@@ -1,11 +1,11 @@
 ---
-description: 后端开发与测试编排。调度 backend-dev subagent 按 design.md 完成 TDD 开发（Red-Green-Refactor）与接口测试，闭环交付后端任务
+description: 后端开发与测试编排。主会话按 backend-dev 角色规范（roles/backend-dev.md）完成 TDD 开发（Red-Green-Refactor）与接口测试。分工红线显式例外：执行循环类命令，主会话直接执行、不委派 subagent
 argument-hint: <需求编号> [项目名/模块名，如 STO-001 order-service]
 ---
 
 # /agile:backend — 后端 TDD 开发编排
 
-先阅读 skill `sdd-tdd-method`，然后按以下步骤执行。
+先阅读 skill `sdd-tdd-method` 与 `roles/backend-dev.md`（后端角色规范），然后按以下步骤执行。**分工例外声明**：执行循环类任务（跑测试 → 看结果 → 迭代的代码实施）由主会话直接执行、不委派 subagent——执行过程全程可见、用户可随时插话纠偏（SKILL 分工红线中「个别命令文件显式声明的例外」）。
 
 ## 前置校验
 
@@ -24,11 +24,11 @@ argument-hint: <需求编号> [项目名/模块名，如 STO-001 order-service]
 ## 执行步骤
 
 1. 从 `process-docs/<编号>/implementation-be.md` 读取任务清单（无则从 design.md 的接口/模块清单初始化；对照 implementation.md 任务分配表核对任务归属）。**只写 implementation-be.md，禁止改 implementation-fe.md 与主文件。**
-2. 调用 **backend-dev** subagent（Task 工具委派），传入：
-   - 需求编号、design.md 路径、测试案例文档路径、worktree 路径、任务清单（本轮要完成的任务）
-   - 任务分批：单次委派不超过 5 个任务，完成一批汇报后再继续下一批
-3. subagent 逐任务执行 TDD 循环并更新 implementation-be.md。
-4. **复核（主会话执行，不得让 subagent 自查替代）**：在 worktree 目录运行该仓库标准测试命令确认绿色；抽查 diff 是否最小、是否仅覆盖本轮任务、TDD 循环记录是否完整；发现偏差退回 subagent 修复——**不得以「subagent 不可靠」为由改由主会话直接实施**（分工红线见 skill）。
+2. 按 `roles/backend-dev.md` 角色规范在主会话直接执行 TDD 循环（Red → Green → Refactor），节奏与纪律：
+   - **批次节奏**：每批 2~3 个任务（长任务单批单做）；批间向用户一行摘要（本批完成什么、测试状态）再继续
+   - **增量落盘**：逐任务「写失败测试并记录红 → 最小实现转绿 → 必要重构 → 立即更新 implementation-be.md（勾选 + 循环记录 + 建议 commit message）」，再进下一任务——**禁止长时间只读不写**：任务清单即进度看板，会话上下文压缩后从盘上状态续作，不重做已完成任务
+   - 执行中用户可随时插话调整方向；契约问题按角色规范「接口变更闭环」处理（停止 → 负责人修订 design.md → 重读对齐再继续）
+3. 每批完成后复核：在 worktree 目录运行该仓库标准测试命令确认绿色；发现偏差当批修复。
 
 ## 闭环条件
 
@@ -36,4 +36,4 @@ argument-hint: <需求编号> [项目名/模块名，如 STO-001 order-service]
 
 ## 输出
 
-汇报：完成任务、测试结果、建议的提交清单（待人工 add 后汇总提交）、遗留问题；建议下一步 `/agile:frontend`（如涉及）或 `/agile:run-test <编号>`。
+汇报：完成任务（带任务标题，如「BE-5 导出任务超时状态机（完成）」）、进度（implementation-be.md x/y）、测试结果、建议的提交清单（待人工 add 后汇总提交，diff 由人工在 add 时审阅）、遗留问题；建议下一步 `/agile:frontend`（如涉及）或 `/agile:run-test <编号>`。

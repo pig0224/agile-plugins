@@ -1,11 +1,11 @@
 ---
-description: 前端开发与调试编排。调度 frontend-dev subagent 完成分层开发（接口层/组件层/页面层）与浏览器测试，闭环交付前端任务
+description: 前端开发与调试编排。主会话按 frontend-dev 角色规范（roles/frontend-dev.md）完成分层开发（接口层/组件层/页面层）与浏览器测试。分工红线显式例外：执行循环类命令，主会话直接执行、不委派 subagent
 argument-hint: <需求编号> [前端项目名]
 ---
 
 # /agile:frontend — 前端分层开发编排
 
-先阅读 skill `sdd-tdd-method`，然后按以下步骤执行。
+先阅读 skill `sdd-tdd-method` 与 `roles/frontend-dev.md`（前端角色规范），然后按以下步骤执行。**分工例外声明**：执行循环类任务（跑测试 → 看结果 → 迭代的代码实施）由主会话直接执行、不委派 subagent——执行过程全程可见、用户可随时插话纠偏（SKILL 分工红线中「个别命令文件显式声明的例外」）。
 
 ## 前置校验
 
@@ -23,9 +23,11 @@ argument-hint: <需求编号> [前端项目名]
 ## 执行步骤
 
 1. 从 `process-docs/<编号>/implementation-fe.md` 读取/初始化前端任务清单（按「接口层→组件层→页面层」分层拆分；对照 implementation.md 任务分配表核对任务归属）。**只写 implementation-fe.md，禁止改 implementation-be.md 与主文件。**
-2. 调用 **frontend-dev** subagent（Task 工具委派），分批（每批 ≤5 任务）传入：
-   - 需求编号、design.md、UI/交互规范路径（抽屉三）、worktree 路径、本批任务
-3. 浏览器验证（subagent 内完成，编排层复核）：dev server 启动、关键路径对照 AC 走查。
+2. 按 `roles/frontend-dev.md` 角色规范在主会话直接执行分层开发（接口层 → 组件层 → 页面层，每层 TDD），节奏与纪律：
+   - **批次节奏**：每批 2~3 个任务（长任务单批单做）；批间向用户一行摘要（本批完成什么、测试状态）再继续
+   - **增量落盘**：逐任务完成即更新 implementation-fe.md（勾选 + 测试记录 + 建议 commit message），再进下一任务——**禁止长时间只读不写**：任务清单即进度看板，会话上下文压缩后从盘上状态续作，不重做已完成任务
+   - 执行中用户可随时插话调整方向；契约问题按角色规范「接口变更闭环」处理（停止 → 负责人修订 design.md → 重读对齐再继续）
+3. 浏览器验证：按角色规范经 Playwright 脚本 / e2e 驱动（以脚本输出为准，不虚构浏览器结论），dev server 启动、关键路径对照 AC 走查；临时验证脚本归 `process-docs/<编号>/scripts/`。
 4. 每批完成后在该 worktree 运行前端测试命令，确认绿色。
 
 ## 闭环条件
@@ -34,4 +36,4 @@ argument-hint: <需求编号> [前端项目名]
 
 ## 输出
 
-汇报：分层完成度、组件/页面清单、测试与浏览器验证结论、建议的提交清单（待人工 add 后汇总提交）、遗留问题；建议下一步 `/agile:run-test <编号>`。
+汇报：分层完成度（带任务标题）、进度（implementation-fe.md x/y）、组件/页面清单、测试与浏览器验证结论、建议的提交清单（待人工 add 后汇总提交，diff 由人工在 add 时审阅）、遗留问题；建议下一步 `/agile:run-test <编号>`。

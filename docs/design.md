@@ -12,11 +12,12 @@ agile-plugins/                       # 插件市场仓库
     └── agile/                       # SDD/TDD 主插件
         ├── .claude-plugin/plugin.json
         ├── commands/                # 18 个命令（安装后 /agile:xxx）
-        ├── agents/                  # 7 个角色 subagent
+        ├── agents/                  # 4 个角色 subagent（调研产出类命令委派）
+        ├── roles/                   # 3 个角色规范文档（执行循环类命令主会话直做引用）
         └── skills/sdd-tdd-method/   # 共享方法论（附录 A = 任务目录模板）
 ```
 
-**职责分离**：命令 = 人机入口（前置校验 + 委派 + 复核汇报）；agent = 具体执行（产出文档/代码）；skill = 共享知识（所有命令开头要求先读）。命令体内不写实现细节，保证角色 prompt 集中且可独立演化。
+**职责分离**：命令 = 人机入口（前置校验 + 复核汇报；调研产出类委派 agent，执行循环类主会话按 roles/ 角色规范直做）；agent = 调研产出类执行（产出文档）；skill = 共享知识（所有命令开头要求先读）。
 
 ## 2. 安装链路（CLI 零知识）
 

@@ -17,8 +17,8 @@ disable-model-invocation: true
 | /agile:sync-req | 需求产物从抽屉三同步到 process-docs，准备开发目录 | 负责人 |
 | /agile:architect | 技术方案设计（SDD：先设计后开发） | 架构 |
 | /agile:gen-test | Stage 1：测试案例生成（先于实现） | 负责人兼任/测试 |
-| /agile:backend | 后端 TDD 开发与接口测试编排 | 后端 |
-| /agile:frontend | 前端分层开发与浏览器测试编排 | 前端 |
+| /agile:backend | 后端 TDD 开发与接口测试（主会话按角色规范直做） | 后端 |
+| /agile:frontend | 前端分层开发与浏览器测试（主会话按角色规范直做） | 前端 |
 | /agile:ui | UI 设计与组件库全生命周期（建设/原型/维护） | UI |
 | /agile:run-test | Stage 2：测试执行与验收报告 | 开发兼任/测试 |
 | /agile:review | 验收汇总与门禁判定（可交付 PR 门禁，不代验收） | 负责人 |
